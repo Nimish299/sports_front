@@ -1,0 +1,243 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* CSS */
+.container {
+  /* max-width: 200px; */
+  margin: 0 auto;
+  /* padding: 20px; */
+}
+
+.button-container {
+  margin-bottom: 10px;
+}
+
+.button-container button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+}
+
+.player_player_container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.player_player_heading {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 32px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.player_player_filter-container {
+  display: flex;
+  align-items: center;
+  /* Black background */
+  padding: 10px;
+  margin-left: 20%; /* Add padding to give space */
+  border-radius: 3%;
+}
+
+.player_player_filter-container button {
+  margin-right: 10px; /* Add margin between button and input */
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.player_player_filter-container button:hover {
+  background-color: #218838;
+}
+
+.player_player_filter-container input[type='text'] {
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+}
+
+.player_player_filtered-category {
+  color: white;
+  font-size: 16px;
+  text-decoration: underline;
+  margin-left: auto; /* Move the filtered category to the right */
+}
+
+.post-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post-item {
+  flex-basis: calc(33.33%);
+  /* margin-bottom: 20px; */
+}
+/* CSS */
+.post-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  opacity: 90%;
+  border-radius: 10px; /* Add background color */
+}
+
+.post-card {
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  opacity: 100%;
+}
+
+.post-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.post-subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.post-text {
+  margin-bottom: 5px;
+}
+
+.button-pending {
+  background-color: yellow;
+  color: black;
+}
+
+.button-accepted {
+  background-color: green;
+  color: white;
+}
+
+.button-rejected {
+  background-color: red;
+  color: white;
+}
+
+/* Define default button styles */
+.post-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  margin: 1%;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.post-button-status {
+  padding: 10px 20px;
+  border: none;
+  /* background-color: #007bff; */
+  margin: 1%;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.post-button:hover {
+  opacity: 0.8;
+}
+.my_post-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 20px;
+  justify-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.my_post-grid-item {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.request_post_table-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -8px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  opacity: 90%;
+  border-radius: 10px;
+}
+.star-star-container {
+  margin-bottom: -8px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  opacity: 90%;
+  border-radius: 10px;
+}
+.request_post_table-column {
+  flex: 0 0 calc(50% - 16px);
+  margin: 8px;
+}
+.request_post_player-status {
+  /* background-color: yellow; */
+  background-color: rgba(173, 216, 230, 0.7);
+  border-radius: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.request_post_post-item {
+  padding: 12px;
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+}
+
+.request_post_post-item h3 {
+  margin: 0;
+}
+
+.request_post_player-info {
+  margin-top: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.request_post_player-info h4 {
+  margin: 0;
+}
+
+.request_post_social-media-links {
+  margin-top: 8px;
+}
+
+.request_post_social-media-links h5 {
+  margin-bottom: 4px;
+}
