@@ -84,17 +84,7 @@ const PlayerLogin = () => {
         >
           Login
         </Button>
-        <Button
-          width='100%'
-          colorScheme='red'
-          style={{ marginTop: 15 }}
-          onClick={() => {
-            setEmailID('123player@gmail.com');
-            setPassword('12345');
-          }}
-        >
-          Get Guest user Credentials
-        </Button>
+
         <div>{errDisplay && <p>{errDisplay}</p>}</div>
 
         <Link class='btn btn-primary' to='/' role='button'>
