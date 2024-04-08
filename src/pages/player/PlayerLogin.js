@@ -25,22 +25,29 @@ const PlayerLogin = () => {
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
     const user = { emailID, password };
-    const response = await fetch(`/api/player/login`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const json = await response.json();
 
-    if (response.ok) {
-      console.log(json);
-      setLoginflag(true);
-      return navigate('/player/home');
-    } else {
-      console.log(json.error);
-      seterrDisplay(json.error);
+    try {
+      const response = await fetch(`/api/player/login`, {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const json = await response.json();
+        console.log(json);
+        setLoginflag(true);
+        return navigate('/player/home');
+      } else {
+        const json = await response.json();
+        console.log(json.error);
+        seterrDisplay(json.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle any network errors or exceptions here
     }
   };
 
