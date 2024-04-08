@@ -9,12 +9,15 @@ const PlayerCoach = () => {
   const [filterinUse, setFilterinUse] = useState(false);
 
   const run = async () => {
-    const response = await fetch('/api/playerpost/allplayerposts', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      'https://sports-back.onrender.com/api/playerpost/allplayerposts',
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    );
     setflag(true);
     const json = await response.json();
 
@@ -35,12 +38,15 @@ const PlayerCoach = () => {
   };
 
   const filterPlayerPosts = async () => {
-    const response = await fetch(`/api/playerpost/sport/${sport}`, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      `https://sports-back.onrender.com/api/playerpost/sport/${sport}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    );
     const json = await response.json();
     setPlayerPosts(json);
     setFilterinUse(true);
