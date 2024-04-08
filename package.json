@@ -1,5 +1,5 @@
 {
-  "proxy": "https://sports-back-1.onrender.com",
+  "proxy": "https://sports-back-1.onrender.com/",
   "name": "front",
   "version": "0.1.0",
   "private": true,
