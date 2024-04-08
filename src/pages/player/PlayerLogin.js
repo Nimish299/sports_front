@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FlagState } from '../../context/FlagProvider';
 
@@ -9,7 +9,7 @@ import {
   FormHelperText,
   Input,
   Button,
-  useToast,
+  // useToast,
 } from '@chakra-ui/react';
 
 const PlayerLogin = () => {
@@ -30,6 +30,7 @@ const PlayerLogin = () => {
       body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     });
     const json = await response.json();
