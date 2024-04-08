@@ -15,7 +15,7 @@ import PlayerPlayer from './pages/player/PlayerPlayer';
 import AppliedAcademys from './pages/player/AppliedAcademys';
 import StarredPosts from './pages/player/StarredPosts';
 import PlayerPostDetailsPage from './pages/playerPost/PlayerPostDetailsPage';
-import MyPosts from './pages/player/MyPosts';
+import MyPosts from './pages/pla yer/MyPosts';
 import Navbar from './pages/Navbar';
 import backgroundImage from './pages/backgroundImage.jpg';
 import PlayerWelcome from './pages/player/PlayerWelcome';

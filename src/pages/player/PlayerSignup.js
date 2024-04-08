@@ -6,7 +6,7 @@ import {
   FormHelperText,
   Input,
   Button,
-  useToast,
+  // useToast,
   VStack,
 } from '@chakra-ui/react';
 import { FlagState } from '../../context/FlagProvider';
@@ -35,7 +35,7 @@ const PlayerSignup = () => {
   }
 
   const LoginFormSubmit = async (e) => {
-    if (name.length == 0) {
+    if (name.length === 0) {
       return alert('name should have atleast one character');
     }
     if (!validateEmail(emailID)) {
@@ -50,7 +50,7 @@ const PlayerSignup = () => {
       return alert('mobile number should have 10 digits');
     }
 
-    if (cpassword == password) {
+    if (cpassword === password) {
       e.preventDefault();
       const user = { name, emailID, password, mobileNumber };
       const response = await fetch(`/api/player/signup`, {
