@@ -8,9 +8,11 @@ const PlayerCoach = () => {
   const [flag, setflag] = useState(false);
   const [filterinUse, setFilterinUse] = useState(false);
 
+  // import axios from 'axios';
+
   const run = async () => {
     try {
-      const response = await axios.get('/api/playerpost/allplayerposts', {
+      const response = await axios.get('/api/playerpost/allPlayerPosts', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -28,6 +30,7 @@ const PlayerCoach = () => {
       console.error('Error:', error);
     }
   };
+
   useEffect(() => {
     run();
   }, [flag]);
