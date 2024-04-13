@@ -1,33 +1,27 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import PostListDisplay from '../../components/player/PostListDisplay';
-import axios from 'axios';
+
 const PlayerCoach = () => {
   const [playerPosts, setPlayerPosts] = useState([]);
   const [sport, setSport] = useState([]);
   const [flag, setflag] = useState(false);
   const [filterinUse, setFilterinUse] = useState(false);
 
-  // import axios from 'axios';
-
   const run = async () => {
-    try {
-      const response = await axios.get('/api/playerpost/allPlayerPosts', {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      });
+    const response = await fetch('/api/playerpost/allplayerposts', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+    setflag(true);
+    const json = await response.json();
 
-      setflag(true);
-
-      if (response.status === 200) {
-        const json = response.data;
-        setPlayerPosts(json);
-      } else {
-        console.log('Error:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error:', error);
+    if (response.ok) {
+      setPlayerPosts(json);
+    } else {
+      console.log(json.error);
     }
   };
 
