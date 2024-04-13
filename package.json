@@ -1,5 +1,5 @@
 {
-  "proxy": "https://sportsback-production.up.railway.app/",
+  "proxy": "https://sports-back.onrender.com/",
   "name": "front",
   "version": "0.1.0",
   "private": true,

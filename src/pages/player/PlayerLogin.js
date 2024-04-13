@@ -30,25 +30,18 @@ const PlayerLogin = () => {
       body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json',
-        // Accept: 'application/json',
+        Accept: 'application/json',
       },
     });
+    const json = await response.json();
 
-    try {
-      const json = await response.json();
-
-      if (response.ok) {
-        console.log(json);
-        setLoginflag(true);
-        return navigate('/player/home');
-      } else {
-        console.log(json.error);
-        seterrDisplay(json.error);
-      }
-    } catch (error) {
-      console.error('Error parsing JSON:', error);
-      // Handle error here, for example:
-      seterrDisplay('Error parsing JSON response');
+    if (response.ok) {
+      console.log(json);
+      setLoginflag(true);
+      return navigate('/player/home');
+    } else {
+      console.log(json.error);
+      seterrDisplay(json.error);
     }
   };
 
