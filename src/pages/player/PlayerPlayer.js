@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import PostListDisplay from '../../components/player/PostListDisplay';
-
+import axios from 'axios';
 const PlayerCoach = () => {
   const [playerPosts, setPlayerPosts] = useState([]);
   const [sport, setSport] = useState([]);
