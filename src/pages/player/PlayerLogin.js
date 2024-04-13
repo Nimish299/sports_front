@@ -1,7 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FlagState } from '../../context/FlagProvider';
-
+import axios from 'axios';
 import {
   VStack,
   FormControl,
@@ -25,23 +25,27 @@ const PlayerLogin = () => {
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
     const user = { emailID, password };
-    const response = await fetch(`/api/player/login`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
-    const json = await response.json();
 
-    if (response.ok) {
-      console.log(json);
-      setLoginflag(true);
-      return navigate('/player/home');
-    } else {
-      console.log(json.error);
-      seterrDisplay(json.error);
+    try {
+      const response = await axios.post(`/api/player/login`, user, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = response.data;
+
+      if (response.status === 200) {
+        console.log(data);
+        setLoginflag(true);
+        return navigate('/player/home');
+      } else {
+        console.log(data.error);
+        seterrDisplay(data.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error appropriately
     }
   };
 
