@@ -9,19 +9,23 @@ const PlayerCoach = () => {
   const [filterinUse, setFilterinUse] = useState(false);
 
   const run = async () => {
-    const response = await fetch('/api/playerpost/allplayerposts', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
-    setflag(true);
-    const json = await response.json();
+    try {
+      const response = await axios.get('/api/playerpost/allplayerPosts', {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
 
-    if (response.ok) {
-      setPlayerPosts(json);
-    } else {
-      console.log(json.error);
+      setflag(true);
+
+      if (response.status === 200) {
+        const json = response.data;
+        setPlayerPosts(json);
+      } else {
+        console.log(response.data.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
