@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import { FlagState } from '../context/FlagProvider';
 
 const Navbar = () => {
@@ -10,37 +10,37 @@ const Navbar = () => {
 
   const logoutUser = async () => {
     console.log('logged out');
-    try {
-      await axios.get('/api/player/logout', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log('logged out');
-      // return navigate('/');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
+    await fetch('/api/player/logout', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+    console.log('logged out');
+    // return navigate('/');
   };
   const Checklogin = async () => {
     try {
-      const response = await axios.get('/api/player/check', {
+      const response = await fetch('/api/player/check', {
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-type': 'application/json',
         },
       });
 
-      if (response.status === 200) {
-        const data = response.data;
-        // console.log(data);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
         setLoginflag(data.loggedIn);
       } else {
+        // Handle error response
         console.log('NO');
-        setLoginflag(false);
+        setLoginflag(false); // Set loginflag to false if there's an error
       }
     } catch (error) {
       console.error('Error checking login:', error);
-      setLoginflag(false);
+      // Handle fetch error
+      setLoginflag(false); // Set loginflag to false in case of fetch error
     }
   };
 
