@@ -16,7 +16,7 @@ const MyPosts = () => {
   const [showForm, setShowForm] = useState(false);
   const fetchPlayerPosts = async () => {
     try {
-      const response = await fetch('/api/playerpost/allPlayerPost', {
+      const response = await fetch('/api/playerpost/allplayerpost', {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',

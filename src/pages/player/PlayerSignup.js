@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { FlagState } from '../../context/FlagProvider';
-
+import axios from 'axios';
 const PlayerSignup = () => {
   const [emailID, setEmailID] = useState('');
   const [password, setPassword] = useState('');
@@ -51,28 +51,29 @@ const PlayerSignup = () => {
     }
 
     if (cpassword === password) {
-      e.preventDefault();
-      const user = { name, emailID, password, mobileNumber };
-      const response = await fetch(`/api/player/signup`, {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {
-          'Content-type': 'application/json',
-        },
-      });
-      const json = await response.json();
+      try {
+        const user = { name, emailID, password, mobileNumber };
 
-      if (response.ok) {
-        console.log(json);
-        setLoginflag(true);
-        return navigate('/player/home');
-      } else {
-        console.log(json.error);
-        seterrDisplay(json.error);
-        alert(errDisplay);
+        const response = await axios.post(`/api/player/signup`, user, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.status === 200) {
+          console.log(response.data);
+          setLoginflag(true);
+          return navigate('/player/home');
+        } else {
+          console.log(response.data.error);
+          seterrDisplay(response.data.error);
+          alert(errDisplay);
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
     } else {
-      return alert('Passwords do not match');
+      alert('Passwords do not match');
     }
   };
 
