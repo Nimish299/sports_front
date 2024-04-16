@@ -31,6 +31,7 @@ const PlayerLogin = () => {
         `https://sports-back.onrender.com/api/player/login`,
         user,
         {
+          withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
           },
