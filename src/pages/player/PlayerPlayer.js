@@ -11,7 +11,7 @@ const PlayerCoach = () => {
   const run = async () => {
     try {
       const response = await axios.get(
-        'sports-back.onrender.com/api/playerpost/allplayerposts',
+        'https://sports-back.onrender.com/api/playerpost/allplayerposts',
         {
           headers: {
             'Content-type': 'application/json',

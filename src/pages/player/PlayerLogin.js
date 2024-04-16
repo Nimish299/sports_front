@@ -28,7 +28,7 @@ const PlayerLogin = () => {
 
     try {
       const response = await axios.post(
-        `sports-back.onrender.com/api/player/login`,
+        `https://sports-back.onrender.com/api/player/login`,
         user,
         {
           headers: {
