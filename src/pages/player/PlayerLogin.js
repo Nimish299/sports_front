@@ -27,17 +27,12 @@ const PlayerLogin = () => {
     const user = { emailID, password };
 
     try {
-      const response = await axios.post(
-        `https://sports-back.onrender.com/api/player/login`,
-        user,
-        {
-          withCredentials: true,
-          // sss
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await axios.post(`/api/player/login`, user, {
+        // withCredentials:true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
       const data = response.data;
 
