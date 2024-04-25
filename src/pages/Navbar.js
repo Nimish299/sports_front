@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -7,7 +8,7 @@ import { FlagState } from '../context/FlagProvider';
 
 const Navbar = () => {
   const { loginflag, setLoginflag } = FlagState();
-
+  const navigate = useNavigate();
   function printAxiosHeaders() {
     // Get default headers from Axios
     const headers = axios.defaults.headers.common;
@@ -35,6 +36,9 @@ const Navbar = () => {
       // Handle error
       console.error('Error logging out:', error);
     }
+  };
+  const redirecttomyposts = () => {
+    return navigate('/player/player-profile');
   };
   const Checklogin = async () => {
     // try {
@@ -117,8 +121,11 @@ const Navbar = () => {
                   Search
                 </button>
               </form>
-              <button className='btn btn-outline-success'>
-                <a href='/player/player-profile'>Profile</a>
+              <button
+                className='btn btn-outline-success'
+                onClick={redirecttomyposts}
+              >
+                Profile
               </button>
               <button className='btn btn-outline-danger' onClick={logoutUser}>
                 <a href='/'>Sign-out</a>
