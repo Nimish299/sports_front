@@ -22,31 +22,67 @@ const PlayerLogin = () => {
 
   console.log(loginflag);
 
+  // const LoginFormSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const user = { emailID, password };
+
+  //   try {
+  //     const response = await axios.post(`/api/player/login`, user, {
+  //       // withCredentials:true,
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+
+  //     // const data = response.data;
+
+  //     const json = await response.json();
+
+  //     if (response.status === 200) {
+  //       setLoginflag(true);
+  //       const { token } = json;
+
+  //       console.log('front end token', token);
+
+  //       localStorage.setItem('auth-token', token);
+
+  //       // console.log(data);
+
+  //       return navigate('/player/home');
+  //     } else {
+  //       console.log(json.error);
+  //       seterrDisplay(json.error);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     // Handle error appropriately
+  //   }
+  // };
+
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
     const user = { emailID, password };
+    const response = await fetch(`/api/player/login`, {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+    const json = await response.json();
 
-    try {
-      const response = await axios.post(`/api/player/login`, user, {
-        // withCredentials:true,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    if (response.ok) {
+      const { token } = json;
 
-      const data = response.data;
+      console.log('front end token', token);
 
-      if (response.status === 200) {
-        console.log(data);
-        setLoginflag(true);
-        return navigate('/player/home');
-      } else {
-        console.log(data.error);
-        seterrDisplay(data.error);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle error appropriately
+      localStorage.setItem('auth-token', token);
+      console.log(json);
+      setLoginflag(true);
+      return navigate('/player/home');
+    } else {
+      console.log(json.error);
+      seterrDisplay(json.error);
     }
   };
 

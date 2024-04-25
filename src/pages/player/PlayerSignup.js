@@ -63,8 +63,19 @@ const PlayerSignup = () => {
       const json = await response.json();
 
       if (response.ok) {
+        // console.log(json);
+        // setLoginflag(true);
+        // return navigate('/player/home');
+
+        const { token } = json;
+        setLoginflag(true);
+
+        console.log('front end token', token);
+
+        localStorage.setItem('auth-token', token);
         console.log(json);
         setLoginflag(true);
+
         return navigate('/player/home');
       } else {
         console.log(json.error);

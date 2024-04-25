@@ -10,11 +10,14 @@ const PlayerCoach = () => {
 
   const run = async () => {
     try {
-      const response = await axios.get('/api/playerpost/allplayerposts', {
+      const response = await fetch('/api/playerpost/allplayerposts', {
+        method: 'GET',
         headers: {
           'Content-type': 'application/json',
         },
       });
+
+      // "proxy": "https://sports-back.onrender.com/"
 
       setflag(true);
 
