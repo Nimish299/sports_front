@@ -18,13 +18,16 @@ const PlayerPostDetailsPage = () => {
   };
   const getDetails = async () => {
     try {
-      const response = await axios.get(`/api/playerpost/details/${_id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.get(
+        `https://sports-back.onrender.com/api/playerpost/details/${_id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-      if (response.status !== 200) {
+      if (response.status < 200 && response.status > 300) {
         throw new Error('Failed to fetch post details');
       }
 
@@ -40,7 +43,7 @@ const PlayerPostDetailsPage = () => {
     const user = { message };
     try {
       const response = await axios.post(
-        `/api/playerpost/requestonpost/${_id}`,
+        `https://sports-back.onrender.com/api/playerpost/requestonpost/${_id}`,
         user,
         {
           headers: {
@@ -51,7 +54,7 @@ const PlayerPostDetailsPage = () => {
 
       const json = response.data;
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         setStatus('pending');
         console.log(json.message);
         // Check if a new request was created or an existing one was updated
@@ -71,11 +74,14 @@ const PlayerPostDetailsPage = () => {
   // Inside the statusfun function
   const statusfun = async (_id) => {
     try {
-      const response = await axios.get(`/api/playerpost/Statusonpost/${_id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.get(
+        `https://sports-back.onrender.com/api/playerpost/Statusonpost/${_id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       const data = response.data;
       setStatus(data.status);
