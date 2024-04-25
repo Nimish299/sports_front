@@ -27,7 +27,12 @@ const PlayerProfile = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          'https://sports-back.onrender.com/api/player/profile'
+          'https://sports-back.onrender.com/api/player/profile',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
         );
         if (response.status !== 200) {
           throw new Error('Failed to fetch profile data');
