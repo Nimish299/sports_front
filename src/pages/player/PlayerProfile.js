@@ -22,30 +22,29 @@ const PlayerProfile = () => {
   const renderInterests = (interests) => {
     return <Text>Interests: {interests.join(', ')}</Text>;
   };
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get(
-          'https://sports-back.onrender.com/api/player/profile',
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-        if (response.status !== 200) {
-          throw new Error('Failed to fetch profile data');
+  const fetchProfile = async () => {
+    console.log('sss');
+    try {
+      const response = await axios.get(
+        'https://sports-back.onrender.com/api/player/profile',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-        const data = response.data;
-        setProfileData(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
+      );
+      if (response.status < 200 || response.status > 300) {
+        throw new Error('Failed to fetch profile data');
       }
-    };
-
+      const data = response.data;
+      setProfileData(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchProfile();
   }, []);
 

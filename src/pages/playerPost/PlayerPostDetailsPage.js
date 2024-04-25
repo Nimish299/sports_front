@@ -27,7 +27,7 @@ const PlayerPostDetailsPage = () => {
         }
       );
 
-      if (response.status < 200 && response.status > 300) {
+      if (response.status < 200 || response.status > 300) {
         throw new Error('Failed to fetch post details');
       }
 
