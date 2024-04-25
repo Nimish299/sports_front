@@ -29,7 +29,7 @@ const Navbar = () => {
       localStorage.removeItem('auth-token');
 
       delete axios.defaults.headers.common['Authorization'];
-
+      printAxiosHeaders();
       // return navigate('/');
     } catch (error) {
       // Handle error
@@ -106,13 +106,22 @@ const Navbar = () => {
           </ul>
           {loginflag && (
             <div className='d-flex'>
+              <form className='d-flex' role='search'>
+                <input
+                  className='form-control me-2'
+                  type='search'
+                  placeholder='Search'
+                  aria-label='Search'
+                />
+                <button className='btn btn-outline-success' type='submit'>
+                  Search
+                </button>
+              </form>
               <button className='btn btn-outline-success'>
-                <Link to='/player/player-profile' className='nav-link'>
-                  Profile
-                </Link>
+                <a href='/player/player-profile'>Profile</a>
               </button>
               <button className='btn btn-outline-danger' onClick={logoutUser}>
-                Sign-out
+                <a href='/'>Sign-out</a>
               </button>
             </div>
           )}
