@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import MypostDisplay from '../../components/player/MypostDisplay';
 import { useEffect, useState } from 'react';
-
+import axios from 'axios';
 const MyPosts = () => {
   const navigate = useNavigate();
   const [playerPosts, setPlayerPosts] = useState([]);
@@ -16,14 +16,14 @@ const MyPosts = () => {
   const [showForm, setShowForm] = useState(false);
   const fetchPlayerPosts = async () => {
     try {
-      const response = await fetch('/api/playerpost/allplayerpost', {
-        method: 'GET',
+      const response = await axios.get('/api/playerpost/allplayerpost', {
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       });
-      if (response.ok) {
-        const json = await response.json();
+
+      if (response.status === 200) {
+        const json = response.data;
         setPlayerPosts(json);
       } else {
         console.log('Error fetching player posts:', response.statusText);
@@ -38,19 +38,18 @@ const MyPosts = () => {
   }, []);
   // let playerInfo = null;
 
-  const fletch_info = async () => {
+  const fetch_info = async () => {
     try {
-      const response = await fetch('/api/player/profile/info', {
-        method: 'GET',
+      const response = await axios.get('/api/player/profile/info', {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      if (response.ok) {
-        return await response.json();
+
+      if (response.status === 200) {
+        return response.data;
       } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error);
+        throw new Error(response.data.error);
       }
     } catch (error) {
       console.error('Error fetching player info:', error);
@@ -62,7 +61,7 @@ const MyPosts = () => {
     e.preventDefault();
     try {
       // Fetch playerInfo
-      const playerInfo = await fletch_info();
+      const playerInfo = await fetch_info();
 
       // Create new post object with playerInfo
       const newPost = {
@@ -76,16 +75,14 @@ const MyPosts = () => {
       };
       console.log('New Post:', newPost);
       // Send POST request to create player post
-      const response = await fetch('/api/playerpost/create', {
-        method: 'POST',
+      const response = await axios.post('/api/playerpost/create', newPost, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newPost),
       });
 
-      if (response.ok) {
-        const createdPost = await response.json();
+      if (response.status === 200) {
+        const createdPost = response.data;
         setPlayerPosts((prevPosts) => [...prevPosts, createdPost]);
         setTitle('');
         setDescription('');
@@ -96,7 +93,7 @@ const MyPosts = () => {
         fetchPlayerPosts();
         setSkill();
       } else {
-        const errorData = await response.json();
+        const errorData = response.data;
         setErrDisplay(errorData.error);
       }
     } catch (error) {
@@ -106,6 +103,7 @@ const MyPosts = () => {
       );
     }
   };
+
   const goToPlayerPlayer = () => {
     navigate('/player/playerplayer');
   };

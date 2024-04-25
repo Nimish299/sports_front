@@ -7,18 +7,22 @@ const PlayerHome = () => {
   const navigate = useNavigate();
   const logoutUser = async () => {
     console.log('logged out');
-    await fetch('/api/player/logout', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
-    setLoginflag(false);
-    console.log('logged out');
-    localStorage.removeItem('auth-token');
+    try {
+      await axios.get('/api/player/logout', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log('logged out');
+      localStorage.removeItem('auth-token');
 
-    delete axios.defaults.headers.common['Authorization'];
-    return navigate('/');
+      delete axios.defaults.headers.common['Authorization'];
+      printAxiosHeaders();
+      // return navigate('/');
+    } catch (error) {
+      // Handle error
+      console.error('Error logging out:', error);
+    }
   };
 
   const gotoPlayerPlayer = () => {

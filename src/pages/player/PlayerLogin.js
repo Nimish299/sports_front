@@ -88,7 +88,7 @@ const PlayerLogin = () => {
         axios.defaults.headers.common['Authorization'] =
           token.length > 0 ? token : '';
 
-        printAxiosHeaders();
+        // printAxiosHeaders();
 
         console.log('Frontend token:', token);
         localStorage.setItem('auth-token', token);

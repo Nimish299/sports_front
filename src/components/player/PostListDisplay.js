@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const PostListDisplay = ({ playerPost, navigate }) => {
   console.log(playerPost);
@@ -10,24 +11,25 @@ const PostListDisplay = ({ playerPost, navigate }) => {
     const _id = playerPost._id;
 
     const item = { _id };
-    const response = await fetch('/api/player/addtostarred', {
-      method: 'POST',
-      body: JSON.stringify(item),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
+    try {
+      const response = await axios.post('/api/player/addtostarred', item, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    const json = await response.json();
-    if (response.ok) {
-      console.log(json);
-      setApplied(true);
-    } else {
-      console.log(json.error);
-      seterrDisplay(json.error);
+      const json = response.data;
+      if (response.status === 200) {
+        console.log(json);
+        setApplied(true);
+      } else {
+        console.log(json.error);
+        seterrDisplay(json.error);
+      }
+    } catch (error) {
+      console.error('Error applying:', error.message);
     }
   };
-
   const acceptadded = (e) => {
     e.preventDefault();
     seterrDisplay('');

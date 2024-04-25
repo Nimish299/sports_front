@@ -25,11 +25,11 @@ const PlayerProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch('/api/player/profile');
-        if (!response.ok) {
+        const response = await axios.get('/api/player/profile');
+        if (response.status !== 200) {
           throw new Error('Failed to fetch profile data');
         }
-        const data = await response.json();
+        const data = response.data;
         setProfileData(data);
       } catch (error) {
         setError(error.message);

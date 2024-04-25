@@ -4,15 +4,14 @@ const StarredListDisplay = ({ playerPost, playerPosts, setPlayerPosts }) => {
   const deletePlayerPost = async () => {
     try {
       // Send a DELETE request to remove the player post from starred
-      const response = await fetch(`/api/player/removefromstarred`, {
-        method: 'DELETE',
-        body: JSON.stringify(playerPost), // Assuming postId is required to identify the post
+      const response = await axios.delete(`/api/player/removefromstarred`, {
+        data: playerPost, // Assuming postId is required to identify the post
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Failed to remove player post from starred');
       }
 
@@ -22,7 +21,7 @@ const StarredListDisplay = ({ playerPost, playerPosts, setPlayerPosts }) => {
       );
       setPlayerPosts(updatedPlayerPosts);
     } catch (error) {
-      console.error('Error removing player post from starred:', error);
+      console.error('Error removing player post from starred:', error.message);
     }
   };
 

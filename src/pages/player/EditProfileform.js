@@ -11,7 +11,7 @@ import {
   Text,
   Divider,
 } from '@chakra-ui/react';
-
+import axios from 'axios';
 const EditProfile = () => {
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -38,11 +38,8 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch('/api/player/profile');
-        if (!response.ok) {
-          throw new Error('Failed to fetch profile data');
-        }
-        const data = await response.json();
+        const response = await axios.get('/api/player/profile');
+        const data = response.data;
         setProfileData(data);
         setFormData(data); // Initialize form data with fetched profile data
       } catch (error) {
@@ -96,12 +93,10 @@ const EditProfile = () => {
     setError('');
     setLoading(true);
     try {
-      const response = await fetch('/api/player/updateProfile', {
-        method: 'PUT',
+      const response = await axios.put('/api/player/updateProfile', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {

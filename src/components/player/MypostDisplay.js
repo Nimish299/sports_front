@@ -13,24 +13,28 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
   const deletePlayerPost = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`/api/playerpost/delete`, {
-      method: 'DELETE',
-      body: JSON.stringify(playerPost),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
-    const json = await response.json();
+    try {
+      const response = await axios.delete(`/api/playerpost/delete`, {
+        data: playerPost,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    if (response.ok) {
-      console.log(json);
-      // Remove the deleted post from the local state
-      const updatedPlayerPosts = playerPosts.filter(
-        (post) => post._id !== playerPost._id
-      );
-      setPlayerPosts(updatedPlayerPosts);
-    } else {
-      console.log(json.error);
+      const json = response.data;
+
+      if (response.status === 200) {
+        console.log(json);
+        // Remove the deleted post from the local state
+        const updatedPlayerPosts = playerPosts.filter(
+          (post) => post._id !== playerPost._id
+        );
+        setPlayerPosts(updatedPlayerPosts);
+      } else {
+        console.log(json.error);
+      }
+    } catch (error) {
+      console.error('Error deleting player post:', error.message);
     }
   };
 
@@ -40,21 +44,20 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
 
     try {
       console.log(`request`);
-      const response = await fetch(
+      const response = await axios.get(
         `/api/playerpost/Getrequestonpost/${playerPost._id}`,
         {
-          method: 'GET',
           headers: {
-            'Content-type': 'application/json',
+            'Content-Type': 'application/json',
           },
         }
       );
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch data');
       }
 
-      const json = await response.json();
+      const json = response.data;
       setpostRequests(json);
       setflag(true);
       console.log(postRequests);
@@ -64,25 +67,22 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
   };
 
   const Getrequestonpost1 = async () => {
-    //e.preventDefault();
-
     try {
       console.log(`request`);
-      const response = await fetch(
+      const response = await axios.get(
         `/api/playerpost/Getrequestonpost/${playerPost._id}`,
         {
-          method: 'GET',
           headers: {
-            'Content-type': 'application/json',
+            'Content-Type': 'application/json',
           },
         }
       );
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch data');
       }
 
-      const json = await response.json();
+      const json = response.data;
       setpostRequests(json);
       setflag(true);
       console.log(postRequests);
@@ -90,25 +90,22 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
       console.error('Error:', error.message);
     }
   };
-
   //accept a post && reject Remaining
   const acceptRequest = async (req) => {
     try {
       console.log(`Accepted`);
       console.log(req);
-      const response = await fetch(`/api/playerpost/POSTAccept`, {
-        method: 'POST',
-        body: JSON.stringify(req),
+      const response = await axios.post(`/api/playerpost/POSTAccept`, req, {
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch data');
       }
 
-      const json = await response.json();
+      const json = response.data;
       setpostAccept(json);
       setacceptflag(true);
       console.log(`postAccept`);
@@ -121,19 +118,17 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`Rejected`);
       console.log(req);
-      const response = await fetch(`/api/playerpost/POSTREJECT`, {
-        method: 'POST',
-        body: JSON.stringify(req),
+      const response = await axios.post(`/api/playerpost/POSTREJECT`, req, {
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch data');
       }
 
-      const json = await response.json();
+      const json = response.data;
       // setpostAccept(json);
       // setacceptflag();
       setplayerreject(json);

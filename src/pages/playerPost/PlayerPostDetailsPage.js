@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import axios from 'axios';
 const PlayerPostDetailsPage = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
@@ -18,17 +18,17 @@ const PlayerPostDetailsPage = () => {
   };
   const getDetails = async () => {
     try {
-      const response = await fetch(`/api/playerpost/details/${_id}`, {
-        method: 'GET',
+      const response = await axios.get(`/api/playerpost/details/${_id}`, {
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
       });
-      if (!response.ok) {
+
+      if (response.status !== 200) {
         throw new Error('Failed to fetch post details');
       }
-      const data = await response.json();
 
+      const data = response.data;
       setPost(data);
       statusfun(_id);
     } catch (error) {
@@ -38,42 +38,46 @@ const PlayerPostDetailsPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = { message };
-    const response = await fetch(`/api/playerpost/requestonpost/${_id}`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
-    const json = await response.json();
+    try {
+      const response = await axios.post(
+        `/api/playerpost/requestonpost/${_id}`,
+        user,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-    if (response.ok) {
-      setStatus('pending');
-      console.log(json.message);
-      // setflag(false);
-      // Check if a new request was created or an existing one was updated
-      if (json.updated) {
-        console.log('Existing request updated');
+      const json = response.data;
+
+      if (response.status === 200) {
+        setStatus('pending');
+        console.log(json.message);
+        // Check if a new request was created or an existing one was updated
+        if (json.updated) {
+          console.log('Existing request updated');
+        } else {
+          console.log('New request created');
+        }
       } else {
-        console.log('New request created');
+        console.log(json.error);
+        setErrorMessage(json.error); // Set the error message received from the backend
       }
-    } else {
-      console.log(json.error);
-      setErrorMessage(json.error); // Set the error message received from the backend
+    } catch (error) {
+      console.error('Error submitting request:', error.message);
     }
   };
-
   // Inside the statusfun function
   const statusfun = async (_id) => {
     try {
-      const response = await fetch(`/api/playerpost/Statusonpost/${_id}`, {
-        method: 'GET',
+      const response = await axios.get(`/api/playerpost/Statusonpost/${_id}`, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      const data = await response.json();
+      const data = response.data;
       setStatus(data.status);
       setflag(true); // Update status state
     } catch (error) {

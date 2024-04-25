@@ -14,29 +14,28 @@ const StarredPosts = () => {
     const getStarredPosts = async () => {
       try {
         // Fetch starred post IDs from the server
-        const response = await fetch('/api/player/starred', {
-          method: 'GET',
+        const response = await axios.get('/api/player/starred', {
           headers: {
-            'Content-type': 'application/json',
+            'Content-Type': 'application/json',
           },
         });
-        const starredPostIds = await response.json();
-        // console.log(starredPostIds);
+        const starredPostIds = response.data;
+
         // Fetch post data based on the retrieved post IDs
-        const postDataResponse = await fetch('/api/playerpost/getpostsbyids', {
-          method: 'POST', // Change method to POST
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify({ postIds: starredPostIds }),
-          // Send postIds array in the body
-        });
-        const starredPostsData = await postDataResponse.json();
+        const postDataResponse = await axios.post(
+          '/api/playerpost/getpostsbyids',
+          { postIds: starredPostIds },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        const starredPostsData = postDataResponse.data;
 
         // Update state with fetched post data
         setStarredPostIds(starredPostsData);
-        console.log('starredPostIds');
-        console.log(starredPostIds); // Use the correct variable name
+        console.log('starredPostsData:', starredPostsData);
       } catch (error) {
         console.error('Error fetching starred posts:', error);
       }

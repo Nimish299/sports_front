@@ -77,17 +77,20 @@ const PlayerCoach = () => {
   };
 
   const filterPlayerPosts = async () => {
-    const response = await fetch(`/api/playerpost/sport/${sport}`, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
-    const json = await response.json();
-    setPlayerPosts(json);
-    setFilterinUse(true);
+    try {
+      const response = await axios.get(`/api/playerpost/sport/${sport}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const json = response.data;
+      setPlayerPosts(json);
+      setFilterinUse(true);
+    } catch (error) {
+      // Handle error
+      console.error('Error filtering player posts:', error);
+    }
   };
-
   const removeFilter = () => {
     run();
     setFilterinUse(false);
