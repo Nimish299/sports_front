@@ -23,12 +23,14 @@ const PlayerProfile = () => {
     return <Text>Interests: {interests.join(', ')}</Text>;
   };
   const fetchProfile = async () => {
-    console.log('ssssssaa');
+    console.log('ssssssaa1');
+    const token = localStorage.getItem('auth-token');
     try {
       const response = await axios.get(
         'https://sports-back.onrender.com/api/player/profile',
         {
           headers: {
+            Authorization: token ? `Bearer ${token}` : '',
             'Content-Type': 'application/json',
           },
         }
