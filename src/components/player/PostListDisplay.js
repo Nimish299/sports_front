@@ -76,17 +76,16 @@ const PostListDisplay = ({ playerPost, navigate }) => {
   useEffect(() => {
     const run = async () => {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `https://sports-back.onrender.com/api/player/tellifstarred/${playerPost._id}`,
           {
-            method: 'GET',
             headers: {
               'Content-Type': 'application/json',
             },
           }
         );
 
-        const data = await response.json();
+        const data = response.data;
         setApplied(data.status);
         //console.log('hi');
         // console.log(applied);
