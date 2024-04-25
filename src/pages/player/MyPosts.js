@@ -26,7 +26,7 @@ const MyPosts = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const json = response.data;
         setPlayerPosts(json);
       } else {
@@ -56,7 +56,7 @@ const MyPosts = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         return response.data;
       } else {
         throw new Error(response.data.error);
@@ -69,10 +69,11 @@ const MyPosts = () => {
 
   const addPlayerPost = async (e) => {
     e.preventDefault();
+    console.log('before the commit im here');
     try {
       // Fetch playerInfo
       const playerInfo = await fetch_info();
-
+      console.log('after fetch info im here');
       // Create new post object with playerInfo
       const newPost = {
         title,
