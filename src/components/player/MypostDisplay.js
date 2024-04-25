@@ -3,13 +3,13 @@ import axios from 'axios';
 
 const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
   const [postRequests, setpostRequests] = useState([]);
-  const [flag, setflag] = useState(false);
-  const [acceptflag, setacceptflag] = useState(false);
-  const [rejectflag, setrejectflag] = useState(false);
+  const [flag1, setflag1] = useState(false);
+  const [acceptflag1, setacceptflag1] = useState(false);
+  const [rejectflag1, setrejectflag1] = useState(false);
   const [postAccept, setpostAccept] = useState([]);
   const [playerreject, setplayerreject] = useState([]);
   // const [1postAccept, 1setpostAccept] = useState([]);
-  const [sflag, setsflag] = useState(false);
+  const [sflag1, setsflag1] = useState(false);
   //delete post
   const deletePlayerPost = async (e) => {
     e.preventDefault();
@@ -63,7 +63,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
 
       const json = response.data;
       setpostRequests(json);
-      setflag(true);
+      setflag1(true);
       console.log(postRequests);
     } catch (error) {
       console.error('Error:', error.message);
@@ -88,12 +88,16 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
 
       const json = response.data;
       setpostRequests(json);
-      setflag(true);
+      setflag1(true);
       console.log(postRequests);
     } catch (error) {
       console.error('Error:', error.message);
     }
   };
+  useEffect(() => {
+    getStatusColor();
+    Getrequestonpost1();
+  }, [postRequests, acceptflag1, rejectflag1]);
   //accept a post && reject Remaining
   const acceptRequest = async (req) => {
     try {
@@ -115,7 +119,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
 
       const json = response.data;
       setpostAccept(json);
-      setacceptflag(true);
+      setacceptflag1(true);
       console.log(`postAccept`);
       console.log(postAccept);
     } catch (error) {
@@ -142,10 +146,10 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
 
       const json = response.data;
       // setpostAccept(json);
-      // setacceptflag();
+      // setacceptflag1();
       setplayerreject(json);
       console.log(playerreject);
-      setrejectflag(true);
+      setrejectflag1(true);
       console.log(`postAccept`);
       console.log(postAccept);
     } catch (error) {
@@ -177,15 +181,11 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     }
   };
 
-  // flag remove request
+  // flag1 remove request
   const removerequest = () => {
-    setflag(false);
+    setflag1(false);
   };
 
-  useEffect(() => {
-    getStatusColor();
-    Getrequestonpost1();
-  }, [postRequests, acceptflag, rejectflag]);
   // Assuming playerPost.playerInfo is an object containing name and emailID
   // Ensure playerPost.playerInfo exists before destructure
   const name = playerPost.playersInfo?.[0]?.name || 'Name not available';
@@ -264,7 +264,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
             >
               Delete
             </button>
-            {!flag && (
+            {!flag1 && (
               <button
                 className='btn btn-primary'
                 onClick={Getrequestonpost}
@@ -273,7 +273,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
                 Requests
               </button>
             )}
-            {flag && (
+            {flag1 && (
               <button
                 className='btn btn-primary'
                 onClick={removerequest}
@@ -285,7 +285,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
           </div>
         </div>
       </div>
-      {flag && (
+      {flag1 && (
         <div className='request_post_table-container'>
           {postRequests.map((req, index) => (
             <div key={index} className='request_post_table-column'>
