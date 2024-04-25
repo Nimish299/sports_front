@@ -45,14 +45,11 @@ const PlayerCoach = () => {
   const run = async () => {
     const token = localStorage.getItem('auth-token');
     try {
-      const response = await axios.get(
-        'https://sports-back.onrender.com/api/playerpost/allplayerposts',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await axios.get('api/playerpost/allplayerposts', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (response.status === 200) {
         const playerPosts = response.data;
