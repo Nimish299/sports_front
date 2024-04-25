@@ -1,5 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { useState } from 'react';
+// import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FlagState } from '../../context/FlagProvider';
 import axios from 'axios';
 import {
@@ -104,6 +105,12 @@ const PlayerLogin = () => {
     }
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      setLoginflag(true);
+    }
+  }, []);
   return (
     <div>
       <VStack spacing={2}>

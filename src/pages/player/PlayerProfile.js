@@ -47,7 +47,12 @@ const PlayerProfile = () => {
   useEffect(() => {
     fetchProfile();
   }, []);
-
+  const redirectedhome = () => {
+    return navigate('/player/home');
+  };
+  const redirecteditprofile = () => {
+    return navigate('/player/player-Edit-profile');
+  };
   return (
     <VStack spacing={4} align='flex-start'>
       <div
@@ -152,12 +157,12 @@ const PlayerProfile = () => {
             <Text>
               Reviews: {profileData.feedback_and_ratings?.reviews?.join(', ')}
             </Text>
-            <Button colorScheme='blue'>
-              <a href='/player/player-Edit-profile'>Edit Profile</a>
+            <Button colorScheme='blue' onClick={redirecteditprofile}>
+              Edit Profile
             </Button>
             <Divider />
-            <Button colorScheme='blue'>
-              <a href='/player/home'>Home</a>
+            <Button colorScheme='blue' onClick={redirectedhome}>
+              Home
             </Button>
           </>
         )}
