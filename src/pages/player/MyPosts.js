@@ -98,6 +98,7 @@ const MyPosts = () => {
       if (response.status === 200) {
         const createdPost = response.data;
         setPlayerPosts((prevPosts) => [...prevPosts, createdPost]);
+        console.log('im here');
         setTitle('');
         setDescription('');
         setSport('');
@@ -106,8 +107,8 @@ const MyPosts = () => {
         setLocation('');
         fetchPlayerPosts();
         setSkill();
-        // const a = !newPostFlag;
-        // setNewPostFlag(a);
+        const a = !newPostFlag;
+        setNewPostFlag(a);
       } else {
         const errorData = response.data;
         setErrDisplay(errorData.error);
