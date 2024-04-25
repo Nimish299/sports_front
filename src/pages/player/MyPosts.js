@@ -106,8 +106,8 @@ const MyPosts = () => {
         setLocation('');
         fetchPlayerPosts();
         setSkill();
-        const a = !newPostFlag;
-        setNewPostFlag(a);
+        // const a = !newPostFlag;
+        // setNewPostFlag(a);
       } else {
         const errorData = response.data;
         setErrDisplay(errorData.error);
