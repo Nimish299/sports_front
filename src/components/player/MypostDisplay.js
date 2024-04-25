@@ -97,7 +97,11 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
   useEffect(() => {
     getStatusColor();
     Getrequestonpost1();
-  }, [postRequests, acceptflag1, rejectflag1]);
+  }, [acceptflag1, rejectflag1]);
+  useEffect(() => {
+    getStatusColor();
+    Getrequestonpost1();
+  }, []);
   //accept a post && reject Remaining
   const acceptRequest = async (req) => {
     try {
