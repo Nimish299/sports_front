@@ -24,7 +24,9 @@ const PlayerHome = () => {
       console.error('Error logging out:', error);
     }
   };
-
+  const redirectprofile = () => {
+    return navigate('/player/player-profile');
+  };
   const gotoPlayerPlayer = () => {
     return navigate('/player/playerplayer');
   };
@@ -109,6 +111,24 @@ const PlayerHome = () => {
               }}
             >
               <button onClick={gotoPlayerCoach}>Find coaches</button>
+            </div>
+            <div
+              style={{
+                display: 'inline-block',
+                padding: '15px 40px',
+                fontSize: '1.2rem',
+                backgroundColor: '#007bff',
+                color: '#fff',
+                textDecoration: 'none',
+                border: 'none',
+                borderRadius: '25px',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s',
+                margin: '10px',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+              }}
+            >
+              <button onClick={redirectprofile}>Profile</button>
             </div>
 
             <div

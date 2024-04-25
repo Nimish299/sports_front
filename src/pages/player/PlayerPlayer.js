@@ -104,9 +104,6 @@ const PlayerCoach = () => {
   const redirecttomyposts = () => {
     return navigate('/player/myposts');
   };
-  const redirectprofile = () => {
-    return navigate('/player/player-profile');
-  };
 
   return (
     <div class='container'>
@@ -114,7 +111,6 @@ const PlayerCoach = () => {
         <button onClick={gotoPlayerHome}>Back</button>
         <button onClick={redirecttoapplied}>Go to Starred Posts</button>
         <button onClick={redirecttomyposts}>See All Your Posts</button>
-        <button onClick={redirectprofile}>My Posts</button>
       </div>
 
       <div className='player_player_container'>
