@@ -14,6 +14,7 @@ const MyPosts = () => {
   const [playerInfo, setPlayerInfo] = useState('');
   const [errDisplay, setErrDisplay] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [newPostFlag, setNewPostFlag] = useState(false);
   const fetchPlayerPosts = async () => {
     try {
       const response = await axios.get(
@@ -39,6 +40,9 @@ const MyPosts = () => {
   useEffect(() => {
     fetchPlayerPosts();
   }, []);
+  useEffect(() => {
+    fetchPlayerPosts();
+  }, [newPostFlag]);
   // let playerInfo = null;
 
   const fetch_info = async () => {
@@ -102,6 +106,7 @@ const MyPosts = () => {
         setLocation('');
         fetchPlayerPosts();
         setSkill();
+        setNewPostFlag(!setNewPostFlag);
       } else {
         const errorData = response.data;
         setErrDisplay(errorData.error);
