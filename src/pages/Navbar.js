@@ -118,15 +118,11 @@ const Navbar = () => {
                 </button>
               </form> */}
               <button className='btn btn-outline-success'>
-                <Link
-                  to='/player/player-profile'
-                  className='btn btn-outline-success'
-                >
-                  Profile
-                </Link>
+                <Link to='/player/player-profile'>Profile</Link>
               </button>
               <button className='btn btn-outline-danger' onClick={logoutUser}>
                 <a href='/'>Sign-out</a>
+                <Link to='/'>Signout</Link>
               </button>
             </div>
           )}
