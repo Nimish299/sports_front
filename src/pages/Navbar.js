@@ -29,7 +29,7 @@ const Navbar = () => {
       localStorage.removeItem('auth-token');
 
       delete axios.defaults.headers.common['Authorization'];
-      printAxiosHeaders();
+
       // return navigate('/');
     } catch (error) {
       // Handle error
@@ -118,7 +118,12 @@ const Navbar = () => {
                 </button>
               </form> */}
               <button className='btn btn-outline-success'>
-                <a href='/player/player-profile'>Profile</a>
+                <Link
+                  to='/player/player-profile'
+                  className='btn btn-outline-success'
+                >
+                  Profile
+                </Link>
               </button>
               <button className='btn btn-outline-danger' onClick={logoutUser}>
                 <a href='/'>Sign-out</a>

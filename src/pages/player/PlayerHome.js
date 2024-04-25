@@ -127,7 +127,9 @@ const PlayerHome = () => {
                 boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
               }}
             >
-              <button onClick={logoutUser}>sign out</button>
+              <button href='/' onClick={logoutUser}>
+                sign out
+              </button>
             </div>
           </div>
         </div>

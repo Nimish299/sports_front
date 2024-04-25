@@ -23,10 +23,10 @@ const PlayerProfile = () => {
     return <Text>Interests: {interests.join(', ')}</Text>;
   };
   const fetchProfile = async () => {
-    // console.log('sss');
+    console.log('sss');
     try {
       const response = await axios.get(
-        'https://sports-back.onrender.com/api/player/profile/info',
+        'https://sports-back.onrender.com/api/player/profile',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -37,7 +37,6 @@ const PlayerProfile = () => {
         throw new Error('Failed to fetch profile data');
       }
       const data = response.data;
-      console.log(data);
       setProfileData(data);
     } catch (error) {
       setError(error.message);
