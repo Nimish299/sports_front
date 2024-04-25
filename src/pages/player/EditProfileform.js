@@ -38,7 +38,9 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('/api/player/profile');
+        const response = await axios.get(
+          'https://sports-back.onrender.com/api/player/profile'
+        );
         const data = response.data;
         setProfileData(data);
         setFormData(data); // Initialize form data with fetched profile data
@@ -93,11 +95,15 @@ const EditProfile = () => {
     setError('');
     setLoading(true);
     try {
-      const response = await axios.put('/api/player/updateProfile', formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.put(
+        'https://sports-back.onrender.com/api/player/updateProfile',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to update profile');

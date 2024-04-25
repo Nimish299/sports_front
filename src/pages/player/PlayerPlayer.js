@@ -78,11 +78,14 @@ const PlayerCoach = () => {
 
   const filterPlayerPosts = async () => {
     try {
-      const response = await axios.get(`/api/playerpost/sport/${sport}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.get(
+        `https://sports-back.onrender.com/api/playerpost/sport/${sport}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       const json = response.data;
       setPlayerPosts(json);
       setFilterinUse(true);

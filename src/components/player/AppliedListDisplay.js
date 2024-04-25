@@ -1,29 +1,36 @@
-
-const AppliedListDisplay =({academy,academys,setAcademys})=>{
-
-  const deleteAcademy = async(e)=>{
-    e.preventDefault()
+const AppliedListDisplay = ({ academy, academys, setAcademys }) => {
+  const deleteAcademy = async (e) => {
+    e.preventDefault();
     console.log(academy);
-    const response = await fetch(`/api/player/leaveacad`, {
-			method: 'DELETE',
-			body: JSON.stringify(academy),
-			headers: {
-				'Content-type': 'application/json',
-			}
-		})
+    const response = await fetch(
+      `https://sports-back.onrender.com/api/player/leaveacad`,
+      {
+        method: 'DELETE',
+        body: JSON.stringify(academy),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    );
     console.log(response);
-    const json=await response.json()
+    const json = await response.json();
     console.log(json);
-    const updatedApplied=academys.filter((acad)=>acad!==academy);
+    const updatedApplied = academys.filter((acad) => acad !== academy);
     setAcademys(updatedApplied);
-  }
+  };
 
-  return(
+  return (
     <div>
       <h4>name : {academy.name}</h4>
-      <button onClick={(e)=>{deleteAcademy(e)}}>leave this academy </button>
+      <button
+        onClick={(e) => {
+          deleteAcademy(e);
+        }}
+      >
+        leave this academy{' '}
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default AppliedListDisplay
+export default AppliedListDisplay;

@@ -16,11 +16,14 @@ const MyPosts = () => {
   const [showForm, setShowForm] = useState(false);
   const fetchPlayerPosts = async () => {
     try {
-      const response = await axios.get('/api/playerpost/allplayerpost', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.get(
+        'https://sports-back.onrender.com/api/playerpost/allplayerpost',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (response.status === 200) {
         const json = response.data;
@@ -40,11 +43,14 @@ const MyPosts = () => {
 
   const fetch_info = async () => {
     try {
-      const response = await axios.get('/api/player/profile/info', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.get(
+        'https://sports-back.onrender.com/api/player/profile/info',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (response.status === 200) {
         return response.data;
@@ -75,11 +81,15 @@ const MyPosts = () => {
       };
       console.log('New Post:', newPost);
       // Send POST request to create player post
-      const response = await axios.post('/api/playerpost/create', newPost, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        'https://sports-back.onrender.com/api/playerpost/create',
+        newPost,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (response.status === 200) {
         const createdPost = response.data;

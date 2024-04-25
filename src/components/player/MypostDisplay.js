@@ -15,12 +15,15 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.delete(`/api/playerpost/delete`, {
-        data: playerPost,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.delete(
+        `https://sports-back.onrender.com/api/playerpost/delete`,
+        {
+          data: playerPost,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       const json = response.data;
 
@@ -46,7 +49,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`request`);
       const response = await axios.get(
-        `/api/playerpost/Getrequestonpost/${playerPost._id}`,
+        `https://sports-back.onrender.com/api/playerpost/Getrequestonpost/${playerPost._id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -71,7 +74,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`request`);
       const response = await axios.get(
-        `/api/playerpost/Getrequestonpost/${playerPost._id}`,
+        `https://sports-back.onrender.com/api/playerpost/Getrequestonpost/${playerPost._id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -96,11 +99,15 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`Accepted`);
       console.log(req);
-      const response = await axios.post(`/api/playerpost/POSTAccept`, req, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        `https://sports-back.onrender.com/api/playerpost/POSTAccept`,
+        req,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error('Failed to fetch data');
@@ -119,11 +126,15 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`Rejected`);
       console.log(req);
-      const response = await axios.post(`/api/playerpost/POSTREJECT`, req, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        `https://sports-back.onrender.com/api/playerpost/POSTREJECT`,
+        req,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error('Failed to fetch data');

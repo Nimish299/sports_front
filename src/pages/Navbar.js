@@ -20,7 +20,7 @@ const Navbar = () => {
   const logoutUser = async () => {
     console.log('logged out');
     try {
-      await axios.get('/api/player/logout', {
+      await axios.get('https://sports-back.onrender.com/api/player/logout', {
         headers: {
           'Content-Type': 'application/json',
         },

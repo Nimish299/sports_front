@@ -26,7 +26,9 @@ const PlayerProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('/api/player/profile');
+        const response = await axios.get(
+          'https://sports-back.onrender.com/api/player/profile'
+        );
         if (response.status !== 200) {
           throw new Error('Failed to fetch profile data');
         }

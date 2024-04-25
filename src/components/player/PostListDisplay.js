@@ -12,11 +12,15 @@ const PostListDisplay = ({ playerPost, navigate }) => {
 
     const item = { _id };
     try {
-      const response = await axios.post('/api/player/addtostarred', item, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        'https://sports-back.onrender.com/api/player/addtostarred',
+        item,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       const json = response.data;
       if (response.status === 200) {
@@ -73,7 +77,7 @@ const PostListDisplay = ({ playerPost, navigate }) => {
     const run = async () => {
       try {
         const response = await fetch(
-          `/api/player/tellifstarred/${playerPost._id}`,
+          `https://sports-back.onrender.com/api/player/tellifstarred/${playerPost._id}`,
           {
             method: 'GET',
             headers: {
