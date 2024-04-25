@@ -22,7 +22,7 @@ const PlayerHome = () => {
   };
 
   const gotoPlayerPlayer = () => {
-    return navigate('/player/playerplayer');
+    return navigate('https://sports-back.onrender.com/player/playerplayer');
   };
   const { loginflag, setLoginflag } = FlagState();
 

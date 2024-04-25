@@ -73,11 +73,15 @@ const PlayerLogin = () => {
     e.preventDefault();
     const user = { emailID, password };
     try {
-      const response = await axios.post(`api/player/login`, user, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post(
+        `https://sports-back.onrender.com/api/player/login`,
+        user,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (response.status === 200) {
         const { token } = response.data;
