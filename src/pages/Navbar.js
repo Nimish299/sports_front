@@ -106,7 +106,7 @@ const Navbar = () => {
           </ul>
           {loginflag && (
             <div className='d-flex'>
-              <form className='d-flex' role='search'>
+              {/* <form className='d-flex' role='search'>
                 <input
                   className='form-control me-2'
                   type='search'
@@ -116,7 +116,7 @@ const Navbar = () => {
                 <button className='btn btn-outline-success' type='submit'>
                   Search
                 </button>
-              </form>
+              </form> */}
               <button className='btn btn-outline-success'>
                 <a href='/player/player-profile'>Profile</a>
               </button>

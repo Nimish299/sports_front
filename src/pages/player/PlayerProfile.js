@@ -23,14 +23,12 @@ const PlayerProfile = () => {
     return <Text>Interests: {interests.join(', ')}</Text>;
   };
   const fetchProfile = async () => {
-    console.log('ssssssaa1');
-    const token = localStorage.getItem('auth-token');
+    // console.log('sss');
     try {
       const response = await axios.get(
-        'https://sports-back.onrender.com/api/player/profile',
+        'https://sports-back.onrender.com/api/player/profile/info',
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : '',
             'Content-Type': 'application/json',
           },
         }
@@ -39,6 +37,7 @@ const PlayerProfile = () => {
         throw new Error('Failed to fetch profile data');
       }
       const data = response.data;
+      console.log(data);
       setProfileData(data);
     } catch (error) {
       setError(error.message);
