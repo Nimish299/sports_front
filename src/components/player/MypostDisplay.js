@@ -88,7 +88,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
 
       const json = response.data;
       setpostRequests(json);
-      setflag1(true);
+      //setflag1(true);
       console.log(postRequests);
     } catch (error) {
       console.error('Error:', error.message);
