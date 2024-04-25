@@ -23,7 +23,7 @@ const PlayerProfile = () => {
     return <Text>Interests: {interests.join(', ')}</Text>;
   };
   const fetchProfile = async () => {
-    console.log('sss');
+    console.log('ssssssaa');
     try {
       const response = await axios.get(
         'https://sports-back.onrender.com/api/player/profile',
