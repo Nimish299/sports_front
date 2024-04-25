@@ -62,30 +62,29 @@ const PlayerLogin = () => {
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
     const user = { emailID, password };
-    const response = await fetch(
-      `https://sports-back.onrender.com/api/player/login`,
-      {
-        method: 'POST',
-        body: JSON.stringify(user),
+    try {
+      const response = await axios.post(`api/player/login`, user, {
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
+      });
+
+      if (response.status === 200) {
+        const { token } = response.data;
+        // axios.defaults.headers.common['auth-token'] =
+        //   token.length > 0 ? token : '';
+
+        console.log('Frontend token:', token);
+        localStorage.setItem('auth-token', token);
+        setLoginflag(true);
+        return navigate('/player/home');
+      } else {
+        console.error('Error:', response.data.error);
+        seterrDisplay(response.data.error);
       }
-    );
-    const json = await response.json();
-
-    if (response.ok) {
-      const { token } = json;
-
-      console.log('front end token', token);
-
-      localStorage.setItem('auth-token', token);
-      console.log(json);
-      setLoginflag(true);
-      return navigate('/player/home');
-    } else {
-      console.log(json.error);
-      seterrDisplay(json.error);
+    } catch (error) {
+      console.error('Error:', error.message);
+      seterrDisplay(error.message);
     }
   };
 

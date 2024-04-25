@@ -8,27 +8,49 @@ const PlayerCoach = () => {
   const [flag, setflag] = useState(false);
   const [filterinUse, setFilterinUse] = useState(false);
 
+  // const run = async () => {
+  //   try {
+  //     const response = await axios.get('/api/playerpost/allplayerposts', {
+  //       // method: 'GET',
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //       },
+  //     });
+
+  //     // "proxy": "https://sports-back.onrender.com/"
+
+  //     setflag(true);
+
+  //     if (response.status === 200) {
+  //       const json = response.data;
+  //       setPlayerPosts(json);
+  //     } else {
+  //       console.log(response.data.error);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
+
   const run = async () => {
+    const token = localStorage.getItem('auth-token');
     try {
-      const response = await fetch('/api/playerpost/allplayerposts', {
-        method: 'GET',
+      const response = await axios.get('/api/playerpost/allplayerposts', {
         headers: {
-          'Content-type': 'application/json',
+          'auth-token': token,
+          'Content-Type': 'application/json',
         },
       });
 
-      // "proxy": "https://sports-back.onrender.com/"
-
-      setflag(true);
-
       if (response.status === 200) {
-        const json = response.data;
-        setPlayerPosts(json);
+        const playerPosts = response.data;
+        setPlayerPosts(playerPosts);
+        setflag(true);
       } else {
-        console.log(response.data.error);
+        console.error('Error:', response.data.error);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error.message);
     }
   };
 

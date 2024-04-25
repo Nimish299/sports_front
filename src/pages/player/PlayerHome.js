@@ -14,6 +14,7 @@ const PlayerHome = () => {
     });
     setLoginflag(false);
     console.log('logged out');
+    localStorage.removeItem('auth-token');
     return navigate('/');
   };
 

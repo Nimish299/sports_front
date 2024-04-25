@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -17,30 +17,36 @@ const Navbar = () => {
       },
     });
     console.log('logged out');
+    localStorage.removeItem('auth-token');
     // return navigate('/');
   };
   const Checklogin = async () => {
-    try {
-      const response = await fetch('/api/player/check', {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-        },
-      });
+    // try {
+    // //   const response = await axios.get('/api/player/check', {
+    // //     headers: {
+    // //       'Content-Type': 'application/json',
+    // //     },
+    // //   });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        setLoginflag(data.loggedIn);
-      } else {
-        // Handle error response
-        console.log('NO');
-        setLoginflag(false); // Set loginflag to false if there's an error
-      }
-    } catch (error) {
-      console.error('Error checking login:', error);
-      // Handle fetch error
-      setLoginflag(false); // Set loginflag to false in case of fetch error
+    // //   if (response.status === 200) {
+    // //     const data = response.data;
+    // //     console.log(data);
+    // //     setLoginflag(data.loggedIn);
+    // //   } else {
+    // //     console.log('NO');
+    // //     setLoginflag(false);
+    // //   }
+    // // } catch (error) {
+    // //   console.error('Error checking login:', error);
+    // //   setLoginflag(false);
+    // // }
+    // };
+
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      setLoginflag(true);
+    } else {
+      setLoginflag(false);
     }
   };
 

@@ -9,6 +9,7 @@ import {
   // useToast,
   VStack,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import { FlagState } from '../../context/FlagProvider';
 
 const PlayerSignup = () => {
@@ -53,16 +54,13 @@ const PlayerSignup = () => {
     if (cpassword === password) {
       e.preventDefault();
       const user = { name, emailID, password, mobileNumber };
-      const response = await fetch(
-        `https://sports-back.onrender.com/api/player/signup`,
-        {
-          method: 'POST',
-          body: JSON.stringify(user),
-          headers: {
-            'Content-type': 'application/json',
-          },
-        }
-      );
+      const response = await axios.post(`api/player/signup`, {
+        // method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
       const json = await response.json();
 
       if (response.ok) {
