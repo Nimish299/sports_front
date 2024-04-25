@@ -17,7 +17,7 @@ const PlayerHome = () => {
       localStorage.removeItem('auth-token');
 
       delete axios.defaults.headers.common['Authorization'];
-      printAxiosHeaders();
+      // printAxiosHeaders();
       // return navigate('/');
     } catch (error) {
       // Handle error

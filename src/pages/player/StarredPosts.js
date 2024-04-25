@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StarredListDisplay from '../../components/player/StarredListDisplay';
-
+import axios from 'axios';
 const StarredPosts = () => {
   const navigate = useNavigate();
   const [starredPostIds, setStarredPostIds] = useState([]);
