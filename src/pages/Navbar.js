@@ -8,6 +8,16 @@ import { FlagState } from '../context/FlagProvider';
 const Navbar = () => {
   const { loginflag, setLoginflag } = FlagState();
 
+  function printAxiosHeaders() {
+    // Get default headers from Axios
+    const headers = axios.defaults.headers.common;
+
+    // Print each header
+    Object.keys(headers).forEach((header) => {
+      console.log(`${header}: ${headers[header]}`);
+    });
+  }
+
   const logoutUser = async () => {
     console.log('logged out');
     await fetch('/api/player/logout', {
@@ -18,6 +28,9 @@ const Navbar = () => {
     });
     console.log('logged out');
     localStorage.removeItem('auth-token');
+
+    delete axios.defaults.headers.common['Authorization'];
+    printAxiosHeaders();
     // return navigate('/');
   };
   const Checklogin = async () => {

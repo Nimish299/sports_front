@@ -59,6 +59,16 @@ const PlayerLogin = () => {
   //   }
   // };
 
+  function printAxiosHeaders() {
+    // Get default headers from Axios
+    const headers = axios.defaults.headers.common;
+
+    // Print each header
+    Object.keys(headers).forEach((header) => {
+      console.log(`${header}: ${headers[header]}`);
+    });
+  }
+
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
     const user = { emailID, password };
@@ -71,8 +81,10 @@ const PlayerLogin = () => {
 
       if (response.status === 200) {
         const { token } = response.data;
-        // axios.defaults.headers.common['auth-token'] =
-        //   token.length > 0 ? token : '';
+        axios.defaults.headers.common['Authorization'] =
+          token.length > 0 ? token : '';
+
+        printAxiosHeaders();
 
         console.log('Frontend token:', token);
         localStorage.setItem('auth-token', token);

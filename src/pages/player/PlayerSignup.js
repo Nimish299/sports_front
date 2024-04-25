@@ -76,6 +76,8 @@ const PlayerSignup = () => {
         localStorage.setItem('auth-token', token);
         console.log(json);
         setLoginflag(true);
+        axios.defaults.headers.common['Authorization'] =
+          token.length > 0 ? token : '';
 
         return navigate('/player/home');
       } else {

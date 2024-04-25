@@ -32,12 +32,21 @@ const PlayerCoach = () => {
   //   }
   // };
 
+  function printAxiosHeaders() {
+    // Get default headers from Axios
+    const headers = axios.defaults.headers.common;
+
+    // Print each header
+    Object.keys(headers).forEach((header) => {
+      console.log(`${header}: ${headers[header]}`);
+    });
+  }
+
   const run = async () => {
     const token = localStorage.getItem('auth-token');
     try {
       const response = await axios.get('/api/playerpost/allplayerposts', {
         headers: {
-          'auth-token': token,
           'Content-Type': 'application/json',
         },
       });
@@ -46,6 +55,7 @@ const PlayerCoach = () => {
         const playerPosts = response.data;
         setPlayerPosts(playerPosts);
         setflag(true);
+        printAxiosHeaders();
       } else {
         console.error('Error:', response.data.error);
       }

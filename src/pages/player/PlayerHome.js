@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import { FlagState } from '../../context/FlagProvider';
+import axios from 'axios';
 
 const PlayerHome = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const PlayerHome = () => {
     setLoginflag(false);
     console.log('logged out');
     localStorage.removeItem('auth-token');
+
+    delete axios.defaults.headers.common['Authorization'];
     return navigate('/');
   };
 
