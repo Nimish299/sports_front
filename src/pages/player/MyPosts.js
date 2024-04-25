@@ -83,7 +83,7 @@ const MyPosts = () => {
         location,
         playerInfo,
       };
-      console.log('New Post:', newPost);
+      console.log('New Post:before ', newPost);
       // Send POST request to create player post
       const response = await axios.post(
         'https://sports-back.onrender.com/api/playerpost/create',
