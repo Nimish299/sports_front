@@ -62,13 +62,16 @@ const PlayerLogin = () => {
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
     const user = { emailID, password };
-    const response = await fetch(`/api/player/login`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      `https://sports-back.onrender.com/api/player/login`,
+      {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    );
     const json = await response.json();
 
     if (response.ok) {

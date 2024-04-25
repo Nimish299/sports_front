@@ -53,13 +53,16 @@ const PlayerSignup = () => {
     if (cpassword === password) {
       e.preventDefault();
       const user = { name, emailID, password, mobileNumber };
-      const response = await fetch(`/api/player/signup`, {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {
-          'Content-type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `https://sports-back.onrender.com/api/player/signup`,
+        {
+          method: 'POST',
+          body: JSON.stringify(user),
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      );
       const json = await response.json();
 
       if (response.ok) {
