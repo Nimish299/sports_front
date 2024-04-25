@@ -94,7 +94,7 @@ const MyPosts = () => {
           },
         }
       );
-
+      console.log(response.status);
       if (response.status >= 200 && response.status < 300) {
         const createdPost = response.data;
         setPlayerPosts((prevPosts) => [...prevPosts, createdPost]);
