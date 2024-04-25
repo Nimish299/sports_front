@@ -105,14 +105,14 @@ const EditProfile = () => {
         }
       );
 
-      if (!response.ok) {
+      if (response.status === 200) {
+        // Redirect to player profile page
+        return navigate('/player/player-profile');
+      } else {
         throw new Error('Failed to update profile');
       }
-
-      // Redirect to player profile page
-      window.location.href = '/player/player-profile'; // Or use React Router for navigation
     } catch (error) {
-      setError(error.message);
+      setError(error.response?.data?.error || error.message);
     } finally {
       setLoading(false);
     }

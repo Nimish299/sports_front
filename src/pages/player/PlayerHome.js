@@ -18,7 +18,7 @@ const PlayerHome = () => {
 
       delete axios.defaults.headers.common['Authorization'];
       // printAxiosHeaders();
-      // return navigate('/');
+      return navigate('/');
     } catch (error) {
       // Handle error
       console.error('Error logging out:', error);
