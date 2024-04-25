@@ -37,10 +37,10 @@ const PlayerSignup = () => {
 
   const LoginFormSubmit = async (e) => {
     if (name.length === 0) {
-      return alert('name should have atleast one character');
+      return alert('Name should have at least one character');
     }
     if (!validateEmail(emailID)) {
-      return alert('please enter a valid email');
+      return alert('Please enter a valid email');
     }
     if (!isValidPassword(password)) {
       return alert(
@@ -48,44 +48,41 @@ const PlayerSignup = () => {
       );
     }
     if (!isValidPhoneNumber(mobileNumber)) {
-      return alert('mobile number should have 10 digits');
+      return alert('Mobile number should have 10 digits');
     }
 
     if (cpassword === password) {
       e.preventDefault();
       const user = { name, emailID, password, mobileNumber };
-      const response = await axios.post(
-        `https://sports-back.onrender.com/api/player/signup`,
-        {
-          // method: 'POST',
-          body: JSON.stringify(user),
-          headers: {
-            'Content-type': 'application/json',
-          },
+      try {
+        const response = await axios.post(
+          `https://sports-back.onrender.com/api/player/signup`,
+          user,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        const json = response.data;
+
+        if (response.status === 200) {
+          const { token } = json;
+          setLoginflag(true);
+          console.log('Frontend token:', token);
+          localStorage.setItem('auth-token', token);
+          axios.defaults.headers.common['Authorization'] =
+            token.length > 0 ? token : '';
+          return navigate('/player/home');
+        } else {
+          console.error('Error:', json.error);
+          seterrDisplay(json.error);
+          alert(errDisplay);
         }
-      );
-      const json = await response.json();
-
-      if (response.ok) {
-        // console.log(json);
-        // setLoginflag(true);
-        // return navigate('/player/home');
-
-        const { token } = json;
-        setLoginflag(true);
-
-        console.log('front end token', token);
-
-        localStorage.setItem('auth-token', token);
-        console.log(json);
-        setLoginflag(true);
-        axios.defaults.headers.common['Authorization'] =
-          token.length > 0 ? token : '';
-
-        return navigate('/player/home');
-      } else {
-        console.log(json.error);
-        seterrDisplay(json.error);
+      } catch (error) {
+        console.error('Error:', error.message);
+        seterrDisplay(error.message);
         alert(errDisplay);
       }
     } else {
