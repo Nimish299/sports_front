@@ -1,3 +1,5 @@
+// what ever code u have just cjange 
+player profile to 
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -132,23 +134,9 @@ const PlayerProfile = () => {
               Social Interactions
             </Heading>
             <Text>Bio: {profileData.social_interactions?.bio}</Text>
-            {profileData.social_interactions?.interests &&
-              renderInterests(profileData.social_interactions.interests)}
-            {profileData.social_interactions?.social_media_links && (
-              <>
-                {Object.entries(
-                  profileData.social_interactions.social_media_links
-                ).map(([platform, link]) => (
-                  <div key={platform}>
-                    <a href={link} target='_blank' rel='noopener noreferrer'>
-                      {platform}
-                    </a>
-                  </div>
-                ))}
-              </>
-            )}
-
-            <Divider />
+            <Text>facebook: {profileData.social_interactions?.social_media_links?.facebook}</Text>
+            <Text>instagram: {profileData.social_interactions?.social_media_links?.instagram}</Text>
+            <Text>twitter: {profileData.social_interactions?.social_media_links?.twitter}</Text>
             <Divider />
             <Heading as='h2' size='md'>
               Feedback and Ratings

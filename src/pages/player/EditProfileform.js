@@ -1,3 +1,4 @@
+// edit profile to
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {
@@ -26,6 +27,7 @@ const EditProfile = () => {
     social_interactions: {
       bio: '',
       interests: [],
+      facebook: '',
       social_media_links: {
         facebook: '',
         twitter: '',
@@ -69,26 +71,26 @@ const EditProfile = () => {
   };
 
   // Handle changes in form fields
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    if (name.startsWith('gaming_statistics[')) {
-      const fieldName = name.split('.')[1]; // Extracting field name from gaming_statistics[index].field_name
-      const updatedStats = [...formData.gaming_statistics];
-      updatedStats[index][fieldName] = value;
-      setFormData({ ...formData, gaming_statistics: updatedStats });
-    } else if (name.startsWith('social_interactions.interests')) {
-      const interests = value.split(',').map((item) => item.trim()); // Convert comma-separated interests to an array
-      setFormData({
-        ...formData,
-        social_interactions: {
-          ...formData.social_interactions,
-          interests,
-        },
-      });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
+  // const handleChange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   if (name.startsWith('gaming_statistics[')) {
+  //     const fieldName = name.split('.')[1]; // Extracting field name from gaming_statistics[index].field_name
+  //     const updatedStats = [...formData.gaming_statistics];
+  //     updatedStats[index][fieldName] = value;
+  //     setFormData({ ...formData, gaming_statistics: updatedStats });
+  //   } else if (name.startsWith('social_interactions.interests')) {
+  //     const interests = value.split(',').map((item) => item.trim()); // Convert comma-separated interests to an array
+  //     setFormData({
+  //       ...formData,
+  //       social_interactions: {
+  //         ...formData.social_interactions,
+  //         interests,
+  //       },
+  //     });
+  //   } else {
+  //     setFormData({ ...formData, [name]: value });
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -142,7 +144,9 @@ const EditProfile = () => {
                 type='text'
                 name='name'
                 value={formData.name || ''}
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({ ...formData, name: e.target.value });
+                }}
               />
             </FormControl>
             <FormControl>
@@ -151,21 +155,23 @@ const EditProfile = () => {
                 type='text'
                 name='location'
                 value={formData.location || ''}
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({ ...formData, location: e.target.value });
+                }}
               />
             </FormControl>
             <Divider />
             <Heading as='h2' size='md'>
               Gaming Statistics
             </Heading>
-            {formData.gaming_statistics.map((stat, index) => (
+            {/* {formData.gaming_statistics.map((stat, index) => (
               <div key={index}>
                 <FormLabel>Game {index + 1}</FormLabel>
                 <FormControl>
                   <FormLabel>Sport</FormLabel>
                   <Input
                     type='text'
-                    name={`gaming_statistics[${index}].sport`}
+                    name={gaming_statistics[${index}].sport}
                     value={stat.sport || ''}
                     onChange={(e) => handleChange(e, index)}
                   />
@@ -174,7 +180,7 @@ const EditProfile = () => {
                   <FormLabel>Skill</FormLabel>
                   <Input
                     type='text'
-                    name={`gaming_statistics[${index}].skill`}
+                    name={gaming_statistics[${index}].skill}
                     value={stat.skill || ''}
                     onChange={(e) => handleChange(e, index)}
                   />
@@ -184,7 +190,7 @@ const EditProfile = () => {
                 </Button>
                 <Divider />
               </div>
-            ))}
+            ))} */}
             <Button onClick={handleAddStatistic}>Add Gaming Statistic</Button>
             <Divider />
             {formData.gaming_statistics.length === 0 && (
@@ -199,10 +205,15 @@ const EditProfile = () => {
               <Input
                 type='text'
                 name='communication_preferences.preferred_language'
-                value={
-                  formData.communication_preferences?.preferred_language || ''
-                }
-                onChange={handleChange}
+                value={formData.communication_preferences.preferred_language}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    communication_preferences: {
+                      preferred_language: e.target.value,
+                    },
+                  });
+                }}
               />
             </FormControl>
             <Divider />
@@ -211,22 +222,19 @@ const EditProfile = () => {
             </Heading>
             <FormControl>
               <FormLabel>Bio</FormLabel>
-              <Textarea
-                name='social_interactions.bio'
-                value={formData.social_interactions?.bio || ''}
-                onChange={handleChange}
-                type='text'
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Interests</FormLabel>
               <Input
                 type='text'
-                name='social_interactions.interests'
-                value={(formData.social_interactions?.interests || []).join(
-                  ', '
-                )}
-                onChange={handleChange}
+                name='social_interactions.bio'
+                value={formData.social_interactions.bio}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    social_interactions: {
+                      ...formData.social_interactions,
+                      bio: e.target.value,
+                    },
+                  });
+                }}
               />
             </FormControl>
             <FormControl>
@@ -235,10 +243,20 @@ const EditProfile = () => {
                 type='text'
                 name='social_interactions.social_media_links.facebook'
                 value={
-                  formData.social_interactions?.social_media_links?.facebook ||
-                  ''
+                  formData?.social_interactions?.social_media_links?.facebook
                 }
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    social_interactions: {
+                      ...formData.social_interactions,
+                      social_media_links: {
+                        ...formData.social_interactions.social_media_links,
+                        facebook: e.target.value,
+                      },
+                    },
+                  });
+                }}
               />
             </FormControl>
             <FormControl>
@@ -247,10 +265,20 @@ const EditProfile = () => {
                 type='text'
                 name='social_interactions.social_media_links.twitter'
                 value={
-                  formData.social_interactions?.social_media_links?.twitter ||
-                  ''
+                  formData?.social_interactions?.social_media_links?.instagram
                 }
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    social_interactions: {
+                      ...formData.social_interactions,
+                      social_media_links: {
+                        ...formData.social_interactions.social_media_links,
+                        instagram: e.target.value,
+                      },
+                    },
+                  });
+                }}
               />
             </FormControl>
             <FormControl>
@@ -259,10 +287,20 @@ const EditProfile = () => {
                 type='text'
                 name='social_interactions.social_media_links.instagram'
                 value={
-                  formData.social_interactions?.social_media_links?.instagram ||
-                  ''
+                  formData?.social_interactions?.social_media_links?.twitter
                 }
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    social_interactions: {
+                      ...formData.social_interactions,
+                      social_media_links: {
+                        ...formData.social_interactions.social_media_links,
+                        twitter: e.target.value,
+                      },
+                    },
+                  });
+                }}
               />
             </FormControl>
             <Divider />
