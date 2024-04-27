@@ -2,36 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import PostListDisplay from '../../components/player/PostListDisplay';
 import axios from 'axios';
-const PlayerCoach = () => {
+const Coachstudent = () => {
   const [playerPosts, setPlayerPosts] = useState([]);
   const [sport, setSport] = useState([]);
   const [flag, setflag] = useState(false);
   const [filterinUse, setFilterinUse] = useState(false);
 
-  // const run = async () => {
-  //   try {
-  //     const response = await axios.get('/api/playerpost/allplayerposts', {
-  //       // method: 'GET',
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     });
-
-  //     // "proxy": "https://sports-back.onrender.com/"
-
-  //     setflag(true);
-
-  //     if (response.status === 200) {
-  //       const json = response.data;
-  //       setPlayerPosts(json);
-  //     } else {
-  //       console.log(response.data.error);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
-
+ 
   function printAxiosHeaders() {
     // Get default headers from Axios
     const headers = axios.defaults.headers.common;
@@ -79,7 +56,7 @@ const PlayerCoach = () => {
   const filterPlayerPosts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_URL}api/playerpost/sport/${sport}`,
+        `https://sports-back.onrender.com/api/playerpost/sport/${sport}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -155,4 +132,4 @@ const PlayerCoach = () => {
   );
 };
 
-export default PlayerCoach;
+export default Coachstudent;
