@@ -1,55 +1,47 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const PostListDisplay = ({ playerPost, navigate }) => {
-  console.log(playerPost);
+const CoachPostListDisplay = ({ coachPost, navigate }) => {
+  console.log(coachPost);
   const [errDisplay, seterrDisplay] = useState('');
+  const [coachinfo, setcoachinfo] = useState('');
   const [applied, setApplied] = useState(false);
-
-  const apply_start = async (e) => {
-    e.preventDefault();
-    const _id = playerPost._id;
-
-    const item = { _id };
+  //   const coach_id = coachPost._id;
+  //   console.log(coach_id);
+  const fetch_info = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_URL}api/player/addtostarred`,
-        item,
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
+
+      // Assuming coach_id is available from somewhere in your component
+      //   const item = { coach_id };coachPost.
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}api/player/fetch_coach_info/${coachPost._id}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
-      const json = response.data;
-      if (response.status === 200) {
-        console.log(json);
-        setApplied(true);
+      if (response.status >= 200 && response.status < 300) {
+        const json = response.data;
+        setcoachinfo(json);
+        console.log(coachinfo);
       } else {
-        console.log(json.error);
-        seterrDisplay(json.error);
+        throw new Error(response.data.error);
       }
     } catch (error) {
-      console.error('Error applying:', error.message);
+      console.error('Error fetching coach info:', error);
+      throw new Error('Failed to fetch coach info. Please try again later.');
     }
   };
-  const acceptadded = (e) => {
-    e.preventDefault();
-    seterrDisplay('');
-    setApplied(false);
 
-    // alert('Added to starred List');
-  };
-  // console.log(playerPost._id);
   const gotoPost = (e) => {
     e.preventDefault();
     //console.log(playerPost._id);
-    return navigate(`/playerpost/${playerPost._id}`);
+    return navigate(`/coachpost/${coachPost._id}`);
   };
-  const name = playerPost.playersInfo?.[0]?.name || 'Name not available';
-  const playerLocation =
-    playerPost.playersInfo?.[0]?.playerLocation || 'Location not available';
   const formatTimestamp = (timestamp) => {
     const currentTime = new Date();
     const postTime = new Date(timestamp);
@@ -74,30 +66,8 @@ const PostListDisplay = ({ playerPost, navigate }) => {
     }
   };
   useEffect(() => {
-    const run = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_URL}api/player/tellifstarred/${playerPost._id}`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-
-        const data = response.data;
-        setApplied(data.status);
-        //console.log('hi');
-        // console.log(applied);
-        //setflag(true); // Update status state
-      } catch (error) {
-        console.error('Error:', error.message);
-        //setErrorMessage(error.message); // Set the error message received from the backend
-      }
-    };
-    run();
-  });
-
+    fetch_info(); // Corrected invocation of fetch_info
+  }, []); // Empty dependency array to ensure the effect runs only once
   return (
     <div className='card mx-3 my-3' style={{ width: '18rem' }}>
       <div className='card-body'>
@@ -105,27 +75,27 @@ const PostListDisplay = ({ playerPost, navigate }) => {
           className='card-title mb-3'
           style={{ fontSize: '1.25rem', fontWeight: 'bold' }}
         >
-          {playerPost.title}
+          {coachPost.title}
         </h5>
         {/* <h6
           className='card-subtitle mb-2 text-muted'
           style={{ fontSize: '0.9rem' }}
         >
-          Description: {playerPost.description}
+          Description: {coachinfo.description}
         </h6> */}
-        <p className='card-text mb-1'>Name: {name}</p>
-        <p className='card-text mb-1'>Sports: {playerPost.sport}</p>
-        {/* <p className='card-text mb-1'>Skill: {playerPost.skill}</p> */}
+        <p className='card-text mb-1'>Name: {coachinfo.name}</p>
+        <p className='card-text mb-1'>Sports: {coachinfo.sport}</p>
+        <p className='card-text mb-1'>Court: {coachPost.court}</p>
+        <p className='card-text mb-1'>City: {coachinfo.location}</p>
+        <p className='card-text mb-1'>Charges:₹ {coachPost.price} per month</p>
         <p className='card-text mb-1'>
-          Number of Openings: {playerPost.quantity}
+          Experience: {coachinfo.coaching_experience_years}
         </p>
-        <p className='card-text mb-1'>Court: {playerPost.location}</p>
-        <p className='card-text mb-1'>City: {playerLocation}</p>
-        <p>Posted: {formatTimestamp(playerPost.createdAt)}</p>
+        <p>Posted: {formatTimestamp(coachPost.createdAt)}</p>
 
         <div className='flex-end'></div>
 
-        <div className='btn-group'>
+        {/* <div className='btn-group'>
           {applied ? (
             <div>
               <label>Added to starred</label>
@@ -162,9 +132,17 @@ const PostListDisplay = ({ playerPost, navigate }) => {
               </button>
             </div>
           )}
-        </div>
+        </div> */}
+        <button
+          className='btn btn-primary btn-sm mx-2'
+          onClick={(e) => {
+            gotoPost(e);
+          }}
+        >
+          See details
+        </button>
       </div>
     </div>
   );
 };
-export default PostListDisplay;
+export default CoachPostListDisplay;

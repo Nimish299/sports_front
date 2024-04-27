@@ -15,6 +15,7 @@ import PlayerPlayer from './pages/player/PlayerPlayer';
 import AppliedAcademys from './pages/player/AppliedAcademys';
 import StarredPosts from './pages/player/StarredPosts';
 import PlayerPostDetailsPage from './pages/playerPost/PlayerPostDetailsPage';
+import CoachPostDetailsPage from './pages/coachpost/CoachPostDetailsPage';
 import MyPosts from './pages/player/MyPosts';
 import Mypostscoach from './pages/coach/Mypostscoach';
 import Navbar from './pages/Navbar';
@@ -24,6 +25,7 @@ import About from './pages/About';
 import PlayerProfile from './pages/player/PlayerProfile';
 import EditProfile from './pages/player/EditProfileform';
 import Coachstudent from './pages/coach/Coachstudent';
+import Applypost from './pages/player/Applypost';
 function App() {
   const [loginflag, setloginflag] = useState(false);
   return (
@@ -63,7 +65,7 @@ function App() {
               path='/playerpost/:_id'
               element={<PlayerPostDetailsPage />}
             />
-
+            <Route path='/player/applied' element={<Applypost />} />
             <Route path='/academy/:name' element={<AcademyDetailsPage />} />
 
             <Route path='/coach' element={<CoachWelcome />} />
@@ -71,7 +73,8 @@ function App() {
             <Route path='/coach/signup' element={<CoachSignup />} />
             <Route path='/coach/playerCoach' element={<Coachstudent />} />
             <Route path='/coach/home' element={<CoachHome />} />
-            <Route path='/coach/myposts' element={<Mypostscoach/>} />
+            <Route path='/coach/myposts' element={<Mypostscoach />} />
+            <Route path='/coachpost/:_id' element={<CoachPostDetailsPage />} />
           </Routes>
         </div>
       </BrowserRouter>
