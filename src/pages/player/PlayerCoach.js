@@ -16,7 +16,7 @@ const PlayerCoach = () => {
       };
 
       const response = await axios.get(
-        `${process.env.REACT_APP_URL}api/coachpost/allcoachposts`,
+        `${process.env.REACT_APP_URL}api/player/allcoachposts`,
         { headers }
       );
 

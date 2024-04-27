@@ -19,7 +19,7 @@ const PlayerPostDetailsPage = () => {
   const getDetails = async () => {
     try {
       const response = await axios.get(
-        `https://sports-back.onrender.com/api/playerpost/details/${_id}`,
+        `${process.env.REACT_APP_URL}api/playerpost/details/${_id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const PlayerPostDetailsPage = () => {
     const user = { message };
     try {
       const response = await axios.post(
-        `https://sports-back.onrender.com/api/playerpost/requestonpost/${_id}`,
+        `${process.env.REACT_APP_URL}api/playerpost/requestonpost/${_id}`,
         user,
         {
           headers: {
@@ -75,7 +75,7 @@ const PlayerPostDetailsPage = () => {
   const statusfun = async (_id) => {
     try {
       const response = await axios.get(
-        `https://sports-back.onrender.com/api/playerpost/Statusonpost/${_id}`,
+        `${process.env.REACT_APP_URL}api/playerpost/Statusonpost/${_id}`,
         {
           headers: {
             'Content-Type': 'application/json',

@@ -164,21 +164,7 @@ const Mypostscoach = () => {
                     placeholder='Enter Price'
                   />
                 </div>
-                {/* <div className='form-group'>
-                  <label htmlFor='skill'>Skill</label>
-                  <select
-                    id='skill'
-                    value={skill}
-                    onChange={(e) => setSkill(e.target.value)}
-                    className='form-control'
-                    required // Add the required attribute to ensure HTML5 form validation
-                  >
-                    <option value=''>Select Skill</option>
-                    <option value='Beginner'>Beginner</option>
-                    <option value='Intermediate'>Intermediate</option>
-                    <option value='Advanced'>Advanced</option>
-                  </select>
-                </div> */}
+                
 
                 <div className='form-group'>
                   <label>Court:</label>
