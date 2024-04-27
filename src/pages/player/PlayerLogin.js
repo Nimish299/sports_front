@@ -60,22 +60,12 @@ const PlayerLogin = () => {
   //   }
   // };
 
-  function printAxiosHeaders() {
-    // Get default headers from Axios
-    const headers = axios.defaults.headers.common;
-
-    // Print each header
-    Object.keys(headers).forEach((header) => {
-      console.log(`${header}: ${headers[header]}`);
-    });
-  }
-
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
     const user = { emailID, password };
     try {
       const response = await axios.post(
-        `https://sports-back.onrender.com/api/player/login`,
+        `${process.env.REACT_APP_URL}api/player/login`,
         user,
         {
           headers: {
@@ -88,8 +78,6 @@ const PlayerLogin = () => {
         const { token } = response.data;
         axios.defaults.headers.common['Authorization'] =
           token.length > 0 ? token : '';
-
-        // printAxiosHeaders();
 
         console.log('Frontend token:', token);
         localStorage.setItem('auth-token', token);
@@ -110,7 +98,7 @@ const PlayerLogin = () => {
     if (token) {
       setLoginflag(true);
     }
-  }, []);
+  }, [loginflag]);
   return (
     <div>
       <VStack spacing={2}>

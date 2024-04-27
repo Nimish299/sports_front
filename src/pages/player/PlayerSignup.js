@@ -35,7 +35,7 @@ const PlayerSignup = () => {
     return phoneRegex.test(phoneNumber);
   }
 
-  const LoginFormSubmit = async (e) => {
+  const SignupFormSubmit = async (e) => {
     if (name.length === 0) {
       return alert('Name should have at least one character');
     }
@@ -56,7 +56,7 @@ const PlayerSignup = () => {
       const user = { name, emailID, password, mobileNumber };
       try {
         const response = await axios.post(
-          `https://sports-back.onrender.com/api/player/signup`,
+          `${process.env.REACT_APP_URL}api/player/signup`,
           user,
           {
             headers: {
@@ -92,7 +92,7 @@ const PlayerSignup = () => {
 
   return (
     <VStack spacing={2}>
-      <FormControl onSubmit={LoginFormSubmit}>
+      <FormControl onSubmit={SignupFormSubmit}>
         <FormLabel>Name</FormLabel>
         <Input
           type='text'
@@ -163,7 +163,7 @@ const PlayerSignup = () => {
         width='100%'
         colorScheme='blue'
         style={{ marginTop: 15 }}
-        onClick={LoginFormSubmit}
+        onClick={SignupFormSubmit}
       >
         Sign Up
       </Button>
