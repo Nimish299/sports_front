@@ -22,6 +22,7 @@ import PlayerWelcome from './pages/player/PlayerWelcome';
 import About from './pages/About';
 import PlayerProfile from './pages/player/PlayerProfile';
 import EditProfile from './pages/player/EditProfileform';
+import Coachstudent from './pages/coach/Coachstudent';
 function App() {
   const [loginflag, setloginflag] = useState(false);
   return (
@@ -67,6 +68,7 @@ function App() {
             <Route path='/coach' element={<CoachWelcome />} />
             <Route path='/coach/login' element={<CoachLogin />} />
             <Route path='/coach/signup' element={<CoachSignup />} />
+            <Route path='/coach/playerCoach' element={<Coachstudent />} />
             <Route path='/coach/home' element={<CoachHome />} />
           </Routes>
         </div>

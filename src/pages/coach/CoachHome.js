@@ -26,13 +26,13 @@ const CoachHome = () => {
     }
   };
   const redirectprofile = () => {
-    return navigate('/player/Coach-profile');
+    return navigate('/coach/Coach-profile');
   };
 
   const { loginflag, setLoginflag } = FlagState();
 
   const gotoPlayerCoach = () => {
-    return navigate('/player/playerCoach');
+    return navigate('/coach/playerCoach');
   };
 
   return (

@@ -10,6 +10,7 @@ import {
   Input,
   Button,
   useToast,
+  Select,
 } from '@chakra-ui/react';
 import axios from 'axios';
 
@@ -22,7 +23,10 @@ const CoachSignup = () => {
   const [mobileNumber, setmobileNumber] = useState('');
   const navigate = useNavigate();
   const { loginflag, setLoginflag } = FlagState();
-
+  const [sport, setsport] = useState('');
+  const [coaching_experience_years, setcoaching_experience_years] =
+    useState('');
+  const [certifications, setcertifications] = useState('');
   function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -32,30 +36,17 @@ const CoachSignup = () => {
     return passwordRegex.test(password);
   }
   function isValidPhoneNumber(phoneNumber) {
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^\d{10,11}$/;
     return phoneRegex.test(phoneNumber);
   }
-
-  // const SignupFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const coach = { emailID, password };
-  //   const response = await fetch(`/api/coach/signup`, {
-  //     method: 'POST',
-  //     body: JSON.stringify(coach),
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //     },
-  //   });
-  //   const json = await response.json();
-
-  //   if (response.ok) {
-  //     console.log(json);
-  //     return navigate('/coach/home');
-  //   } else {
-  //     console.log(json.error);
-  //     seterrDisplay(json.error);
-  //   }
-  // };
+  const sportList = [
+    'Football',
+    'Basketball',
+    'Tennis',
+    'Swimming',
+    'Badminton',
+  ];
+  const certificationOptions = ['1', '2', '3', '4', '5+'];
   const SignupFormSubmit = async (e) => {
     if (name.length === 0) {
       return alert('Name should have at least one character');
@@ -74,7 +65,15 @@ const CoachSignup = () => {
 
     if (cpassword === password) {
       e.preventDefault();
-      const user = { name, emailID, password, mobileNumber };
+      const user = {
+        name,
+        emailID,
+        password,
+        mobileNumber,
+        sport,
+        coaching_experience_years,
+        certifications,
+      };
       // console.log(user);
       try {
         const response = await axios.post(
@@ -177,6 +176,54 @@ const CoachSignup = () => {
           }}
         />
       </FormControl>
+
+      <FormControl>
+        <FormLabel htmlFor='sport'>Sport</FormLabel>
+        <Select
+          id='sport'
+          value={sport}
+          onChange={(e) => setsport(e.target.value)}
+          placeholder='Select Sport'
+        >
+          {sportList.map((sportOption, index) => (
+            <option key={index} value={sportOption}>
+              {sportOption}
+            </option>
+          ))}
+        </Select>
+        <FormHelperText>
+          Sports for which you want to apply as a coach
+        </FormHelperText>
+      </FormControl>
+      <FormControl>
+        <FormLabel htmlFor='coachingExperienceYears'>Year experience</FormLabel>
+        <Select
+          id='coaching_experience_years'
+          value={coaching_experience_years}
+          onChange={(e) => setcoaching_experience_years(e.target.value)}
+          placeholder='Select Years of Experience'
+        >
+          {certificationOptions.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </Select>
+        <FormHelperText>Years of coaching experience</FormHelperText>
+      </FormControl>
+      <FormControl>
+        <FormLabel>Certification </FormLabel>
+        <Input
+          type='text'
+          className='form-control'
+          id='certifications'
+          aria-describedby='emailHelp'
+          value={certifications}
+          onChange={(e) => setcertifications(e.target.value)}
+          placeholder='Enter Certification'
+        />
+      </FormControl>
+
       <FormControl>
         <FormLabel>Upload your picture</FormLabel>
         <Input type='file' p={0.5} />
