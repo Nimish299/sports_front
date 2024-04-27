@@ -41,7 +41,7 @@ const EditProfile = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          'https://sports-back.onrender.com/api/player/profile'
+          `${process.env.REACT_APP_URL}api/player/profile`
         );
         const data = response.data;
         setProfileData(data);
@@ -98,7 +98,7 @@ const EditProfile = () => {
     setLoading(true);
     try {
       const response = await axios.put(
-        'https://sports-back.onrender.com/api/player/updateProfile',
+        `${process.env.REACT_APP_URL}api/player/updateProfile`,
         formData,
         {
           headers: {

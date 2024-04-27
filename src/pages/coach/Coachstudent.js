@@ -43,7 +43,7 @@ const Coachstudent = () => {
   };
 
   const redirecttomyposts = () => {
-    return navigate('/player/myposts');
+    return navigate('/coach/myposts');
   };
 
   return (

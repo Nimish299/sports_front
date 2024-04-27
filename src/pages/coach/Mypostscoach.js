@@ -1,24 +1,26 @@
 import { useNavigate } from 'react-router-dom';
-import MypostDisplay from '../../components/player/MypostDisplay';
+import MypostDisplaycoach from '../../components/coach/MypostDisplaycoach';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-const MyPosts = () => {
+const Mypostscoach = () => {
   const navigate = useNavigate();
-  const [playerPosts, setPlayerPosts] = useState([]);
+  const [coachPosts, setcoachPosts] = useState([]);
   const [title, setTitle] = useState('');
-  const [skill, setSkill] = useState('');
+  //   const [skill, setSkill] = useState('');
   const [description, setDescription] = useState('');
-  const [sport, setSport] = useState('');
-  const [quantity, setQuantity] = useState(0);
-  const [location, setLocation] = useState('');
-  const [playerInfo, setPlayerInfo] = useState('');
+  //   const [sport, setSport] = useState('');
+  //   const [quantity, setQuantity] = useState(0);
+  //   const [location, setLocation] = useState('');
+  const [price, setprice] = useState('');
+  const [court, setcourt] = useState('');
+  //   const [playerInfo, setPlayerInfo] = useState('');
   const [errDisplay, setErrDisplay] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [newPostFlag, setNewPostFlag] = useState(false);
   const fetchPlayerPosts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_URL}api/playerpost/allplayerpost`,
+        `${process.env.REACT_APP_URL}api/coachpost/allselfpost`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -28,7 +30,8 @@ const MyPosts = () => {
 
       if (response.status >= 200 && response.status < 300) {
         const json = response.data;
-        setPlayerPosts(json);
+        setcoachPosts(json);
+        console.log(json);
       } else {
         console.log('Error fetching player posts:', response.statusText);
       }
@@ -45,49 +48,22 @@ const MyPosts = () => {
   }, [newPostFlag]);
   // let playerInfo = null;
 
-  const fetch_info = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_URL}api/player/profile/info`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (response.status >= 200 && response.status < 300) {
-        return response.data;
-      } else {
-        throw new Error(response.data.error);
-      }
-    } catch (error) {
-      console.error('Error fetching player info:', error);
-      throw new Error('Failed to fetch player info. Please try again later.');
-    }
-  };
-
-  const addPlayerPost = async (e) => {
+  const addcoachPost = async (e) => {
     e.preventDefault();
     console.log('before the commit im here');
     try {
-      // Fetch playerInfo
-      const playerInfo = await fetch_info();
       console.log('after fetch info im here');
       // Create new post object with playerInfo
       const newPost = {
         title,
-        skill,
         description,
-        sport,
-        quantity,
-        location,
-        playerInfo,
+        court,
+        price,
       };
       console.log('New Post:before the commit ', newPost);
       // Send POST request to create player post
       const response = await axios.post(
-        `${process.env.REACT_APP_URL}api/playerpost/create`,
+        `${process.env.REACT_APP_URL}api/coachpost/create`,
         newPost,
         {
           headers: {
@@ -98,16 +74,13 @@ const MyPosts = () => {
       console.log(response.status);
       if (response.status >= 200 && response.status < 300) {
         const createdPost = response.data;
-        setPlayerPosts((prevPosts) => [...prevPosts, createdPost]);
+        setcoachPosts((prevPosts) => [...prevPosts, createdPost]);
         console.log('im here');
         setTitle('');
         setDescription('');
-        setSport('');
-        setQuantity(0);
+        setprice('');
         setErrDisplay('');
-        setLocation('');
-        fetchPlayerPosts();
-        setSkill();
+        setcourt('');
         const a = !newPostFlag;
         setNewPostFlag(a);
       } else {
@@ -122,8 +95,8 @@ const MyPosts = () => {
     }
   };
 
-  const goToPlayerPlayer = () => {
-    navigate('/player/playerplayer');
+  const goTocoachstudent = () => {
+    navigate('/coach/playerCoach');
   };
   const toggleFormVisibility = () => {
     setShowForm(!showForm); // Toggle form visibility
@@ -137,7 +110,7 @@ const MyPosts = () => {
             {showForm ? 'Hide' : 'Add Post'}
           </button>
           <div style={{ textAlign: 'center', marginTop: '20px' }}>
-            <button className='btn btn-primary' onClick={goToPlayerPlayer}>
+            <button className='btn btn-primary' onClick={goTocoachstudent}>
               Back
             </button>
           </div>
@@ -158,7 +131,7 @@ const MyPosts = () => {
               <h2 style={{ textAlign: 'center' }}>Add Player Post</h2>
               <form
                 style={{ maxWidth: '500px', margin: '0 auto' }}
-                onSubmit={addPlayerPost}
+                onSubmit={addcoachPost}
               >
                 <div className='form-group'>
                   <label>Title</label>
@@ -182,16 +155,16 @@ const MyPosts = () => {
                   ></textarea>
                 </div>
                 <div className='form-group'>
-                  <label>Sport</label>
+                  <label>Price</label>
                   <input
                     type='text'
-                    value={sport}
-                    onChange={(e) => setSport(e.target.value)}
+                    value={price}
+                    onChange={(e) => setprice(e.target.value)}
                     className='form-control'
-                    placeholder='Enter Sport'
+                    placeholder='Enter Price'
                   />
                 </div>
-                <div className='form-group'>
+                {/* <div className='form-group'>
                   <label htmlFor='skill'>Skill</label>
                   <select
                     id='skill'
@@ -205,25 +178,16 @@ const MyPosts = () => {
                     <option value='Intermediate'>Intermediate</option>
                     <option value='Advanced'>Advanced</option>
                   </select>
-                </div>
-                <div className='form-group'>
-                  <label>Patner Require</label>
-                  <input
-                    type='number'
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    className='form-control'
-                    placeholder='Enter Number of patner require'
-                  />
-                </div>
+                </div> */}
+
                 <div className='form-group'>
                   <label>Court:</label>
                   <input
                     type='text'
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
+                    value={court}
+                    onChange={(e) => setcourt(e.target.value)}
                     className='form-control'
-                    placeholder='Enter Location'
+                    placeholder='Enter Court'
                   />
                 </div>
                 <button type='submit' className='btn btn-primary'>
@@ -240,27 +204,27 @@ const MyPosts = () => {
           Posts
         </h2>
 
-        <div className='my_post-grid-container'>
+        {/* <div className='my_post-grid-container'>
           <div className='my_post-grid-container'>
-            {playerPosts &&
-              playerPosts.map((post, index) => (
+            {coachPosts &&
+              coachPosts.map((post, index) => (
                 <div
                   key={post._id}
                   className='my_post-grid-item'
                   style={{ marginLeft: index % 4 !== 0 ? '2px' : '0' }}
                 >
-                  <MypostDisplay
-                    playerPosts={playerPosts}
-                    setPlayerPosts={setPlayerPosts}
-                    playerPost={post}
+                  <MypostDisplaycoach
+                    coachPosts={coachPosts}
+                    setcoachPosts={setcoachPosts}
+                    coachPost={post}
                   />
                 </div>
               ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default MyPosts;
+export default Mypostscoach;

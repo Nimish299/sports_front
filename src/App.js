@@ -16,6 +16,7 @@ import AppliedAcademys from './pages/player/AppliedAcademys';
 import StarredPosts from './pages/player/StarredPosts';
 import PlayerPostDetailsPage from './pages/playerPost/PlayerPostDetailsPage';
 import MyPosts from './pages/player/MyPosts';
+import Mypostscoach from './pages/coach/Mypostscoach';
 import Navbar from './pages/Navbar';
 import backgroundImage from './pages/backgroundImage.jpg';
 import PlayerWelcome from './pages/player/PlayerWelcome';
@@ -70,6 +71,7 @@ function App() {
             <Route path='/coach/signup' element={<CoachSignup />} />
             <Route path='/coach/playerCoach' element={<Coachstudent />} />
             <Route path='/coach/home' element={<CoachHome />} />
+            <Route path='/coach/myposts' element={<Mypostscoach/>} />
           </Routes>
         </div>
       </BrowserRouter>
