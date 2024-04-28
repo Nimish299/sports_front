@@ -121,50 +121,50 @@ const EditProfile = () => {
   };
 
   return (
-    <VStack spacing={4} align='flex-start'>
-      <div
-        style={{
-          backgroundColor: 'white',
-          padding: '20px',
-          borderRadius: '5px',
-        }}
-      >
-        <Heading as='h1' size='lg'>
-          Edit Profile
-        </Heading>
-        {loading ? (
-          <Text>Loading profile...</Text>
-        ) : error ? (
-          <Text color='red.500'>{error}</Text>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <FormControl>
-              <FormLabel>Name</FormLabel>
-              <Input
-                type='text'
-                name='name'
-                value={formData.name || ''}
-                onChange={(e) => {
-                  setFormData({ ...formData, name: e.target.value });
-                }}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Location</FormLabel>
-              <Input
-                type='text'
-                name='location'
-                value={formData.location || ''}
-                onChange={(e) => {
-                  setFormData({ ...formData, location: e.target.value });
-                }}
-              />
-            </FormControl>
-            <Divider />
+    <div
+      style={{
+        backgroundColor: 'white',
+        padding: '20px',
+        borderRadius: '5px',
+        width: '25rem',
+      }}
+    >
+      <Heading as='h1' size='lg'>
+        Edit Profile
+      </Heading>
+      {loading ? (
+        <Text>Loading profile...</Text>
+      ) : error ? (
+        <Text color='red.500'>{error}</Text>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <FormControl>
+            <FormLabel>Name</FormLabel>
+            <Input
+              type='text'
+              name='name'
+              value={formData.name || ''}
+              onChange={(e) => {
+                setFormData({ ...formData, name: e.target.value });
+              }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Location</FormLabel>
+            <Input
+              type='text'
+              name='location'
+              value={formData.location || ''}
+              onChange={(e) => {
+                setFormData({ ...formData, location: e.target.value });
+              }}
+            />
+          </FormControl>
+          {/* <Divider />
             <Heading as='h2' size='md'>
               Gaming Statistics
-            </Heading>
-            {/* {formData.gaming_statistics.map((stat, index) => (
+            </Heading> */}
+          {/* {formData.gaming_statistics.map((stat, index) => (
               <div key={index}>
                 <FormLabel>Game {index + 1}</FormLabel>
                 <FormControl>
@@ -191,128 +191,125 @@ const EditProfile = () => {
                 <Divider />
               </div>
             ))} */}
-            <Button onClick={handleAddStatistic}>Add Gaming Statistic</Button>
+          {/* <Button onClick={handleAddStatistic}>Add Gaming Statistic</Button>
             <Divider />
             {formData.gaming_statistics.length === 0 && (
               <Button onClick={handleAddStatistic}>Add Gaming Statistic</Button>
             )}
-            <Divider />
-            <Heading as='h2' size='md'>
-              Communication Preferences
-            </Heading>
-            <FormControl>
-              <FormLabel>Preferred Language</FormLabel>
-              <Input
-                type='text'
-                name='communication_preferences.preferred_language'
-                value={formData.communication_preferences.preferred_language}
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    communication_preferences: {
-                      preferred_language: e.target.value,
+            <Divider /> */}
+          <Heading as='h2' size='md'>
+            Communication Preferences
+          </Heading>
+          <FormControl>
+            <FormLabel>Preferred Language</FormLabel>
+            <Input
+              type='text'
+              name='communication_preferences.preferred_language'
+              value={formData.communication_preferences.preferred_language}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  communication_preferences: {
+                    preferred_language: e.target.value,
+                  },
+                });
+              }}
+            />
+          </FormControl>
+          <Divider />
+          <Heading as='h2' size='md'>
+            Social Interactions
+          </Heading>
+          <FormControl>
+            <FormLabel>Bio</FormLabel>
+            <Input
+              type='text'
+              name='social_interactions.bio'
+              value={formData.social_interactions.bio}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  social_interactions: {
+                    ...formData.social_interactions,
+                    bio: e.target.value,
+                  },
+                });
+              }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Facebook</FormLabel>
+            <Input
+              type='text'
+              name='social_interactions.social_media_links.facebook'
+              value={
+                formData?.social_interactions?.social_media_links?.facebook
+              }
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  social_interactions: {
+                    ...formData.social_interactions,
+                    social_media_links: {
+                      ...formData.social_interactions.social_media_links,
+                      facebook: e.target.value,
                     },
-                  });
-                }}
-              />
-            </FormControl>
-            <Divider />
-            <Heading as='h2' size='md'>
-              Social Interactions
-            </Heading>
-            <FormControl>
-              <FormLabel>Bio</FormLabel>
-              <Input
-                type='text'
-                name='social_interactions.bio'
-                value={formData.social_interactions.bio}
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    social_interactions: {
-                      ...formData.social_interactions,
-                      bio: e.target.value,
+                  },
+                });
+              }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Twitter</FormLabel>
+            <Input
+              type='text'
+              name='social_interactions.social_media_links.twitter'
+              value={
+                formData?.social_interactions?.social_media_links?.instagram
+              }
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  social_interactions: {
+                    ...formData.social_interactions,
+                    social_media_links: {
+                      ...formData.social_interactions.social_media_links,
+                      instagram: e.target.value,
                     },
-                  });
-                }}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Facebook</FormLabel>
-              <Input
-                type='text'
-                name='social_interactions.social_media_links.facebook'
-                value={
-                  formData?.social_interactions?.social_media_links?.facebook
-                }
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    social_interactions: {
-                      ...formData.social_interactions,
-                      social_media_links: {
-                        ...formData.social_interactions.social_media_links,
-                        facebook: e.target.value,
-                      },
+                  },
+                });
+              }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Instagram</FormLabel>
+            <Input
+              type='text'
+              name='social_interactions.social_media_links.instagram'
+              value={formData?.social_interactions?.social_media_links?.twitter}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  social_interactions: {
+                    ...formData.social_interactions,
+                    social_media_links: {
+                      ...formData.social_interactions.social_media_links,
+                      twitter: e.target.value,
                     },
-                  });
-                }}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Twitter</FormLabel>
-              <Input
-                type='text'
-                name='social_interactions.social_media_links.twitter'
-                value={
-                  formData?.social_interactions?.social_media_links?.instagram
-                }
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    social_interactions: {
-                      ...formData.social_interactions,
-                      social_media_links: {
-                        ...formData.social_interactions.social_media_links,
-                        instagram: e.target.value,
-                      },
-                    },
-                  });
-                }}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Instagram</FormLabel>
-              <Input
-                type='text'
-                name='social_interactions.social_media_links.instagram'
-                value={
-                  formData?.social_interactions?.social_media_links?.twitter
-                }
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    social_interactions: {
-                      ...formData.social_interactions,
-                      social_media_links: {
-                        ...formData.social_interactions.social_media_links,
-                        twitter: e.target.value,
-                      },
-                    },
-                  });
-                }}
-              />
-            </FormControl>
-            <Divider />
+                  },
+                });
+              }}
+            />
+          </FormControl>
+          <Divider />
 
-            <Button type='submit' colorScheme='blue'>
-              Submit
-              {/* <a href='/player/player-profile'>Submit</a> */}
-            </Button>
-          </form>
-        )}
-      </div>
-    </VStack>
+          <Button type='submit' colorScheme='blue'>
+            Submit
+            {/* <a href='/player/player-profile'>Submit</a> */}
+          </Button>
+        </form>
+      )}
+    </div>
   );
 };
 export default EditProfile;

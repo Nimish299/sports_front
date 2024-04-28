@@ -30,7 +30,7 @@ const Navbar = () => {
       localStorage.removeItem('auth-token');
 
       delete axios.defaults.headers.common['Authorization'];
-      printAxiosHeaders();
+      setLoginflag(false);
       // return navigate('/');
     } catch (error) {
       // Handle error

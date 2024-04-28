@@ -22,7 +22,7 @@ const Coachstudent = () => {
 
       if (response.status === 200) {
         const StudentsIDS = response.data;
-        console.log(`ids:`, StudentsIDS);
+        // console.log(`ids:`, StudentsIDS);
         setStudentsIDS(StudentsIDS);
         setflag(true);
       } else {
@@ -56,15 +56,46 @@ const Coachstudent = () => {
       <div className='player_player_container'>
         <h2 className='player_player_heading'>Students</h2>
       </div>
-
-      <div class='post-list'>
-        {StudentsIDS &&
-          StudentsIDS.map((student) => (
-            <div className='student-item' key={student._id}>
-              <StudentDisplay student={student} navigate={navigate} />
+      <div
+        style={{
+          backgroundColor: 'white',
+          padding: '20px',
+          borderRadius: '8px',
+          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', // Optional: Add a subtle shadow
+          fontFamily: 'Arial, sans-serif', // Change the font family
+        }}
+      >
+        <div className='container text-center'>
+          <div
+            className='row align-items-start'
+            style={{ fontSize: '16px', fontWeight: 'bold' }}
+          >
+            <div className='col' style={{ fontSize: '16px' }}>
+              EmailID
             </div>
-          ))}
+            <div className='col' style={{ fontSize: '16px' }}>
+              Name
+            </div>
+            <div className='col' style={{ fontSize: '16px' }}>
+              Location
+            </div>
+            <div className='col' style={{ fontSize: '16px' }}>
+              Mobile Number
+            </div>
+            <div className='col' style={{ fontSize: '16px' }}>
+              Time Joined
+            </div>
+          </div>
+        </div>
       </div>
+      {/* <div class='post-list'> */}
+      {StudentsIDS &&
+        StudentsIDS.map((student) => (
+          <div className='student-item' key={student._id}>
+            <StudentDisplay student={student} navigate={navigate} />
+          </div>
+        ))}
+      {/* </div> */}
     </div>
   );
 };

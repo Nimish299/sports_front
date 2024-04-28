@@ -56,41 +56,43 @@ const PlayerProfile = () => {
     return navigate('/player/player-Edit-profile');
   };
   return (
-    <VStack spacing={4} align='flex-start'>
-      <div
-        style={{
-          backgroundColor: 'white',
-          padding: '20px',
-          borderRadius: '5px',
-        }}
-      >
-        <Heading as='h1' size='lg'>
-          Player Profile
-        </Heading>
-        {loading ? (
-          <Text>Loading profile...</Text>
-        ) : error ? (
-          <Text color='red.500'>{error}</Text>
-        ) : (
-          <>
-            <FormControl>
-              <FormLabel>Name</FormLabel>
-              <Text>{profileData.name}</Text>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Email</FormLabel>
-              <Text>{profileData.emailID}</Text>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Mobile Number</FormLabel>
-              <Text>{profileData.mobileNumber}</Text>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Location</FormLabel>
-              <Text>{profileData.location}</Text>
-            </FormControl>
-            <Divider />
-            {profileData.gaming_statistics ? (
+    <div
+      style={{
+        backgroundColor: 'white',
+        padding: '20px',
+        borderRadius: '5px',
+        width: '25rem',
+
+        // alignContent: 'center',
+      }}
+    >
+      <Heading as='h1' size='lg'>
+        Player Profile
+      </Heading>
+      {loading ? (
+        <Text>Loading profile...</Text>
+      ) : error ? (
+        <Text color='red.500'>{error}</Text>
+      ) : (
+        <>
+          <FormControl>
+            <FormLabel>Name</FormLabel>
+            <Text>{profileData.name}</Text>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <Text>{profileData.emailID}</Text>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Mobile Number</FormLabel>
+            <Text>{profileData.mobileNumber}</Text>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Location</FormLabel>
+            <Text>{profileData.location}</Text>
+          </FormControl>
+          {/* <Divider /> */}
+          {/* {profileData.gaming_statistics ? (
               <>
                 <Heading as='h2' size='md'>
                   Gaming Statistics
@@ -120,51 +122,50 @@ const PlayerProfile = () => {
               </>
             ) : (
               <Text>No gaming statistics available</Text>
-            )}
+            )} */}
 
-            <Divider />
-            <Heading as='h2' size='md'>
-              Communication Preferences
-            </Heading>
-            <Text>
-              {profileData.communication_preferences?.preferred_language}
-            </Text>
-            <Divider />
-            <Heading as='h2' size='md'>
-              Social Interactions
-            </Heading>
-            <Text>Bio: {profileData.social_interactions?.bio}</Text>
-            <Text>
-              facebook:{' '}
-              {profileData.social_interactions?.social_media_links?.facebook}
-            </Text>
-            <Text>
-              instagram:{' '}
-              {profileData.social_interactions?.social_media_links?.instagram}
-            </Text>
-            <Text>
-              twitter:{' '}
-              {profileData.social_interactions?.social_media_links?.twitter}
-            </Text>
-            <Divider />
-            <Heading as='h2' size='md'>
+          <Divider />
+          <Heading as='h2' size='md'>
+            Communication Preferences
+          </Heading>
+          <Text>
+            {profileData.communication_preferences?.preferred_language}
+          </Text>
+          <Divider />
+          <Heading as='h2' size='md'>
+            Social Interactions
+          </Heading>
+          <Text>Bio: {profileData.social_interactions?.bio}</Text>
+          <Text>
+            facebook:{' '}
+            {profileData.social_interactions?.social_media_links?.facebook}
+          </Text>
+          <Text>
+            instagram:{' '}
+            {profileData.social_interactions?.social_media_links?.instagram}
+          </Text>
+          <Text>
+            twitter:{' '}
+            {profileData.social_interactions?.social_media_links?.twitter}
+          </Text>
+          <Divider />
+          {/* <Heading as='h2' size='md'>
               Feedback and Ratings
             </Heading>
             <Text>Ratings: {profileData.feedback_and_ratings?.ratings}</Text>
             <Text>
               Reviews: {profileData.feedback_and_ratings?.reviews?.join(', ')}
-            </Text>
-            <Button colorScheme='blue' onClick={redirecteditprofile}>
-              Edit Profile
-            </Button>
-            <Divider />
-            <Button colorScheme='blue' onClick={redirectedhome}>
-              Home
-            </Button>
-          </>
-        )}
-      </div>
-    </VStack>
+            </Text> */}
+          <Button colorScheme='blue' onClick={redirecteditprofile}>
+            Edit Profile
+          </Button>
+          <Divider />
+          <Button colorScheme='blue' onClick={redirectedhome}>
+            Home
+          </Button>
+        </>
+      )}
+    </div>
   );
 };
 
