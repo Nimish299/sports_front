@@ -17,12 +17,14 @@ const MyPosts = () => {
   const [newPostFlag, setNewPostFlag] = useState(false);
   const fetchPlayerPosts = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/allplayerpost`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
@@ -47,12 +49,14 @@ const MyPosts = () => {
 
   const fetch_info = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/player/profile/info`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

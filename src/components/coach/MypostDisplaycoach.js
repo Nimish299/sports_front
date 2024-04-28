@@ -89,15 +89,17 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
   };
   const Getrequestonpost = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('auth-token');
+    const headers = {
+      Authorization: token,
+    };
 
     try {
       console.log(`request`);
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/coachpost/Getrequestonpost/${coachPost._id}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
@@ -115,15 +117,17 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
   };
   const Getrequestonpost1 = async () => {
     // e.preventDefault();
+    const token = localStorage.getItem('auth-token');
+    const headers = {
+      Authorization: token,
+    };
 
     try {
       console.log(`request`);
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/coachpost/Getrequestonpost/${coachPost._id}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

@@ -14,12 +14,14 @@ const PlayerCoach = () => {
   const run = async () => {
     const token = localStorage.getItem('auth-token');
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/allplayerposts`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
@@ -46,12 +48,14 @@ const PlayerCoach = () => {
 
   const filterPlayerPosts = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/sport/${sport}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
       const json = response.data;
@@ -64,12 +68,14 @@ const PlayerCoach = () => {
   };
   const Recentactivity = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/recent`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
       const json = response.data;

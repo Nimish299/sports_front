@@ -22,12 +22,14 @@ const Mypostscoach = () => {
   // const Slots = [];
   const fetchPlayerPosts = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/coachpost/allselfpost`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

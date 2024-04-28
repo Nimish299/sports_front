@@ -18,12 +18,14 @@ const PlayerPostDetailsPage = () => {
   };
   const getDetails = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/details/${_id}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
@@ -74,12 +76,14 @@ const PlayerPostDetailsPage = () => {
   // Inside the statusfun function
   const statusfun = async (_id) => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/Statusonpost/${_id}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

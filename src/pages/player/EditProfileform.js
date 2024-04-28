@@ -39,8 +39,15 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const fetchProfile = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
-        `${process.env.REACT_APP_URL}api/player/profile`
+        `${process.env.REACT_APP_URL}api/player/profile`,
+        {
+          headers,
+        }
       );
       const data = response.data;
       setProfileData(data);

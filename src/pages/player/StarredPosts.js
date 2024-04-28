@@ -13,13 +13,15 @@ const StarredPosts = () => {
   useEffect(() => {
     const getStarredPosts = async () => {
       try {
+        const token = localStorage.getItem('auth-token');
+        const headers = {
+          Authorization: token,
+        };
         // Fetch starred post IDs from the server
         const response = await axios.get(
           'https://sports-back.onrender.com/api/player/starred',
           {
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers,
           }
         );
         const starredPostIds = response.data;

@@ -9,14 +9,17 @@ const Coachstudent = () => {
   // const [filterinUse, setFilterinUse] = useState(false);
 
   const run = async () => {
+    // const token = localStorage.getItem('auth-token');
     const token = localStorage.getItem('auth-token');
+    const headers = {
+      Authorization: token,
+    };
+
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/coach/applied/students`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

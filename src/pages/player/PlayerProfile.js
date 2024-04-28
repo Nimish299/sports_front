@@ -24,12 +24,14 @@ const PlayerProfile = () => {
   const fetchProfile = async () => {
     console.log('sss');
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/player/profile`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
       if (response.status < 200 || response.status > 300) {
