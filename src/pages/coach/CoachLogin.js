@@ -43,6 +43,7 @@ const CoachLogin = () => {
   // console.log('env =', process.env.REACT_APP_URL);
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
+
     const user = { emailID, password };
     try {
       const response = await axios.post(
@@ -112,20 +113,6 @@ const CoachLogin = () => {
         >
           Login
         </Button>
-        <Button
-          width='100%'
-          colorScheme='red'
-          style={{ marginTop: 15 }}
-          onClick={() => {
-            setEmailID('123coach@gmail.com');
-            setPassword('12345');
-          }}
-        >
-          Get Guest user Credentials
-        </Button>
-        <NavLink className='btn btn-primary my-3' to='/'>
-          back
-        </NavLink>
 
         <div>{errDisplay && <p>{errDisplay}</p>}</div>
       </VStack>

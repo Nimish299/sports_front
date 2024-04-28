@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
+  console.log(`playerpost:`, playerPost);
+  console.log(`playerposts:`, playerPosts);
   const [postRequests, setpostRequests] = useState([]);
   const [flag1, setflag1] = useState(false);
   const [acceptflag1, setacceptflag1] = useState(false);
@@ -217,7 +219,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
       <div
         className='card mx-2 my-2'
         style={{
-          width: '18rem',
+          width: '45rem',
           boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
           borderRadius: '8px',
           overflow: 'hidden',
@@ -334,7 +336,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
                       </>
                     )}
                     {/* Render feedback and ratings */}
-                    {req.playerInfo.feedback_and_ratings && (
+                    {/* {req.playerInfo.feedback_and_ratings && (
                       <div className='request_post_feedback-ratings'>
                         <h5>Feedback and Ratings</h5>
                         <p>
@@ -347,7 +349,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
                           Ratings: {req.playerInfo.feedback_and_ratings.ratings}
                         </p>
                       </div>
-                    )}
+                    )} */}
                   </div>
                 )}
                 {getStatusColor(req.status) === 'yellow' && (

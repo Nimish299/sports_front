@@ -17,6 +17,9 @@ const Mypostscoach = () => {
   const [errDisplay, setErrDisplay] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [newPostFlag, setNewPostFlag] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState('');
+
+  // const Slots = [];
   const fetchPlayerPosts = async () => {
     try {
       const response = await axios.get(
@@ -31,7 +34,7 @@ const Mypostscoach = () => {
       if (response.status >= 200 && response.status < 300) {
         const json = response.data;
         setcoachPosts(json);
-        console.log(json);
+        console.log(`coachpost:`, json);
       } else {
         console.log('Error fetching player posts:', response.statusText);
       }
@@ -59,6 +62,7 @@ const Mypostscoach = () => {
         description,
         court,
         price,
+        selectedSlot,
       };
       console.log('New Post:before the commit ', newPost);
       // Send POST request to create player post
@@ -94,7 +98,20 @@ const Mypostscoach = () => {
       );
     }
   };
-
+  const Slots = [
+    '9:00 AM - 10:00 AM',
+    '10:00 AM - 11:00 AM',
+    '11:00 AM - 12:00 PM',
+    '12:00 PM - 1:00 PM',
+    '1:00 PM - 2:00 PM',
+    '2:00 PM - 3:00 PM',
+    '3:00 PM - 4:00 PM',
+    '4:00 PM - 5:00 PM',
+    '5:00 PM - 6:00 PM',
+    '6:00 PM - 7:00 PM',
+    '7:00 PM - 8:00 PM',
+    '8:00 PM - 9:00 PM',
+  ];
   const goTocoachstudent = () => {
     navigate('/coach/playerCoach');
   };
@@ -164,7 +181,6 @@ const Mypostscoach = () => {
                     placeholder='Enter Price'
                   />
                 </div>
-                
 
                 <div className='form-group'>
                   <label>Court:</label>
@@ -175,6 +191,21 @@ const Mypostscoach = () => {
                     className='form-control'
                     placeholder='Enter Court'
                   />
+                </div>
+                <div className='form-group'>
+                  <label>Select Slot:</label>
+                  <select
+                    className='form-control'
+                    value={selectedSlot}
+                    onChange={(e) => setSelectedSlot(e.target.value)}
+                  >
+                    <option value=''>Select Slot</option>
+                    {Slots.map((slot, index) => (
+                      <option key={index} value={slot}>
+                        {slot}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <button type='submit' className='btn btn-primary'>
                   Add
@@ -190,24 +221,24 @@ const Mypostscoach = () => {
           Posts
         </h2>
 
-        {/* <div className='my_post-grid-container'>
+        <div className='my_post-grid-container'>
           <div className='my_post-grid-container'>
             {coachPosts &&
-              coachPosts.map((post, index) => (
+              coachPosts.map((coachpost, index) => (
                 <div
-                  key={post._id}
+                  key={coachpost._id}
                   className='my_post-grid-item'
-                  style={{ marginLeft: index % 4 !== 0 ? '2px' : '0' }}
+                  style={{}}
                 >
                   <MypostDisplaycoach
                     coachPosts={coachPosts}
                     setcoachPosts={setcoachPosts}
-                    coachPost={post}
+                    coachPost={coachpost}
                   />
                 </div>
               ))}
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
