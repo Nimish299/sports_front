@@ -9,6 +9,7 @@ import {
   Button,
   VStack,
   Heading,
+  Select,
   Text,
   Divider,
 } from '@chakra-ui/react';
@@ -36,23 +37,22 @@ const EditProfile = () => {
     },
   });
   const navigate = useNavigate();
+  const fetchProfile = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}api/player/profile`
+      );
+      const data = response.data;
+      setProfileData(data);
+      setFormData(data); // Initialize form data with fetched profile data
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_URL}api/player/profile`
-        );
-        const data = response.data;
-        setProfileData(data);
-        setFormData(data); // Initialize form data with fetched profile data
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchProfile();
   }, []);
   const handleAddStatistic = () => {
@@ -71,31 +71,21 @@ const EditProfile = () => {
   };
 
   // Handle changes in form fields
-  // const handleChange = (e, index) => {
-  //   const { name, value } = e.target;
-  //   if (name.startsWith('gaming_statistics[')) {
-  //     const fieldName = name.split('.')[1]; // Extracting field name from gaming_statistics[index].field_name
-  //     const updatedStats = [...formData.gaming_statistics];
-  //     updatedStats[index][fieldName] = value;
-  //     setFormData({ ...formData, gaming_statistics: updatedStats });
-  //   } else if (name.startsWith('social_interactions.interests')) {
-  //     const interests = value.split(',').map((item) => item.trim()); // Convert comma-separated interests to an array
-  //     setFormData({
-  //       ...formData,
-  //       social_interactions: {
-  //         ...formData.social_interactions,
-  //         interests,
-  //       },
-  //     });
-  //   } else {
-  //     setFormData({ ...formData, [name]: value });
-  //   }
-  // };
+  const handleChange = (e, index) => {
+    // const { name, value } = e.target;
+    //   const fieldName = name.split('.')[1]; // Extracting field name from gaming_statistics[index].field_name
+    //   const updatedStats = [...formData.gaming_statistics];
+    //   updatedStats[index][fieldName] = value;
+    let new_data = formData.gaming_statistics;
+    new_data[index].sport = e.target.value;
+    setFormData({ ...formData, gaming_statistics: new_data });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+    console.log(formData);
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_URL}api/player/updateProfile`,
@@ -119,197 +109,234 @@ const EditProfile = () => {
       setLoading(false);
     }
   };
-
+  const sportList = [
+    'Football',
+    'Basketball',
+    'Tennis',
+    'Swimming',
+    'Badminton',
+  ];
   return (
-    <div
-      style={{
-        backgroundColor: 'white',
-        padding: '20px',
-        borderRadius: '5px',
-        width: '25rem',
-      }}
-    >
-      <Heading as='h1' size='lg'>
-        Edit Profile
-      </Heading>
-      {loading ? (
-        <Text>Loading profile...</Text>
-      ) : error ? (
-        <Text color='red.500'>{error}</Text>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <FormControl>
-            <FormLabel>Name</FormLabel>
-            <Input
-              type='text'
-              name='name'
-              value={formData.name || ''}
-              onChange={(e) => {
-                setFormData({ ...formData, name: e.target.value });
-              }}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Location</FormLabel>
-            <Input
-              type='text'
-              name='location'
-              value={formData.location || ''}
-              onChange={(e) => {
-                setFormData({ ...formData, location: e.target.value });
-              }}
-            />
-          </FormControl>
-          {/* <Divider />
+    <VStack spacing={4} align='flex-start'>
+      <div
+        style={{
+          backgroundColor: 'white',
+          padding: '20px',
+          borderRadius: '5px',
+        }}
+      >
+        <Heading as='h1' size='lg'>
+          Edit Profile
+        </Heading>
+        {loading ? (
+          <Text>Loading profile...</Text>
+        ) : error ? (
+          <Text color='red.500'>{error}</Text>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <FormControl>
+              <FormLabel>Name</FormLabel>
+              <Input
+                type='text'
+                name='name'
+                value={formData.name || ''}
+                onChange={(e) => {
+                  setFormData({ ...formData, name: e.target.value });
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Location</FormLabel>
+              <Input
+                type='text'
+                name='location'
+                value={formData.location || ''}
+                onChange={(e) => {
+                  setFormData({ ...formData, location: e.target.value });
+                }}
+              />
+            </FormControl>
+            <Divider />
             <Heading as='h2' size='md'>
               Gaming Statistics
-            </Heading> */}
-          {/* {formData.gaming_statistics.map((stat, index) => (
-              <div key={index}>
-                <FormLabel>Game {index + 1}</FormLabel>
-                <FormControl>
-                  <FormLabel>Sport</FormLabel>
-                  <Input
-                    type='text'
-                    name={gaming_statistics[${index}].sport}
-                    value={stat.sport || ''}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Skill</FormLabel>
-                  <Input
-                    type='text'
-                    name={gaming_statistics[${index}].skill}
-                    value={stat.skill || ''}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </FormControl>
-                <Button onClick={() => handleDeleteStatistic(index)}>
-                  Delete
-                </Button>
-                <Divider />
-              </div>
-            ))} */}
-          {/* <Button onClick={handleAddStatistic}>Add Gaming Statistic</Button>
-            <Divider />
+            </Heading>
+            {
+              //</EditGameStatDisplay >
+              //formData.gaming_statistics.map((game,index))
+
+              formData.gaming_statistics.map((stat, index) => (
+                <div key={index}>
+                  <FormLabel>Game {index + 1}</FormLabel>
+                  <FormControl>
+                    <FormLabel>Sport</FormLabel>
+                    <Select
+                      type='text'
+                      name={stat.sport}
+                      value={stat.sport || ''}
+                      onChange={(e) => {
+                        let new_data = formData.gaming_statistics;
+                        new_data[index].sport = e.target.value;
+                        setFormData({
+                          ...formData,
+                          gaming_statistics: new_data,
+                        });
+                      }}
+                    >
+                      <option value='Football'>Football</option>
+                      <option value='Basketball'>Basketball</option>
+                      <option value='Tennis'>Tennis</option>
+                      <option value='Swimming'>Swimming</option>
+                      <option value='Badminton'>Badminton</option>
+                    </Select>
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Skill</FormLabel>
+                    <Select
+                      name={stat.skill}
+                      value={stat.skill || ''}
+                      onChange={(e) => {
+                        let new_data = formData.gaming_statistics;
+                        new_data[index].skill = e.target.value;
+                        setFormData({
+                          ...formData,
+                          gaming_statistics: new_data,
+                        });
+                      }}
+                    >
+                      <option value='Beginner'>Beginner</option>
+                      <option value='Intermediate'>Intermediate</option>
+                      <option value='Advanced'>Advanced</option>
+                    </Select>
+                  </FormControl>
+                  <Button onClick={() => handleDeleteStatistic(index)}>
+                    Delete
+                  </Button>
+                  <Divider />
+                </div>
+              ))
+            }
+            <Button onClick={handleAddStatistic}>Add Gaming Statistic</Button>
+            {/* <Divider />
             {formData.gaming_statistics.length === 0 && (
               <Button onClick={handleAddStatistic}>Add Gaming Statistic</Button>
-            )}
-            <Divider /> */}
-          <Heading as='h2' size='md'>
-            Communication Preferences
-          </Heading>
-          <FormControl>
-            <FormLabel>Preferred Language</FormLabel>
-            <Input
-              type='text'
-              name='communication_preferences.preferred_language'
-              value={formData.communication_preferences.preferred_language}
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  communication_preferences: {
-                    preferred_language: e.target.value,
-                  },
-                });
-              }}
-            />
-          </FormControl>
-          <Divider />
-          <Heading as='h2' size='md'>
-            Social Interactions
-          </Heading>
-          <FormControl>
-            <FormLabel>Bio</FormLabel>
-            <Input
-              type='text'
-              name='social_interactions.bio'
-              value={formData.social_interactions.bio}
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  social_interactions: {
-                    ...formData.social_interactions,
-                    bio: e.target.value,
-                  },
-                });
-              }}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Facebook</FormLabel>
-            <Input
-              type='text'
-              name='social_interactions.social_media_links.facebook'
-              value={
-                formData?.social_interactions?.social_media_links?.facebook
-              }
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  social_interactions: {
-                    ...formData.social_interactions,
-                    social_media_links: {
-                      ...formData.social_interactions.social_media_links,
-                      facebook: e.target.value,
+            )} */}
+            <Divider />
+            <Heading as='h2' size='md'>
+              Communication Preferences
+            </Heading>
+            <FormControl>
+              <FormLabel>Preferred Language</FormLabel>
+              <Input
+                type='text'
+                name='communication_preferences.preferred_language'
+                value={formData.communication_preferences.preferred_language}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    communication_preferences: {
+                      preferred_language: e.target.value,
                     },
-                  },
-                });
-              }}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Twitter</FormLabel>
-            <Input
-              type='text'
-              name='social_interactions.social_media_links.twitter'
-              value={
-                formData?.social_interactions?.social_media_links?.instagram
-              }
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  social_interactions: {
-                    ...formData.social_interactions,
-                    social_media_links: {
-                      ...formData.social_interactions.social_media_links,
-                      instagram: e.target.value,
+                  });
+                }}
+              />
+            </FormControl>
+            <Divider />
+            <Heading as='h2' size='md'>
+              Social Interactions
+            </Heading>
+            <FormControl>
+              <FormLabel>Bio</FormLabel>
+              <Input
+                type='text'
+                name='social_interactions.bio'
+                value={formData.social_interactions.bio}
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    social_interactions: {
+                      ...formData.social_interactions,
+                      bio: e.target.value,
                     },
-                  },
-                });
-              }}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Instagram</FormLabel>
-            <Input
-              type='text'
-              name='social_interactions.social_media_links.instagram'
-              value={formData?.social_interactions?.social_media_links?.twitter}
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  social_interactions: {
-                    ...formData.social_interactions,
-                    social_media_links: {
-                      ...formData.social_interactions.social_media_links,
-                      twitter: e.target.value,
+                  });
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Facebook</FormLabel>
+              <Input
+                type='text'
+                name='social_interactions.social_media_links.facebook'
+                value={
+                  formData?.social_interactions?.social_media_links?.facebook
+                }
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    social_interactions: {
+                      ...formData.social_interactions,
+                      social_media_links: {
+                        ...formData.social_interactions.social_media_links,
+                        facebook: e.target.value,
+                      },
                     },
-                  },
-                });
-              }}
-            />
-          </FormControl>
-          <Divider />
+                  });
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Twitter</FormLabel>
+              <Input
+                type='text'
+                name='social_interactions.social_media_links.twitter'
+                value={
+                  formData?.social_interactions?.social_media_links?.instagram
+                }
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    social_interactions: {
+                      ...formData.social_interactions,
+                      social_media_links: {
+                        ...formData.social_interactions.social_media_links,
+                        instagram: e.target.value,
+                      },
+                    },
+                  });
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Instagram</FormLabel>
+              <Input
+                type='text'
+                name='social_interactions.social_media_links.instagram'
+                value={
+                  formData?.social_interactions?.social_media_links?.twitter
+                }
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    social_interactions: {
+                      ...formData.social_interactions,
+                      social_media_links: {
+                        ...formData.social_interactions.social_media_links,
+                        twitter: e.target.value,
+                      },
+                    },
+                  });
+                }}
+              />
+            </FormControl>
+            <Divider />
 
-          <Button type='submit' colorScheme='blue'>
-            Submit
-            {/* <a href='/player/player-profile'>Submit</a> */}
-          </Button>
-        </form>
-      )}
-    </div>
+            <Button type='submit' colorScheme='blue'>
+              Submit
+              {/* <a href='/player/player-profile'>Submit</a> */}
+            </Button>
+          </form>
+        )}
+      </div>
+    </VStack>
   );
 };
 export default EditProfile;

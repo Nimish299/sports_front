@@ -26,6 +26,8 @@ import PlayerProfile from './pages/player/PlayerProfile';
 import EditProfile from './pages/player/EditProfileform';
 import Coachstudent from './pages/coach/Coachstudent';
 import Applypost from './pages/player/Applypost';
+import CoachProfile from './pages/coach/CoachProfile';
+import EditProfileformcoach from './pages/coach/EditProfileformcoach';
 function App() {
   const [loginflag, setloginflag] = useState(false);
   return (
@@ -75,6 +77,11 @@ function App() {
             <Route path='/coach/home' element={<CoachHome />} />
             <Route path='/coach/myposts' element={<Mypostscoach />} />
             <Route path='/coachpost/:_id' element={<CoachPostDetailsPage />} />
+            <Route path='/coach/coach-profile' element={<CoachProfile />} />
+            <Route
+              path='/coach/coach-Edit-profile'
+              element={<EditProfileformcoach />}
+            />
           </Routes>
         </div>
       </BrowserRouter>

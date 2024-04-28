@@ -6,14 +6,11 @@ import axios from 'axios';
 import {
   FormControl,
   FormLabel,
-  Input,
   Button,
-  VStack,
   Heading,
   Text,
   Divider,
   Box,
-  Flex,
 } from '@chakra-ui/react';
 
 const PlayerProfile = () => {
@@ -28,7 +25,7 @@ const PlayerProfile = () => {
     console.log('sss');
     try {
       const response = await axios.get(
-        'https://sports-back.onrender.com/api/player/profile',
+        `${process.env.REACT_APP_URL}api/player/profile`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -92,37 +89,37 @@ const PlayerProfile = () => {
             <Text>{profileData.location}</Text>
           </FormControl>
           {/* <Divider /> */}
-          {/* {profileData.gaming_statistics ? (
-              <>
-                <Heading as='h2' size='md'>
-                  Gaming Statistics
-                </Heading>
-                {profileData.gaming_statistics.map(({ sport, skill }) => (
-                  <div
-                    key={sport}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      marginBottom: '8px',
-                    }}
+          {profileData.gaming_statistics ? (
+            <>
+              <Heading as='h2' size='md'>
+                Gaming Statistics
+              </Heading>
+              {profileData.gaming_statistics.map(({ sport, skill }) => (
+                <div
+                  key={sport}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: '8px',
+                  }}
+                >
+                  <Text>{sport}</Text>
+                  <Box
+                    ml={2}
+                    minWidth='100px'
+                    borderWidth='1px'
+                    borderRadius='md'
+                    p={1}
+                    textAlign='center'
                   >
-                    <Text>{sport}</Text>
-                    <Box
-                      ml={2}
-                      minWidth='100px'
-                      borderWidth='1px'
-                      borderRadius='md'
-                      p={1}
-                      textAlign='center'
-                    >
-                      <Text>{skill}</Text>
-                    </Box>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <Text>No gaming statistics available</Text>
-            )} */}
+                    <Text>{skill}</Text>
+                  </Box>
+                </div>
+              ))}
+            </>
+          ) : (
+            <Text>No gaming statistics available</Text>
+          )}
 
           <Divider />
           <Heading as='h2' size='md'>
