@@ -44,12 +44,14 @@ const RecentactivityDisplay = ({ Recent, navigate }) => {
   }, [flag]);
   const getDetails = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/details/${Recent.postId}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

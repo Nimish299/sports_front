@@ -76,12 +76,14 @@ const PostListDisplay = ({ playerPost, navigate }) => {
   useEffect(() => {
     const run = async () => {
       try {
+        const token = localStorage.getItem('auth-token');
+        const headers = {
+          Authorization: token,
+        };
         const response = await axios.get(
           `${process.env.REACT_APP_URL}api/player/tellifstarred/${playerPost._id}`,
           {
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers,
           }
         );
 

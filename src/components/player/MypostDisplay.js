@@ -51,12 +51,14 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
 
     try {
       console.log(`request`);
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/Getrequestonpost/${playerPost._id}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
@@ -76,12 +78,14 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
   const Getrequestonpost1 = async () => {
     try {
       console.log(`request`);
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/playerpost/Getrequestonpost/${playerPost._id}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
