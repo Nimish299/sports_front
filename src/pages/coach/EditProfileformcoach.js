@@ -199,7 +199,7 @@ const EditProfileformcoach = () => {
                       value={stat.description || ''}
                       onChange={(e) => {
                         let new_data = formData.achievements;
-                        new_data[index].title = e.target.value;
+                        new_data[index].description = e.target.value;
                         setFormData({
                           ...formData,
                           achievements: new_data,
@@ -215,7 +215,7 @@ const EditProfileformcoach = () => {
                       value={stat.date || ''}
                       onChange={(e) => {
                         let new_data = formData.achievements;
-                        new_data[index].title = e.target.value;
+                        new_data[index].date = e.target.value;
                         setFormData({
                           ...formData,
                           achievements: new_data,
