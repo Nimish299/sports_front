@@ -52,7 +52,7 @@ function App() {
             <Route path='/player/signup' element={<PlayerSignup />} />
             <Route path='/player/home' element={<PlayerHome />} />
             <Route path='/player/playercoach' element={<PlayerCoach />} />
-            <Route path='/player/applied' element={<AppliedAcademys />} />
+            {/* <Route path='/player/applied' element={<AppliedAcademys />} /> */}
             <Route path='/player/playerplayer' element={<PlayerPlayer />} />
             <Route path='/player/myposts' element={<MyPosts />} />
             <Route path='/player' element={<PlayerWelcome />} />
