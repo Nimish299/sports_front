@@ -137,7 +137,8 @@ const Mypostscoach = () => {
           <div
             className='card mx-2 my-2'
             style={{
-              width: '18rem',
+              width: '45rem',
+              alignContent: 'center',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
               borderRadius: '8px',
               overflow: 'hidden',

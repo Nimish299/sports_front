@@ -19,7 +19,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
 
     try {
       const response = await axios.delete(
-        `https://sports-back.onrender.com/api/playerpost/delete`,
+        `${process.env.REACT_APP_URL}api/playerpost/delete`,
         {
           data: playerPost,
           headers: {
@@ -52,7 +52,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`request`);
       const response = await axios.get(
-        `https://sports-back.onrender.com/api/playerpost/Getrequestonpost/${playerPost._id}`,
+        `${process.env.REACT_APP_URL}api/playerpost/Getrequestonpost/${playerPost._id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`request`);
       const response = await axios.get(
-        `https://sports-back.onrender.com/api/playerpost/Getrequestonpost/${playerPost._id}`,
+        `${process.env.REACT_APP_URL}api/playerpost/Getrequestonpost/${playerPost._id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
       console.log(`Accepted`);
       console.log(req);
       const response = await axios.post(
-        `https://sports-back.onrender.com/api/playerpost/POSTAccept`,
+        `${process.env.REACT_APP_URL}api/playerpost/POSTAccept`,
         req,
         {
           headers: {
@@ -138,7 +138,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
       console.log(`Rejected`);
       console.log(req);
       const response = await axios.post(
-        `https://sports-back.onrender.com/api/playerpost/POSTREJECT`,
+        `${process.env.REACT_APP_URL}api/playerpost/POSTREJECT`,
         req,
         {
           headers: {

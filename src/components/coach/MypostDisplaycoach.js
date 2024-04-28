@@ -1,8 +1,65 @@
 import React from 'react';
-
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
-  console.log(`coachpost:`, coachPost);
-  console.log(`coachposts:`, coachPosts);
+  //delete post
+  const [postAccept, setpostAccept] = useState([]);
+  const [flag1, setflag1] = useState(false);
+  const [postRequests, setpostRequests] = useState([]);
+  const [acceptflag1, setacceptflag1] = useState(false);
+  const [playerreject, setplayerreject] = useState([]);
+  const [rejectflag1, setrejectflag1] = useState(false);
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'pending':
+        return 'yellow'; // Adjust color as needed
+      case 'accepted':
+        return 'green'; // Adjust color as needed
+      case 'rejected':
+        return 'red'; // Adjust color as needed
+      default:
+        return 'black'; // Default color
+    }
+  };
+  useEffect(() => {
+    getStatusColor();
+    Getrequestonpost1();
+  }, [acceptflag1, rejectflag1]);
+  useEffect(() => {
+    getStatusColor();
+    Getrequestonpost1();
+  }, []);
+  const deletePlayerPost = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_URL}api/coachpost/delete`,
+        {
+          data: coachPost,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const json = response.data;
+
+      if (response.status === 200) {
+        console.log(json);
+        // Remove the deleted post from the local state
+        const updatedcoachPosts = coachPosts.filter(
+          (post) => post._id !== coachPost._id
+        );
+        setcoachPosts(updatedcoachPosts);
+      } else {
+        console.log(json.error);
+      }
+    } catch (error) {
+      console.error('Error deleting player post:', error.message);
+    }
+  };
+
   const formatTimestamp = (timestamp) => {
     const currentTime = new Date();
     const postTime = new Date(timestamp);
@@ -24,6 +81,117 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
     } else {
       // Otherwise, show seconds ago
       return `${seconds} ${seconds === 1 ? 'second' : 'seconds'} ago`;
+    }
+  };
+  // flag1 remove request
+  const removerequest = () => {
+    setflag1(false);
+  };
+  const Getrequestonpost = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log(`request`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}api/coachpost/Getrequestonpost/${coachPost._id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const json = response.data;
+      setpostRequests(json);
+      setflag1(true);
+      console.log(`post:`, json);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+  const Getrequestonpost1 = async () => {
+    // e.preventDefault();
+
+    try {
+      console.log(`request`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}api/coachpost/Getrequestonpost/${coachPost._id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const json = response.data;
+      setpostRequests(json);
+      //   setflag1(true);
+      console.log(`post:`, json);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+  const rejectRequest = async (req) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}api/coachpost/POSTREJECT`,
+        req,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status !== 201) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const json = response.data;
+      // setpostAccept(json);
+      // setacceptflag1();
+      setplayerreject(json);
+      console.log(playerreject);
+      setrejectflag1(true);
+      console.log(`postAccept`);
+      console.log(postAccept);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+  const acceptRequest = async (req) => {
+    try {
+      console.log(`Accepted`);
+      //   console.log(`req:`, req);
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}api/coachpost/POSTAccept`,
+        req,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status !== 201) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const json = response.data;
+      setpostAccept(json);
+      setacceptflag1(true);
+      console.log(`postAccept`);
+      console.log(postAccept);
+    } catch (error) {
+      console.error('Error:', error.message);
     }
   };
   return (
@@ -60,12 +228,132 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
             Charges: {coachPost.price}
           </p>
           <p className='card-text' style={{ marginBottom: '5px' }}>
+            Court: {coachPost.court}
+          </p>
+          <p className='card-text' style={{ marginBottom: '5px' }}>
             Slot: {coachPost.selectedSlot}
           </p>
 
           <p>Posted: {formatTimestamp(coachPost.createdAt)}</p>
         </div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button
+            className='btn btn-danger'
+            onClick={deletePlayerPost}
+            style={{ fontSize: '0.9rem', padding: '0.3rem 0.75rem' }}
+          >
+            Delete
+          </button>
+          {!flag1 && (
+            <button
+              className='btn btn-primary'
+              onClick={Getrequestonpost}
+              style={{ fontSize: '0.9rem', padding: '0.3rem 0.75rem' }}
+            >
+              Requests
+            </button>
+          )}
+          {flag1 && (
+            <button
+              className='btn btn-primary'
+              onClick={removerequest}
+              style={{ fontSize: '0.9rem', padding: '0.3rem 0.75rem' }}
+            >
+              Hide Request
+            </button>
+          )}
+        </div>
       </div>
+      {flag1 && (
+        <div className='request_post_table-container'>
+          {postRequests.map((req, index) => (
+            <div key={index} className='request_post_table-column'>
+              <div className='request_post_post-item'>
+                <h3>Request {index + 1}</h3>
+                <p>Message: {req.message}</p>
+                <p className='request_post_player-status'>
+                  Status:{' '}
+                  <span style={{ color: getStatusColor(req.status) }}>
+                    {req.status}
+                  </span>
+                </p>
+
+                {/* Render player information */}
+                {req.playerInfo && (
+                  <div className='request_post_player-info'>
+                    <h4>Player Information</h4>
+                    <p>Name: {req.playerInfo.name}</p>
+                    <p>Skill: {req.skill}</p>
+                    {getStatusColor(req.status) === 'green' && (
+                      <>
+                        <p>Email: {req.playerInfo.emailID}</p>
+                        <p>Mobile Number: {req.playerInfo.mobileNumber}</p>
+                        {req.playerInfo.social_media_links && (
+                          <div className='request_post_social-media-links'>
+                            <h5>Social Media Links</h5>
+                            <p>
+                              Facebook:{' '}
+                              {req.playerInfo.social_media_links.facebook}
+                            </p>
+                            <p>
+                              Twitter:{' '}
+                              {req.playerInfo.social_media_links.twitter}
+                            </p>
+                            <p>
+                              Instagram:{' '}
+                              {req.playerInfo.social_media_links.instagram}
+                            </p>
+                          </div>
+                        )}
+                      </>
+                    )}
+                    {/* Render feedback and ratings */}
+                    {/* {req.playerInfo.feedback_and_ratings && (
+                      <div className='request_post_feedback-ratings'>
+                        <h5>Feedback and Ratings</h5>
+                        <p>
+                          Reviews:{' '}
+                          {req.playerInfo.feedback_and_ratings.reviews.join(
+                            ', '
+                          )}
+                        </p>
+                        <p>
+                          Ratings: {req.playerInfo.feedback_and_ratings.ratings}
+                        </p>
+                      </div>
+                    )} */}
+                  </div>
+                )}
+                {getStatusColor(req.status) === 'yellow' && (
+                  <>
+                    <button
+                      className='btn btn-primary'
+                      onClick={() => acceptRequest(req)}
+                      style={{
+                        fontSize: '0.9rem',
+                        padding: '0.3rem 0.75rem',
+                      }}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      className='btn btn-danger'
+                      onClick={() => rejectRequest(req)}
+                      style={{
+                        fontSize: '0.9rem',
+                        padding: '0.3rem 0.75rem',
+                      }}
+                    >
+                      Reject
+                    </button>
+                    <p>Requested : {formatTimestamp(req.timestamp)}</p>
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

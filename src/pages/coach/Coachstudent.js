@@ -22,7 +22,7 @@ const Coachstudent = () => {
 
       if (response.status === 200) {
         const StudentsIDS = response.data;
-        console.log(StudentsIDS);
+        console.log(`ids:`, StudentsIDS);
         setStudentsIDS(StudentsIDS);
         setflag(true);
       } else {
