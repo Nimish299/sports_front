@@ -92,7 +92,17 @@ const EditProfile = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    console.log(formData);
+    // Check if any game statistic has empty sport or skill
+    const hasEmptyField = formData.gaming_statistics.some(
+      (stat) => !stat.sport || !stat.skill
+    );
+
+    if (hasEmptyField) {
+      // setError('Please select sport and skill for all game statistics.');
+      alert('Please select sport and skill for all game statistics.');
+      setLoading(false);
+      return;
+    }
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_URL}api/player/updateProfile`,
@@ -104,7 +114,7 @@ const EditProfile = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         // Redirect to player profile page
         return navigate('/player/player-profile');
       } else {
@@ -189,6 +199,7 @@ const EditProfile = () => {
                         });
                       }}
                     >
+                      <option value=''>Sport</option>
                       <option value='Football'>Football</option>
                       <option value='Basketball'>Basketball</option>
                       <option value='Tennis'>Tennis</option>
@@ -210,6 +221,7 @@ const EditProfile = () => {
                         });
                       }}
                     >
+                      <option value=''>select Skill</option>
                       <option value='Beginner'>Beginner</option>
                       <option value='Intermediate'>Intermediate</option>
                       <option value='Advanced'>Advanced</option>

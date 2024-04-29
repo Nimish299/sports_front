@@ -95,9 +95,8 @@ const Mypostscoach = () => {
       }
     } catch (error) {
       console.error('Error creating player post:', error);
-      setErrDisplay(
-        error.message || 'Failed to create player post. Please try again later.'
-      );
+
+      setErrDisplay(error.response.data.error);
     }
   };
   const Slots = [
@@ -175,9 +174,9 @@ const Mypostscoach = () => {
                   ></textarea>
                 </div>
                 <div className='form-group'>
-                  <label>Price</label>
+                  <label>Charges per month</label>
                   <input
-                    type='text'
+                    type='number'
                     value={price}
                     onChange={(e) => setprice(e.target.value)}
                     className='form-control'

@@ -160,7 +160,7 @@ const EditProfileformcoach = () => {
                   }}
                 />
               </FormControl>
-              <FormControl>
+              {/* <FormControl>
                 <FormLabel>About</FormLabel>
                 <Input
                   type='text'
@@ -170,7 +170,7 @@ const EditProfileformcoach = () => {
                     setFormData({ ...formData, About: e.target.value });
                   }}
                 />
-              </FormControl>
+              </FormControl> */}
               <Divider />
               <Heading as='h2' size='md'>
                 Achievements
@@ -213,7 +213,7 @@ const EditProfileformcoach = () => {
                   <FormControl>
                     <FormLabel>Date</FormLabel>
                     <Input
-                      type='text'
+                      type='date'
                       name={stat.date}
                       value={stat.date || ''}
                       onChange={(e) => {

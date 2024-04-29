@@ -81,9 +81,9 @@ const PlayerSignup = () => {
           alert(errDisplay);
         }
       } catch (error) {
-        console.error('Error:', error.message);
-        seterrDisplay(error.message);
-        alert(errDisplay);
+        console.error('Error:', error.response.data.error);
+        seterrDisplay(error.response.data.error);
+        // alert(errDisplay);
       }
     } else {
       return alert('Passwords do not match');
@@ -155,10 +155,10 @@ const PlayerSignup = () => {
           }}
         />
       </FormControl>
-      <FormControl>
+      {/* <FormControl>
         <FormLabel>Upload your picture</FormLabel>
         <Input type='file' p={0.5} />
-      </FormControl>
+      </FormControl> */}
       <Button
         width='100%'
         colorScheme='blue'

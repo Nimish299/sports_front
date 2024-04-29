@@ -88,7 +88,7 @@ const MyPosts = () => {
         location,
         playerInfo,
       };
-      console.log('New Post:before the commit ', newPost);
+      // console.log('New Post:before the commit ', newPost);
       // Send POST request to create player post
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/playerpost/create`,
@@ -116,13 +116,11 @@ const MyPosts = () => {
         setNewPostFlag(a);
       } else {
         const errorData = response.data;
+        console.log(errorData);
         setErrDisplay(errorData.error);
       }
     } catch (error) {
-      console.error('Error creating player post:', error);
-      setErrDisplay(
-        error.message || 'Failed to create player post. Please try again later.'
-      );
+      setErrDisplay(error.response.data.error);
     }
   };
 
@@ -187,13 +185,21 @@ const MyPosts = () => {
                 </div>
                 <div className='form-group'>
                   <label>Sport</label>
-                  <input
+
+                  <select
                     type='text'
                     value={sport}
                     onChange={(e) => setSport(e.target.value)}
                     className='form-control'
                     placeholder='Enter Sport'
-                  />
+                  >
+                    <option value=''>Select Sport</option>
+                    <option value='Football'>Football</option>
+                    <option value='Basketball'>Basketball</option>
+                    <option value='Tennis'>Tennis</option>
+                    <option value='Swimming'>Swimming</option>
+                    <option value='Badminton'>Badminton</option>
+                  </select>
                 </div>
                 <div className='form-group'>
                   <label htmlFor='skill'>Skill</label>

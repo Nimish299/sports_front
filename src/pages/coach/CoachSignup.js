@@ -99,12 +99,12 @@ const CoachSignup = () => {
         } else {
           console.error('Error:', json.error);
           seterrDisplay(json.error);
-          alert(errDisplay);
+          // alert(errDisplay);
         }
       } catch (error) {
-        console.error('Error:', error.message);
-        seterrDisplay(error.message);
-        alert(errDisplay);
+        console.error('Error:', error.response.data.error);
+        seterrDisplay(error.response.data.error);
+        // alert(error.response.data.error); // Alert the error message directly, no need to use errDisplay
       }
     } else {
       return alert('Passwords do not match');
@@ -224,10 +224,10 @@ const CoachSignup = () => {
         />
       </FormControl>
 
-      <FormControl>
+      {/* <FormControl>
         <FormLabel>Upload your picture</FormLabel>
         <Input type='file' p={0.5} />
-      </FormControl>
+      </FormControl> */}
       <Button
         width='100%'
         colorScheme='blue'

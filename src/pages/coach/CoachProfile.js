@@ -114,10 +114,10 @@ const CoachProfile = () => {
             <Text>{profileData.applied_students.length}</Text>
             <Divider />
 
-            <Heading as='h2' size='md'>
+            {/* <Heading as='h2' size='md'>
               About
             </Heading>
-            <Text>{profileData.about}</Text>
+            <Text>{profileData.about}</Text> */}
             <Divider />
             {profileData.achievements.length > 0 && (
               <>
