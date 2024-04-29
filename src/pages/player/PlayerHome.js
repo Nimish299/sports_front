@@ -8,16 +8,9 @@ const PlayerHome = () => {
   const logoutUser = async () => {
     console.log('logged out');
     try {
-      await axios.get(`${process.env.REACT_APP_URL}api/player/logout`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log('logged out');
       localStorage.removeItem('auth-token');
 
       delete axios.defaults.headers.common['Authorization'];
-      setLoginflag(false);
       // printAxiosHeaders();
       return navigate('/');
     } catch (error) {
