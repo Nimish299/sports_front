@@ -21,7 +21,7 @@ const PlayerCard = () => {
         
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin/getactiveplayerscount`,{ headers }
+        `${process.env.REACT_APP_URL}api/admin/getactiveplayerscount`,{ headers }
       );
 
       if (response.status >= 200 && response.status <= 300) {
@@ -59,7 +59,7 @@ const PlayerCard = () => {
         
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin/getplayerscount`,{ headers }
+        `${process.env.REACT_APP_URL}api/admin/getplayerscount`,{ headers }
       );
 
       if (response.status >= 200 && response.status <= 300) {

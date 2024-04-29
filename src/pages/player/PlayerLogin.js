@@ -65,7 +65,7 @@ const PlayerLogin = () => {
     const user = { emailID, password };
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/player/login`,
+        `${process.env.REACT_APP_URL}api/player/login`,
         user,
         {
           headers: {

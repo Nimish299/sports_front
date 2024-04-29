@@ -63,7 +63,7 @@ const RadarChartGrid = () => {
         Authorization: token,
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin//getplayercoachcountsbySport`,
+        `${process.env.REACT_APP_URL}api/admin//getplayercoachcountsbySport`,
         { headers }
       );
      

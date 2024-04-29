@@ -21,7 +21,7 @@ const TotalUsers = () => {
         
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin/gettotaluserscount`,{ headers }
+        `${process.env.REACT_APP_URL}api/admin/gettotaluserscount`,{ headers }
       );
 
       if (response.status >= 200 && response.status <= 300) {
@@ -57,7 +57,7 @@ const TotalUsers = () => {
         
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin/getactiveuserscount`,{ headers }
+        `${process.env.REACT_APP_URL}api/admin/getactiveuserscount`,{ headers }
       );
 
       if (response.status >= 200 && response.status <= 300) {

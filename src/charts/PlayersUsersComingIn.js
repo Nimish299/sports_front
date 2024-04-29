@@ -20,7 +20,7 @@ const PlayersComingIn = () => {
         Authorization: token,
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin/getallplayerslist`,
+        `${process.env.REACT_APP_URL}api/admin/getallplayerslist`,
         { headers }
       );
 
@@ -54,7 +54,7 @@ const PlayersComingIn = () => {
         Authorization: token,
       };
       const response = await axios.put(
-        `http://localhost:4000/api/admin/blockplayer`,
+        `${process.env.REACT_APP_URL}api/admin/blockplayer`,
         {playerID},
         { headers },
         
@@ -94,7 +94,7 @@ const PlayersComingIn = () => {
         Authorization: token,
       };
       const response = await axios.put(
-        `http://localhost:4000/api/admin/unblockplayer`,
+        `${process.env.REACT_APP_URL}api/admin/unblockplayer`,
         {playerID},
         { headers },
         

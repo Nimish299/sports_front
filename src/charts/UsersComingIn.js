@@ -23,7 +23,7 @@ const UsersComingIn = () => {
         
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin/gettoptenusers`,{ headers }
+        `${process.env.REACT_APP_URL}api/admin/gettoptenusers`,{ headers }
       );
 
       if (response.status >= 200 && response.status <= 300) {

@@ -38,7 +38,7 @@ const PlayerAdminPieChart = () => {
             
           };
           const response = await axios.get(
-            `http://localhost:4000/api/admin/getplayerpostdetails`,{ headers }
+            `${process.env.REACT_APP_URL}api/admin/getplayerpostdetails`,{ headers }
           );
     
           if (response.status >= 200 && response.status <= 300) {
@@ -73,7 +73,7 @@ const PlayerAdminPieChart = () => {
             
           };
           const response = await axios.get(
-            `http://localhost:4000/api/admin/getcoachpostdetails`,{ headers }
+            `${process.env.REACT_APP_URL}api/admin/getcoachpostdetails`,{ headers }
           );
     
           if (response.status >= 200 && response.status <= 300) {

@@ -22,7 +22,7 @@ const CoachCard = () => {
         
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin/getcoachescount`,{ headers }
+        `${process.env.REACT_APP_URL}api/admin/getcoachescount`,{ headers }
       );
 
       if (response.status >= 200 && response.status <= 300) {
@@ -56,7 +56,7 @@ const CoachCard = () => {
         
       };
       const response = await axios.get(
-        `http://localhost:4000/api/admin/getactivecoachescount`,{ headers }
+        `${process.env.REACT_APP_URL}api/admin/getactivecoachescount`,{ headers }
       );
 
       if (response.status >= 200 && response.status <= 300) {

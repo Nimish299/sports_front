@@ -95,10 +95,10 @@ const Barchart = () => {
             
           };
           const response1 = await axios.get(
-            `http://localhost:4000/api/admin/getcoachesjoinedpermonth`,{ headers }
+            `${process.env.REACT_APP_URL}api/admin/getcoachesjoinedpermonth`,{ headers }
           );
           const response2 = await axios.get(
-            `http://localhost:4000/api/admin/getplayersjoinedpermonth`,{ headers }
+            `${process.env.REACT_APP_URL}api/admin/getplayersjoinedpermonth`,{ headers }
           );
     
           if (response1.status >= 200 && response1.status <= 300 && response2.status >= 200 && response2.status <= 300) {
