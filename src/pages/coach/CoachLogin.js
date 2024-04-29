@@ -62,7 +62,7 @@ const CoachLogin = () => {
           axios.defaults.headers.common['Authorization'] = token;
           console.log('Frontend token:', token);
           localStorage.setItem('auth-token', token);
-          setLoginflag(true);
+          setLoginflag(2);
           return navigate('/coach/home');
           // return navigate('/player/home');
         } else {

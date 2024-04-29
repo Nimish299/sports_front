@@ -13,6 +13,7 @@ const CoachHome = () => {
 
       delete axios.defaults.headers.common['Authorization'];
       // printAxiosHeaders();
+      setLoginflag(0);
       return navigate('/');
     } catch (error) {
       // Handle error

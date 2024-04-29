@@ -90,7 +90,7 @@ const CoachSignup = () => {
 
         if (response.status >= 200 && response.status < 300) {
           const { token } = json;
-          setLoginflag(true);
+          setLoginflag(2);
           console.log('Frontend token:', token);
           localStorage.setItem('auth-token', token);
           axios.defaults.headers.common['Authorization'] =

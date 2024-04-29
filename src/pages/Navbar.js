@@ -9,7 +9,7 @@ import { FlagState } from '../context/FlagProvider';
 const Navbar = () => {
   const { loginflag, setLoginflag } = FlagState();
   // const navigate = useNavigate();
- 
+
   const logoutUser = async () => {
     console.log('logged out');
     try {
@@ -17,6 +17,7 @@ const Navbar = () => {
 
       delete axios.defaults.headers.common['Authorization'];
       // printAxiosHeaders();
+      setLoginflag(0);
       // return navigate('/');
     } catch (error) {
       // Handle error
@@ -25,38 +26,21 @@ const Navbar = () => {
   };
 
   const Checklogin = async () => {
-    // try {
-    // //   const response = await axios.get('/api/player/check', {
-    // //     headers: {
-    // //       'Content-Type': 'application/json',
-    // //     },
-    // //   });
-
-    // //   if (response.status === 200) {
-    // //     const data = response.data;
-    // //     console.log(data);
-    // //     setLoginflag(data.loggedIn);
-    // //   } else {
-    // //     console.log('NO');
-    // //     setLoginflag(false);
-    // //   }
-    // // } catch (error) {
-    // //   console.error('Error checking login:', error);
-    // //   setLoginflag(false);
-    // // }
-    // };
-
     const token = localStorage.getItem('auth-token');
     if (token) {
-      setLoginflag(true);
+      // setLoginflag(true);
     } else {
-      setLoginflag(false);
+      setLoginflag(0);
+      console.log(`out`);
     }
   };
 
   useEffect(() => {
     Checklogin(); // Call the function
   }, [loginflag]);
+  // useEffect(() => {
+  //   Checklogin(); // Call the function
+  // });
   // Run whenever loginflag changes
 
   return (
@@ -76,14 +60,25 @@ const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item mx-1 '>
-              {!loginflag && (
+              {loginflag === 0 && (
                 <a onClick={Checklogin} href='/'>
                   Home
                 </a>
               )}
 
-              {loginflag && (
+              {loginflag === 1 && (
                 <a onClick={Checklogin} href='/player/home'>
+                  Home
+                </a>
+              )}
+
+              {loginflag === 2 && (
+                <a onClick={Checklogin} href='/coach/home'>
+                  Home
+                </a>
+              )}
+              {loginflag === 3 && (
+                <a onClick={Checklogin} href='/admin/dashboard'>
                   Home
                 </a>
               )}
@@ -92,7 +87,7 @@ const Navbar = () => {
               <a href='/about'>About</a>
             </li>
           </ul>
-          {loginflag && (
+          {loginflag != 0 && (
             <div className='d-flex'>
               <button className='btn btn-outline-danger' onClick={logoutUser}>
                 <a href='/'>Sign-out</a>

@@ -74,7 +74,7 @@ const PlayerLogin = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const { token } = response.data;
         axios.defaults.headers.common['Authorization'] =
           token.length > 0 ? token : '';
@@ -83,7 +83,7 @@ const PlayerLogin = () => {
 
         console.log('Frontend token:', token);
         localStorage.setItem('auth-token', token);
-        setLoginflag(true);
+        setLoginflag(1);
         return navigate('/player/home');
       } else {
         console.error('Error:', response.data.error);

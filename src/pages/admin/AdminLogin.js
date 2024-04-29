@@ -45,7 +45,7 @@ const AdminLogin = () => {
     
             console.log('Frontend token:', token);
             localStorage.setItem('auth-token', token);
-            setLoginflag(true);
+            setLoginflag(3);
             return navigate('/admin/dashboard');
           }
            else {
