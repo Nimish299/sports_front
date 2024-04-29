@@ -65,7 +65,7 @@ const PlayerLogin = () => {
     const user = { emailID, password };
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_URL}api/player/login`,
+        `http://localhost:4000/api/player/login`,
         user,
         {
           headers: {
@@ -74,10 +74,12 @@ const PlayerLogin = () => {
         }
       );
 
-      if (response.status >= 200 && response.status < 300) {
+      if (response.status === 200) {
         const { token } = response.data;
         axios.defaults.headers.common['Authorization'] =
           token.length > 0 ? token : '';
+
+        // printAxiosHeaders();
 
         console.log('Frontend token:', token);
         localStorage.setItem('auth-token', token);
@@ -86,10 +88,17 @@ const PlayerLogin = () => {
       } else {
         console.error('Error:', response.data.error);
         seterrDisplay(response.data.error);
+        setTimeout(() => {
+          seterrDisplay('');
+        }, 2000);
       }
     } catch (error) {
+      console.log(error.response.data.error);
       console.error('Error:', error.message);
-      seterrDisplay(error.message);
+      seterrDisplay(error.response.data.error);
+      setTimeout(() => {
+        seterrDisplay('');
+      }, 2000);
     }
   };
 
@@ -98,7 +107,7 @@ const PlayerLogin = () => {
     if (token) {
       setLoginflag(true);
     }
-  }, [loginflag]);
+  }, []);
   return (
     <div>
       <VStack spacing={2}>

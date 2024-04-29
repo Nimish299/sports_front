@@ -9,28 +9,14 @@ import { FlagState } from '../context/FlagProvider';
 const Navbar = () => {
   const { loginflag, setLoginflag } = FlagState();
   // const navigate = useNavigate();
-  function printAxiosHeaders() {
-    // Get default headers from Axios
-    const headers = axios.defaults.headers.common;
-
-    // Print each header
-    Object.keys(headers).forEach((header) => {
-      console.log(`${header}: ${headers[header]}`);
-    });
-  }
+ 
   const logoutUser = async () => {
     console.log('logged out');
     try {
-      await axios.get('https://sports-back.onrender.com/api/player/logout', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log('logged out');
       localStorage.removeItem('auth-token');
 
       delete axios.defaults.headers.common['Authorization'];
-      setLoginflag(false);
+      // printAxiosHeaders();
       // return navigate('/');
     } catch (error) {
       // Handle error

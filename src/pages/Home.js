@@ -53,6 +53,25 @@ const Home = () => {
             Ready to take your game to the next level?
           </p>
           <NavLink
+            to='/admin/login'
+            style={{
+              display: 'inline-block',
+              padding: '15px 40px',
+              fontSize: '1.2rem',
+              backgroundColor: 'red',
+              color: '#fff',
+              textDecoration: 'none',
+              border: 'none',
+              borderRadius: '25px',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s',
+              margin: '10px',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+            }}
+          >
+            Admin
+          </NavLink>
+          <NavLink
             to='/player'
             style={{
               display: 'inline-block',

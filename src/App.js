@@ -28,6 +28,14 @@ import Coachstudent from './pages/coach/Coachstudent';
 import Applypost from './pages/player/Applypost';
 import CoachProfile from './pages/coach/CoachProfile';
 import EditProfileformcoach from './pages/coach/EditProfileformcoach';
+
+// AdMIN
+
+import AdminDashboard from './pages/dashboard/AdminDashboard';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminHome from './pages/admin/AdminHome';
+import CoachUsersComingIn from './charts/CoachUsersComingIn';
+import PlayersComingIn from './charts/PlayersUsersComingIn';
 function App() {
   const [loginflag, setloginflag] = useState(false);
   return (
@@ -81,6 +89,18 @@ function App() {
             <Route
               path='/coach/coach-Edit-profile'
               element={<EditProfileformcoach />}
+            />
+
+            {/* Admin */}
+            <Route path='/admin/dashboard' element={<AdminDashboard />} />
+            <Route path='/admin/login' element={<AdminHome />} />
+            <Route
+              path='/admin/dashboard/coachuserscomingin'
+              element={<CoachUsersComingIn />}
+            />
+            <Route
+              path='/admin/dashboard/playeruserscomingin'
+              element={<PlayersComingIn />}
             />
           </Routes>
         </div>
