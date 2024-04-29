@@ -140,11 +140,11 @@ const PlayerProfile = () => {
             {profileData.social_interactions?.social_media_links?.facebook}
           </Text>
           <Text>
-            instagram:{' '}
+            Instagram:{' '}
             {profileData.social_interactions?.social_media_links?.instagram}
           </Text>
           <Text>
-            twitter:{' '}
+            Twitter:{' '}
             {profileData.social_interactions?.social_media_links?.twitter}
           </Text>
           <Divider />

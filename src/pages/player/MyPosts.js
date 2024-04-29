@@ -73,11 +73,18 @@ const MyPosts = () => {
 
   const addPlayerPost = async (e) => {
     e.preventDefault();
-    console.log('before the commit im here');
+    // console.log('before the commit im here');
     try {
       // Fetch playerInfo
       const playerInfo = await fetch_info();
-      console.log('after fetch info im here');
+
+      if (!playerInfo.location) {
+        setTimeout(() => {
+          alert('Please complete your profile');
+          return navigate('/coach/coach-profile');
+        }, 3000); // Adjust the delay time as needed (3000 milliseconds = 3 seconds)
+      }
+      // console.log('after fetch info im here', playerInfo);
       // Create new post object with playerInfo
       const newPost = {
         title,

@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faYoutube,
+  faFacebook,
+  faTwitter,
+  faInstagram,
+  faWhatsapp,
+} from '@fortawesome/free-brands-svg-icons';
 const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
   console.log(`playerpost:`, playerPost);
   console.log(`playerposts:`, playerPosts);
@@ -319,26 +326,47 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
                     {getStatusColor(req.status) === 'green' && (
                       <>
                         <p>Email: {req.playerInfo.emailID}</p>
-                        <p>Mobile Number: {req.playerInfo.mobileNumber}</p>
+                        <p>
+                          Mobile Number: {req.playerInfo.mobileNumber}
+                          <a
+                            href={`https://wa.me/${req.playerInfo.mobileNumber}?text=Hey ${req.playerInfo.name},%0A%0A This is  ${name}.%0AI've accepted your request on Sports-Connect!%0A%0A Sport: ${playerPost.sport}%0A Court: ${playerPost.location}%0A City: ${playerLocation}%0A%0A${req.playerInfo.name} sent this message while requesting: ${req.message}%0A%0ALet's hit the court and have some fun together!`}
+                            className='Whatsapp social'
+                          >
+                            <FontAwesomeIcon icon={faWhatsapp} size='2x' />
+                          </a>
+                        </p>
                         {req.playerInfo.social_media_links && (
                           <div className='request_post_social-media-links'>
                             <h5>Social Media Links</h5>
-                            <p>
-                              Facebook:{' '}
-                              {req.playerInfo.social_media_links.facebook}
-                            </p>
-                            <p>
-                              Twitter:{' '}
-                              {req.playerInfo.social_media_links.twitter}
-                            </p>
-                            <p>
-                              Instagram:{' '}
-                              {req.playerInfo.social_media_links.instagram}
-                            </p>
+                            <div class='social-container'>
+                              <a
+                                href={
+                                  req.playerInfo.social_media_links.facebook
+                                }
+                                className='facebook social'
+                              >
+                                <FontAwesomeIcon icon={faFacebook} size='2x' />
+                              </a>
+                              <a
+                                href={req.playerInfo.social_media_links.twitter}
+                                className='twitter social'
+                              >
+                                <FontAwesomeIcon icon={faTwitter} size='2x' />
+                              </a>
+                              <a
+                                href={
+                                  req.playerInfo.social_media_links.instagram
+                                }
+                                className='instagram social'
+                              >
+                                <FontAwesomeIcon icon={faInstagram} size='2x' />
+                              </a>
+                            </div>
                           </div>
                         )}
                       </>
                     )}
+
                     {/* Render feedback and ratings */}
                     {/* {req.playerInfo.feedback_and_ratings && (
                       <div className='request_post_feedback-ratings'>

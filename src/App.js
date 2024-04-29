@@ -28,7 +28,7 @@ import Coachstudent from './pages/coach/Coachstudent';
 import Applypost from './pages/player/Applypost';
 import CoachProfile from './pages/coach/CoachProfile';
 import EditProfileformcoach from './pages/coach/EditProfileformcoach';
-
+// import SocialFollow from './SocialFollow';
 // AdMIN
 
 import AdminDashboard from './pages/dashboard/AdminDashboard';
@@ -41,7 +41,7 @@ function App() {
   return (
     <div>
       <Navbar />
-
+      {/* <SocialFollow /> */}
       <BrowserRouter>
         <div
           style={{

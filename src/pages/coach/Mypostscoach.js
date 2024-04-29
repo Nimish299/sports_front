@@ -52,11 +52,39 @@ const Mypostscoach = () => {
     fetchPlayerPosts();
   }, [newPostFlag]);
   // let playerInfo = null;
+  const fetch_info = async () => {
+    try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}api/coach/profile`,
+        {
+          headers,
+        }
+      );
 
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      } else {
+        throw new Error(response.data.error);
+      }
+    } catch (error) {
+      console.error('Error fetching player info:', error);
+      throw new Error('Failed to fetch player info. Please try again later.');
+    }
+  };
   const addcoachPost = async (e) => {
     e.preventDefault();
     // console.log('before the commit im here');
     try {
+      const coachInfo = await fetch_info();
+      if (!coachInfo.location) {
+        alert('Please complete your profile');
+        return navigate('/coach/coach-profile');
+        // Adjust the delay time as needed (3000 milliseconds = 3 seconds)
+      }
       // console.log('after fetch info im here');
       // Create new post object with playerInfo
       const newPost = {

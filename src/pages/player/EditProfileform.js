@@ -31,8 +31,8 @@ const EditProfile = () => {
       facebook: '',
       social_media_links: {
         facebook: '',
-        twitter: '',
         instagram: '',
+        twitter: '',
       },
     },
   });

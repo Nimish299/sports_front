@@ -55,17 +55,20 @@ const CoachLogin = () => {
           },
         }
       );
-
       if (response.status >= 200 && response.status < 300) {
-        const { token } = response.data;
-        axios.defaults.headers.common['Authorization'] =
-          token.length > 0 ? token : '';
-
-        console.log('Frontend token:', token);
-        localStorage.setItem('auth-token', token);
-        setLoginflag(true);
-        return navigate('/coach/home');
-        // return navigate('/player/home');
+        const token = response.data.token; // Get the token from response.data
+        if (token && token.length > 0) {
+          // Check if token is defined and has a length
+          axios.defaults.headers.common['Authorization'] = token;
+          console.log('Frontend token:', token);
+          localStorage.setItem('auth-token', token);
+          setLoginflag(true);
+          return navigate('/coach/home');
+          // return navigate('/player/home');
+        } else {
+          console.error('Error: Token is undefined or empty');
+          seterrDisplay('Token is undefined or empty');
+        }
       } else {
         console.error('Error:', response.data.error);
         seterrDisplay(response.data.error);

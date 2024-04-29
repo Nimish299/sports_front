@@ -1,10 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faYoutube,
+  faFacebook,
+  faTwitter,
+  faInstagram,
+  faWhatsapp,
+} from '@fortawesome/free-brands-svg-icons';
 const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
-  //delete post
+  // console.log(`coaspost:`, coachPost);
   const [postAccept, setpostAccept] = useState([]);
   const [flag1, setflag1] = useState(false);
+  const [coachInfo, setcoachInfo] = useState();
   const [postRequests, setpostRequests] = useState([]);
   const [acceptflag1, setacceptflag1] = useState(false);
   const [playerreject, setplayerreject] = useState([]);
@@ -96,6 +105,9 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
 
     try {
       console.log(`request`);
+      const info = await fetch_info();
+      setcoachInfo(info);
+      console.log(`coachinfo:`, coachInfo);
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/coachpost/Getrequestonpost/${coachPost._id}`,
         {
@@ -117,6 +129,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
   };
   const Getrequestonpost1 = async () => {
     // e.preventDefault();
+    // const coachInfo = await fetch_info();
     const token = localStorage.getItem('auth-token');
     const headers = {
       Authorization: token,
@@ -196,6 +209,29 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
       console.log(postAccept);
     } catch (error) {
       console.error('Error:', error.message);
+    }
+  };
+  const fetch_info = async () => {
+    try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+      };
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}api/coach/profile`,
+        {
+          headers,
+        }
+      );
+
+      if (response.status >= 200 && response.status < 300) {
+        return response.data;
+      } else {
+        throw new Error(response.data.error);
+      }
+    } catch (error) {
+      console.error('Error fetching player info:', error);
+      throw new Error('Failed to fetch player info. Please try again later.');
     }
   };
   return (
@@ -291,22 +327,41 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
                     {getStatusColor(req.status) === 'green' && (
                       <>
                         <p>Email: {req.playerInfo.emailID}</p>
-                        <p>Mobile Number: {req.playerInfo.mobileNumber}</p>
+                        <p>
+                          Mobile Number: {req.playerInfo.mobileNumber}
+                          <a
+                            href={`https://wa.me/${req.playerInfo.mobileNumber}?text=Hey ${req.playerInfo.name},%0A%0A** I'm ${coachInfo.name}, your coach for ${coachInfo.sport}.**%0AI'm excited to let you know that your request has been accepted!%0A%0A**Charges PER MONTH:** ${coachPost.price}%0A**Court:** ${coachPost.court}%0A**Slot:** ${coachPost.selectedSlot}%0A%0AI look forward to training with you and helping you improve your skills on the court!`}
+                          >
+                            <FontAwesomeIcon icon={faWhatsapp} size='2x' />
+                          </a>
+                        </p>
                         {req.playerInfo.social_media_links && (
                           <div className='request_post_social-media-links'>
                             <h5>Social Media Links</h5>
-                            <p>
-                              Facebook:{' '}
-                              {req.playerInfo.social_media_links.facebook}
-                            </p>
-                            <p>
-                              Twitter:{' '}
-                              {req.playerInfo.social_media_links.twitter}
-                            </p>
-                            <p>
-                              Instagram:{' '}
-                              {req.playerInfo.social_media_links.instagram}
-                            </p>
+                            <div className='social-container'>
+                              <a
+                                href={
+                                  req.playerInfo.social_media_links.facebook
+                                }
+                                className='facebook social'
+                              >
+                                <FontAwesomeIcon icon={faFacebook} size='2x' />
+                              </a>
+                              <a
+                                href={req.playerInfo.social_media_links.twitter}
+                                className='twitter social'
+                              >
+                                <FontAwesomeIcon icon={faTwitter} size='2x' />
+                              </a>
+                              <a
+                                href={
+                                  req.playerInfo.social_media_links.instagram
+                                }
+                                className='instagram social'
+                              >
+                                <FontAwesomeIcon icon={faInstagram} size='2x' />
+                              </a>
+                            </div>
                           </div>
                         )}
                       </>
