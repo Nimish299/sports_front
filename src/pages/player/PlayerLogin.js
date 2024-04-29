@@ -21,7 +21,7 @@ const PlayerLogin = () => {
 
   const { loginflag, setLoginflag } = FlagState();
 
-  console.log(loginflag);
+  // console.log(loginflag);
 
   // const LoginFormSubmit = async (e) => {
   //   e.preventDefault();
@@ -74,7 +74,7 @@ const PlayerLogin = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const { token } = response.data;
         axios.defaults.headers.common['Authorization'] =
           token.length > 0 ? token : '';

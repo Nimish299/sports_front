@@ -56,7 +56,7 @@ const CoachLogin = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const { token } = response.data;
         axios.defaults.headers.common['Authorization'] =
           token.length > 0 ? token : '';

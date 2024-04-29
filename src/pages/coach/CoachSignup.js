@@ -88,7 +88,7 @@ const CoachSignup = () => {
 
         const json = response.data;
 
-        if (response.status === 200) {
+        if (response.status >= 200 && response.status < 300) {
           const { token } = json;
           setLoginflag(true);
           console.log('Frontend token:', token);

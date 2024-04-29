@@ -20,7 +20,7 @@ const PlayerCoach = () => {
         { headers }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const coachPost = response.data;
         setcoachPost(coachPost);
         // console.log(coachPost);

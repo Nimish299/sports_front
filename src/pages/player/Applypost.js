@@ -20,7 +20,7 @@ const Applypost = () => {
         { headers }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const json = response.data;
         setapplyPost(json);
         // console.log(`json:`, json);

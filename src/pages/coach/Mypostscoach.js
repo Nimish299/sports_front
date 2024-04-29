@@ -55,9 +55,9 @@ const Mypostscoach = () => {
 
   const addcoachPost = async (e) => {
     e.preventDefault();
-    console.log('before the commit im here');
+    // console.log('before the commit im here');
     try {
-      console.log('after fetch info im here');
+      // console.log('after fetch info im here');
       // Create new post object with playerInfo
       const newPost = {
         title,
@@ -66,7 +66,7 @@ const Mypostscoach = () => {
         price,
         selectedSlot,
       };
-      console.log('New Post:before the commit ', newPost);
+      // console.log('New Post:before the commit ', newPost);
       // Send POST request to create player post
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/coachpost/create`,

@@ -45,7 +45,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
 
       const json = response.data;
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         console.log(json);
         // Remove the deleted post from the local state
         const updatedcoachPosts = coachPosts.filter(
@@ -103,7 +103,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
         }
       );
 
-      if (response.status !== 200) {
+      if (response.status < 200 || response.status > 300) {
         throw new Error('Failed to fetch data');
       }
 
@@ -131,7 +131,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
         }
       );
 
-      if (response.status !== 200) {
+      if (response.status < 200 || response.status > 300) {
         throw new Error('Failed to fetch data');
       }
 
@@ -155,7 +155,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
         }
       );
 
-      if (response.status !== 201) {
+      if (response.status < 200 || response.status > 300) {
         throw new Error('Failed to fetch data');
       }
 
@@ -185,7 +185,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
         }
       );
 
-      if (response.status !== 201) {
+      if (response.status < 200 || response.status > 300) {
         throw new Error('Failed to fetch data');
       }
 

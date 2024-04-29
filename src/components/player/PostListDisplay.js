@@ -23,7 +23,7 @@ const PostListDisplay = ({ playerPost, navigate }) => {
       );
 
       const json = response.data;
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         console.log(json);
         setApplied(true);
       } else {

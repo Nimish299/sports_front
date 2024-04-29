@@ -19,7 +19,7 @@ const StarredPosts = () => {
         };
         // Fetch starred post IDs from the server
         const response = await axios.get(
-          'https://sports-back.onrender.com/api/player/starred',
+          `${process.env.REACT_APP_URL}api/player/starred`,
           {
             headers,
           }
@@ -28,7 +28,7 @@ const StarredPosts = () => {
 
         // Fetch post data based on the retrieved post IDs
         const postDataResponse = await axios.post(
-          'https://sports-back.onrender.com/api/playerpost/getpostsbyids',
+          `${process.env.REACT_APP_URL}api/playerpost/getpostsbyids`,
           { postIds: starredPostIds },
           {
             headers: {

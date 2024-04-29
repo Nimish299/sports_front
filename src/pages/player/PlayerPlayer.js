@@ -25,7 +25,7 @@ const PlayerCoach = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const playerPosts = response.data;
         setPlayerPosts(playerPosts);
         setflag(true);

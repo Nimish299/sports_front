@@ -5,7 +5,7 @@ const StarredListDisplay = ({ playerPost, playerPosts, setPlayerPosts }) => {
     try {
       // Send a DELETE request to remove the player post from starred
       const response = await axios.delete(
-        `https://sports-back.onrender.com/api/player/removefromstarred`,
+        `${process.env.REACT_APP_URL}api/player/removefromstarred`,
         {
           data: playerPost, // Assuming postId is required to identify the post
           headers: {
@@ -14,7 +14,7 @@ const StarredListDisplay = ({ playerPost, playerPosts, setPlayerPosts }) => {
         }
       );
 
-      if (response.status !== 200) {
+      if (response.status < 200 || response.status >= 300) {
         throw new Error('Failed to remove player post from starred');
       }
 

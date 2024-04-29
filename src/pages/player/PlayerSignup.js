@@ -31,7 +31,7 @@ const PlayerSignup = () => {
     return passwordRegex.test(password);
   }
   function isValidPhoneNumber(phoneNumber) {
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^\d{10,11}$/;
     return phoneRegex.test(phoneNumber);
   }
 
@@ -67,7 +67,7 @@ const PlayerSignup = () => {
 
         const json = response.data;
 
-        if (response.status === 200) {
+        if (response.status >= 200 && response.status < 300) {
           const { token } = json;
           setLoginflag(true);
           console.log('Frontend token:', token);

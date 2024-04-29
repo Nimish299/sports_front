@@ -96,7 +96,7 @@ const EditProfileformcoach = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         // Redirect to player profile page
         return navigate('/coach/coach-profile');
       } else {

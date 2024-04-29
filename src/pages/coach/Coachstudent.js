@@ -23,7 +23,7 @@ const Coachstudent = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const StudentsIDS = response.data;
         // console.log(`ids:`, StudentsIDS);
         setStudentsIDS(StudentsIDS);
