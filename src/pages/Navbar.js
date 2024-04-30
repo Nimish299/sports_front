@@ -37,7 +37,7 @@ const Navbar = () => {
 
   useEffect(() => {
     Checklogin(); // Call the function
-  }, [loginflag]);
+  }, [Loginflag]);
   // useEffect(() => {
   //   Checklogin(); // Call the function
   // });
