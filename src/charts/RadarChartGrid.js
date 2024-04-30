@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   RadarChart,
   PolarGrid,
@@ -6,37 +6,37 @@ import {
   PolarRadiusAxis,
   Radar,
   Legend,
-} from "recharts";
-import axios from "axios";
+} from 'recharts';
+import axios from 'axios';
 
 const dummySportsData = [
   {
-    subject: "Tennis",
+    subject: 'Tennis',
     A: 120,
     B: 110,
   },
   {
-    subject: "Badminton",
+    subject: 'Badminton',
     A: 98,
     B: 130,
   },
   {
-    subject: "Basketball",
+    subject: 'Basketball',
     A: 86,
     B: 130,
   },
   {
-    subject: "Cricket",
+    subject: 'Cricket',
     A: 99,
     B: 100,
   },
   {
-    subject: "Frisbee",
+    subject: 'Frisbee',
     A: 85,
     B: 90,
   },
   {
-    subject: "Volleyball",
+    subject: 'Volleyball',
     A: 65,
     B: 85,
   },
@@ -53,12 +53,12 @@ const dummySportsData = [
 // ];
 
 const RadarChartGrid = () => {
-  const [errDisplay, seterrDisplay] = useState("");
+  const [errDisplay, seterrDisplay] = useState('');
   const [playerCoachData, setPlayerCoachData] = useState(dummySportsData);
 
   const getPlayerCoachData = async () => {
     try {
-      const token = localStorage.getItem("auth-token");
+      const token = localStorage.getItem('auth-token');
       const headers = {
         Authorization: token,
       };
@@ -66,34 +66,28 @@ const RadarChartGrid = () => {
         `${process.env.REACT_APP_URL}api/admin//getplayercoachcountsbySport`,
         { headers }
       );
-     
-      if (
-        response.status >= 200 &&
-        response.status <= 300 
-       ) {
-        const playerCoachNewData = response.data;
-       
-        // console.log("coach player data data", playerCoachNewData);
 
-        
+      if (response.status >= 200 && response.status <= 300) {
+        const playerCoachNewData = response.data;
+
+        // console.log("coach player data data", playerCoachNewData);
 
         setPlayerCoachData(playerCoachNewData);
 
         //return count;
       } else {
-        console.error("Error:", response.data.error);
-        
+        console.error('Error:', response.data.error);
+
         seterrDisplay(response.data.error);
         //return 0;
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      console.error('Error:', error.message);
       seterrDisplay(error.message);
       // return 0;
     }
   };
 
- 
   useEffect(() => {
     getPlayerCoachData();
   }, []);
@@ -107,22 +101,23 @@ const RadarChartGrid = () => {
         data={playerCoachData}
       >
         <PolarGrid />
-        <PolarAngleAxis dataKey="subject" />
+        <PolarAngleAxis dataKey='subject' />
         <PolarRadiusAxis angle={30} domain={[0, 5]} />
         <Radar
-          name="Players"
-          dataKey="A"
-          stroke="#8884d8"
-          fill="#82ca9d"
+          name='Coaches'
+          dataKey='B'
+          stroke='#8884d8'
+          fill='#8884d8'
           fillOpacity={0.6}
         />
         <Radar
-          name="Coaches"
-          dataKey="B"
-          stroke="#82ca9d"
-          fill="#8884d8"
+          name='Players'
+          dataKey='A'
+          stroke='#82ca9d'
+          fill='#82ca9d'
           fillOpacity={0.6}
         />
+
         <Legend />
       </RadarChart>
     </div>
