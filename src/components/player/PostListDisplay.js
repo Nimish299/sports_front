@@ -12,13 +12,16 @@ const PostListDisplay = ({ playerPost, navigate }) => {
 
     const item = { _id };
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/player/addtostarred`,
         item,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

@@ -3,14 +3,17 @@ import axios from 'axios';
 const StarredListDisplay = ({ playerPost, playerPosts, setPlayerPosts }) => {
   const deletePlayerPost = async () => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       // Send a DELETE request to remove the player post from starred
       const response = await axios.delete(
         `${process.env.REACT_APP_URL}api/player/removefromstarred`,
         {
           data: playerPost, // Assuming postId is required to identify the post
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

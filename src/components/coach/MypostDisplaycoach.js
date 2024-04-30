@@ -42,13 +42,16 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
     e.preventDefault();
 
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       const response = await axios.delete(
         `${process.env.REACT_APP_URL}api/coachpost/delete`,
         {
           data: coachPost,
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
@@ -158,13 +161,16 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
   };
   const rejectRequest = async (req) => {
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/coachpost/POSTREJECT`,
         req,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
@@ -188,13 +194,16 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
     try {
       console.log(`Accepted`);
       //   console.log(`req:`, req);
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/coachpost/POSTAccept`,
         req,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

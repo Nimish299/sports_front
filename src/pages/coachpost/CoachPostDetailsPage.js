@@ -91,13 +91,16 @@ const CoachPostDetailsPage = () => {
     e.preventDefault();
     const user = { message, skill };
     try {
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/playerpost/requestoncoachpost/${_id}`,
         user,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

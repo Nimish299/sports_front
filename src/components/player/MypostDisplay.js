@@ -121,13 +121,16 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`Accepted`);
       // console.log(req);
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/playerpost/POSTAccept`,
         req,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 
@@ -148,13 +151,16 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     try {
       console.log(`Rejected`);
       // console.log(req);
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/playerpost/POSTREJECT`,
         req,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
 

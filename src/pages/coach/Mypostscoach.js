@@ -96,13 +96,16 @@ const Mypostscoach = () => {
       };
       // console.log('New Post:before the commit ', newPost);
       // Send POST request to create player post
+      const token = localStorage.getItem('auth-token');
+      const headers = {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      };
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/coachpost/create`,
         newPost,
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
         }
       );
       console.log(response.status);
