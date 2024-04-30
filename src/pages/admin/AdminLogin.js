@@ -19,7 +19,7 @@ const AdminLogin = () => {
     const [emailID, setEmailID] = useState('');
     const [password, setPassword] = useState('');
     const [errDisplay, seterrDisplay] = useState('');
-    const { loginflag, setLoginflag } = FlagState();
+    const { Loginflag, setLoginflag } = FlagState();
 
     const LoginFormSubmit = async (e) => {
         e.preventDefault();

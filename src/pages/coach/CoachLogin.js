@@ -16,7 +16,7 @@ const CoachLogin = () => {
   const [emailID, setEmailID] = useState('');
   const [password, setPassword] = useState('');
   const [errDisplay, seterrDisplay] = useState('');
-  const { loginflag, setLoginflag } = FlagState();
+  const { Loginflag, setLoginflag } = FlagState();
 
   const navigate = useNavigate();
   // const apiUrl = process.env.URL;
@@ -40,6 +40,7 @@ const CoachLogin = () => {
   //     seterrDisplay(json.error);
   //   }
   // };
+
   // console.log('env =', process.env.REACT_APP_URL);
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
@@ -56,13 +57,14 @@ const CoachLogin = () => {
         }
       );
       if (response.status >= 200 && response.status < 300) {
+        setLoginflag(2);
         const token = response.data.token; // Get the token from response.data
         if (token && token.length > 0) {
           // Check if token is defined and has a length
           axios.defaults.headers.common['Authorization'] = token;
           console.log('Frontend token:', token);
           localStorage.setItem('auth-token', token);
-          setLoginflag(2);
+
           return navigate('/coach/home');
           // return navigate('/player/home');
         } else {

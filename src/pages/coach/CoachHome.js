@@ -24,8 +24,8 @@ const CoachHome = () => {
     return navigate('/coach/Coach-profile');
   };
 
-  const { loginflag, setLoginflag } = FlagState();
-
+  const { Loginflag, setLoginflag } = FlagState();
+  setLoginflag(2);
   const gotoPlayerCoach = () => {
     return navigate('/coach/playerCoach');
   };

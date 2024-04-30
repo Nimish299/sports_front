@@ -20,7 +20,7 @@ const PlayerSignup = () => {
   const [cpassword, setCpassword] = useState('');
   const [mobileNumber, setmobileNumber] = useState('');
   const navigate = useNavigate();
-  const { loginflag, setLoginflag } = FlagState();
+  const { Loginflag, setLoginflag } = FlagState();
 
   function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

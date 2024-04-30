@@ -19,46 +19,7 @@ const PlayerLogin = () => {
   const [errDisplay, seterrDisplay] = useState('');
   const navigate = useNavigate();
 
-  const { loginflag, setLoginflag } = FlagState();
-
-  // console.log(loginflag);
-
-  // const LoginFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const user = { emailID, password };
-
-  //   try {
-  //     const response = await axios.post(`/api/player/login`, user, {
-  //       // withCredentials:true,
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-
-  //     // const data = response.data;
-
-  //     const json = await response.json();
-
-  //     if (response.status === 200) {
-  //       setLoginflag(true);
-  //       const { token } = json;
-
-  //       console.log('front end token', token);
-
-  //       localStorage.setItem('auth-token', token);
-
-  //       // console.log(data);
-
-  //       return navigate('/player/home');
-  //     } else {
-  //       console.log(json.error);
-  //       seterrDisplay(json.error);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     // Handle error appropriately
-  //   }
-  // };
+  const { Loginflag, setLoginflag } = FlagState();
 
   const LoginFormSubmit = async (e) => {
     e.preventDefault();
@@ -84,6 +45,7 @@ const PlayerLogin = () => {
         console.log('Frontend token:', token);
         localStorage.setItem('auth-token', token);
         setLoginflag(1);
+
         return navigate('/player/home');
       } else {
         console.error('Error:', response.data.error);
@@ -105,7 +67,7 @@ const PlayerLogin = () => {
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
     if (token) {
-      setLoginflag(true);
+      setLoginflag(1);
     }
   }, []);
   return (
@@ -151,7 +113,7 @@ const PlayerLogin = () => {
 
         <div>{errDisplay && <p>{errDisplay}</p>}</div>
 
-        <Link class='btn btn-primary' to='/' role='button'>
+        <Link className='btn btn-primary' to='/' role='button'>
           Back
         </Link>
       </VStack>

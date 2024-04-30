@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { FlagState } from '../context/FlagProvider';
 
 const Navbar = () => {
-  const { loginflag, setLoginflag } = FlagState();
+  const { Loginflag, setLoginflag } = FlagState();
   // const navigate = useNavigate();
 
   const logoutUser = async () => {
@@ -28,7 +28,7 @@ const Navbar = () => {
   const Checklogin = async () => {
     const token = localStorage.getItem('auth-token');
     if (token) {
-      // setLoginflag(true);
+      // setLoginflag(Loginflag);
     } else {
       setLoginflag(0);
       console.log(`out`);
@@ -41,7 +41,7 @@ const Navbar = () => {
   // useEffect(() => {
   //   Checklogin(); // Call the function
   // });
-  // Run whenever loginflag changes
+  // Run whenever Loginflag changes
 
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary'>
@@ -60,24 +60,24 @@ const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item mx-1 '>
-              {loginflag === 0 && (
+              {Loginflag === 0 && (
                 <a onClick={Checklogin} href='/'>
                   Home
                 </a>
               )}
 
-              {loginflag === 1 && (
+              {Loginflag === 1 && (
                 <a onClick={Checklogin} href='/player/home'>
                   Home
                 </a>
               )}
 
-              {loginflag === 2 && (
+              {Loginflag === 2 && (
                 <a onClick={Checklogin} href='/coach/home'>
                   Home
                 </a>
               )}
-              {loginflag === 3 && (
+              {Loginflag === 3 && (
                 <a onClick={Checklogin} href='/admin/dashboard'>
                   Home
                 </a>
@@ -87,7 +87,7 @@ const Navbar = () => {
               <a href='/about'>About</a>
             </li>
           </ul>
-          {loginflag != 0 && (
+          {Loginflag != 0 && (
             <div className='d-flex'>
               <button className='btn btn-outline-danger' onClick={logoutUser}>
                 <a href='/'>Sign-out</a>

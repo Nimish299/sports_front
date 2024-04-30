@@ -3,12 +3,12 @@ import React, { createContext, useContext, useState } from 'react';
 const FlagContext = createContext();
 
 const FlagProvider = ({ children }) => {
-  const [loginflag, setLoginflag] = useState(0);
+  const [Loginflag, setLoginflag] = useState(0);
 
   return (
     <FlagContext.Provider
       value={{
-        loginflag,
+        Loginflag,
         setLoginflag,
       }}
     >

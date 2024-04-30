@@ -22,7 +22,7 @@ const CoachSignup = () => {
   const [cpassword, setCpassword] = useState('');
   const [mobileNumber, setmobileNumber] = useState('');
   const navigate = useNavigate();
-  const { loginflag, setLoginflag } = FlagState();
+  const { Loginflag, setLoginflag } = FlagState();
   const [sport, setsport] = useState('');
   const [coaching_experience_years, setcoaching_experience_years] =
     useState('');

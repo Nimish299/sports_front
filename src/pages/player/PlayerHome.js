@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const PlayerHome = () => {
   const navigate = useNavigate();
+
   const logoutUser = async () => {
     console.log('logged out');
     try {
@@ -25,8 +26,8 @@ const PlayerHome = () => {
   const gotoPlayerPlayer = () => {
     return navigate('/player/playerplayer');
   };
-  const { loginflag, setLoginflag } = FlagState();
-
+  const { Loginflag, setLoginflag } = FlagState();
+  setLoginflag(1);
   const gotoPlayerCoach = () => {
     return navigate('/player/playerCoach');
   };
