@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const CoachPostListDisplay = ({ coachPost, navigate }) => {
-  console.log(coachPost);
+  // console.log(coachPost);
   const [errDisplay, seterrDisplay] = useState('');
   const [coachinfo, setcoachinfo] = useState('');
   const [applied, setApplied] = useState(false);
@@ -27,7 +27,7 @@ const CoachPostListDisplay = ({ coachPost, navigate }) => {
       if (response.status >= 200 && response.status < 300) {
         const json = response.data;
         setcoachinfo(json);
-        console.log(coachinfo);
+        // console.log(coachinfo);
       } else {
         throw new Error(response.data.error);
       }

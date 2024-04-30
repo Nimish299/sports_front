@@ -21,7 +21,7 @@ const UsersComingIn = () => {
       if (response.status >= 200 && response.status <= 300) {
         const topTenData = response.data;
 
-        console.log('top ten data: ', topTenData);
+        // console.log('top ten data: ', topTenData);
         setTopUsers(topTenData);
 
         //return count;

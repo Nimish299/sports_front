@@ -111,8 +111,8 @@ const Barchart = () => {
             
     
             
-            console.log('bar chart player data : ', newDataPlayers)
-            console.log('bar chart coach data : ', newDataCoaches)
+            // console.log('bar chart player data : ', newDataPlayers)
+            // console.log('bar chart coach data : ', newDataCoaches)
             // console.log('bar chart coach data : ', finalData);
             // return newData;
             
@@ -161,7 +161,7 @@ const Barchart = () => {
           const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
           return months.indexOf(a.name) - months.indexOf(b.name);
         });
-        console.log('merged array : ', mergedArray)
+        // console.log('merged array : ', mergedArray)
         setBarData(mergedArray);
       };
 

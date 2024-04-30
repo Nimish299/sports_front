@@ -23,7 +23,7 @@ const Applied = ({ ID, navigate }) => {
       if (response.status >= 200 && response.status < 300) {
         const json = response.data;
         setcoachinfo(json);
-        console.log(`info:`, json);
+        // console.log(`info:`, json);
       } else {
         throw new Error(response.data.error);
       }

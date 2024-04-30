@@ -58,7 +58,7 @@ const PlayerPostDetailsPage = () => {
 
       if (response.status >= 200 && response.status < 300) {
         setStatus('pending');
-        console.log(json.message);
+        // console.log(json.message);
         // Check if a new request was created or an existing one was updated
         if (json.updated) {
           console.log('Existing request updated');

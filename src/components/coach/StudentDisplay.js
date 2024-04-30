@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 const StudentDisplay = ({ student, navigate }) => {
-  console.log(`student:`, student);
+  // console.log(`student:`, student);
   const [playerinfo, setplayerinfo] = useState('');
   const fetch_info = async () => {
     try {
@@ -23,7 +23,7 @@ const StudentDisplay = ({ student, navigate }) => {
       if (response.status >= 200 && response.status < 300) {
         const json = response.data;
         setplayerinfo(json);
-        console.log(`info:`, playerinfo);
+        // console.log(`info:`, playerinfo);
       } else {
         throw new Error(response.data.error);
       }

@@ -84,7 +84,7 @@ const EditProfileformcoach = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    console.log(`formdata:`, formData);
+    // console.log(`formdata:`, formData);
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_URL}api/coach/updateProfile`,

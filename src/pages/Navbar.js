@@ -11,7 +11,7 @@ const Navbar = () => {
   // const navigate = useNavigate();
 
   const logoutUser = async () => {
-    console.log('logged out');
+    // console.log('logged out');
     try {
       localStorage.removeItem('auth-token');
 

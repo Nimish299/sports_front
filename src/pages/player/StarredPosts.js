@@ -40,7 +40,7 @@ const StarredPosts = () => {
 
         // Update state with fetched post data
         setStarredPostIds(starredPostsData);
-        console.log('starredPostsData:', starredPostsData);
+        // console.log('starredPostsData:', starredPostsData);
       } catch (error) {
         console.error('Error fetching starred posts:', error);
       }

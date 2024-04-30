@@ -55,7 +55,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
       const json = response.data;
 
       if (response.status >= 200 && response.status < 300) {
-        console.log(json);
+        // console.log(json);
         // Remove the deleted post from the local state
         const updatedcoachPosts = coachPosts.filter(
           (post) => post._id !== coachPost._id
@@ -104,10 +104,10 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
     };
 
     try {
-      console.log(`request`);
+      // console.log(`request`);
       const info = await fetch_info();
       setcoachInfo(info);
-      console.log(`coachinfo:`, coachInfo);
+      // console.log(`coachinfo:`, coachInfo);
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/coachpost/Getrequestonpost/${coachPost._id}`,
         {
@@ -122,7 +122,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
       const json = response.data;
       setpostRequests(json);
       setflag1(true);
-      console.log(`post:`, json);
+      // console.log(`post:`, json);
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -136,7 +136,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
     };
 
     try {
-      console.log(`request`);
+      // console.log(`request`);
       const response = await axios.get(
         `${process.env.REACT_APP_URL}api/coachpost/Getrequestonpost/${coachPost._id}`,
         {
@@ -151,7 +151,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
       const json = response.data;
       setpostRequests(json);
       //   setflag1(true);
-      console.log(`post:`, json);
+      // console.log(`post:`, json);
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -176,10 +176,10 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
       // setpostAccept(json);
       // setacceptflag1();
       setplayerreject(json);
-      console.log(playerreject);
+      // console.log(playerreject);
       setrejectflag1(true);
-      console.log(`postAccept`);
-      console.log(postAccept);
+      // console.log(`postAccept`);
+      // console.log(postAccept);
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -206,7 +206,7 @@ const MypostDisplaycoach = ({ coachPost, setcoachPosts, coachPosts }) => {
       setpostAccept(json);
       setacceptflag1(true);
       console.log(`postAccept`);
-      console.log(postAccept);
+      // console.log(postAccept);
     } catch (error) {
       console.error('Error:', error.message);
     }

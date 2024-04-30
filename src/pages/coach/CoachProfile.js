@@ -166,10 +166,10 @@ const CoachProfile = () => {
             <Button colorScheme='blue' onClick={redirecteditprofile}>
               Edit Profile
             </Button>
-            <Divider />
+            {/* <Divider />
             <Button colorScheme='blue' onClick={redirectedhome}>
               Home
-            </Button>
+            </Button> */}
           </>
         )}
       </div>

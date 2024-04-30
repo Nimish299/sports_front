@@ -79,7 +79,7 @@ const PlayerCoach = () => {
         }
       );
       const json = response.data;
-      console.log(`activity,`, json);
+      // console.log(`activity,`, json);
       setRecent(json);
     } catch (error) {
       // Handle error

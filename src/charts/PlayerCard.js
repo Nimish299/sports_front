@@ -31,7 +31,7 @@ const PlayerCard = () => {
 
         
 
-        console.log('active players count : ', activeCountPlayer);
+        // console.log('active players count : ', activeCountPlayer);
         setActiveUsers(activeCountPlayer);
         //return count;
       } else {

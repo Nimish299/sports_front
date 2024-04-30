@@ -158,10 +158,10 @@ const PlayerProfile = () => {
           <Button colorScheme='blue' onClick={redirecteditprofile}>
             Edit Profile
           </Button>
-          <Divider />
-          <Button colorScheme='blue' onClick={redirectedhome}>
+          {/* <Divider /> */}
+          {/* <Button colorScheme='blue' onClick={redirectedhome}>
             Home
-          </Button>
+          </Button> */}
         </>
       )}
     </div>

@@ -48,7 +48,7 @@ const PlayerAdminPieChart = () => {
     
             
     
-            console.log('player post data : ', playerPostData);
+            // console.log('player post data : ', playerPostData);
             setPlayerPostDetails(playerPostData);
             
           } else {

@@ -42,7 +42,7 @@ const CoachPostDetailsPage = () => {
       if (response.status >= 200 && response.status < 300) {
         const json = response.data;
         setcoachinfo(json);
-        console.log(`info:`, coachinfo);
+        // console.log(`info:`, coachinfo);
       } else {
         throw new Error(response.data.error);
       }
@@ -66,7 +66,7 @@ const CoachPostDetailsPage = () => {
       if (response.status >= 200 && response.status < 300) {
         const coachPost = response.data;
         setcoachPost(coachPost);
-        console.log(`post :`, coachPost);
+        // console.log(`post :`, coachPost);
         setflag(true);
       } else {
         console.error('Error:', response.data.error);
@@ -105,7 +105,7 @@ const CoachPostDetailsPage = () => {
 
       if (response.status >= 200 && response.status < 300) {
         setStatus('pending');
-        console.log(json.message);
+        // console.log(json.message);
         // Check if a new request was created or an existing one was updated
         if (json.updated) {
           console.log('Existing request updated');

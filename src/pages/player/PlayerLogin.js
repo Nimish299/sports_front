@@ -112,10 +112,10 @@ const PlayerLogin = () => {
         </Button>
 
         <div>{errDisplay && <p>{errDisplay}</p>}</div>
-
+        {/* 
         <Link className='btn btn-primary' to='/' role='button'>
           Back
-        </Link>
+        </Link> */}
       </VStack>
     </div>
   );

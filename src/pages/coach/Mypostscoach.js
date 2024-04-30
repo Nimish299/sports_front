@@ -36,7 +36,7 @@ const Mypostscoach = () => {
       if (response.status >= 200 && response.status < 300) {
         const json = response.data;
         setcoachPosts(json);
-        console.log(`coachpost:`, json);
+        // console.log(`coachpost:`, json);
       } else {
         console.log('Error fetching player posts:', response.statusText);
       }

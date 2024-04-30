@@ -37,7 +37,6 @@ import AdminHome from './pages/admin/AdminHome';
 import CoachUsersComingIn from './charts/CoachUsersComingIn';
 import PlayersComingIn from './charts/PlayersUsersComingIn';
 function App() {
-  // const [Loginflag, setloginflag] = useState();
   return (
     <div>
       <Navbar />

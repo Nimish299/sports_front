@@ -31,7 +31,7 @@ const TotalUsers = () => {
 
         
 
-        console.log('coaches count now : ', count);
+        // console.log('coaches count now : ', count);
         setCount(count);
         //return count;
       } else {
@@ -67,7 +67,7 @@ const TotalUsers = () => {
 
         
 
-        console.log('toal active users : ', countActive);
+        // console.log('toal active users : ', countActive);
         setActiveUsersCount(countActive);
         //return count;
       } else {

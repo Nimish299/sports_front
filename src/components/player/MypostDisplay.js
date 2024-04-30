@@ -9,8 +9,8 @@ import {
   faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons';
 const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
-  console.log(`playerpost:`, playerPost);
-  console.log(`playerposts:`, playerPosts);
+  // console.log(`playerpost:`, playerPost);
+  // console.log(`playerposts:`, playerPosts);
   const [postRequests, setpostRequests] = useState([]);
   const [flag1, setflag1] = useState(false);
   const [acceptflag1, setacceptflag1] = useState(false);
@@ -57,7 +57,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
     e.preventDefault();
 
     try {
-      console.log(`request`);
+      // console.log(`request`);
       const token = localStorage.getItem('auth-token');
       const headers = {
         Authorization: token,
@@ -76,7 +76,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
       const json = response.data;
       setpostRequests(json);
       setflag1(true);
-      console.log(postRequests);
+      // console.log(postRequests);
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -103,7 +103,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
       const json = response.data;
       setpostRequests(json);
       //setflag1(true);
-      console.log(postRequests);
+      // console.log(postRequests);
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -120,7 +120,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
   const acceptRequest = async (req) => {
     try {
       console.log(`Accepted`);
-      console.log(req);
+      // console.log(req);
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/playerpost/POSTAccept`,
         req,
@@ -139,7 +139,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
       setpostAccept(json);
       setacceptflag1(true);
       console.log(`postAccept`);
-      console.log(postAccept);
+      // console.log(postAccept);
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -147,7 +147,7 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
   const rejectRequest = async (req) => {
     try {
       console.log(`Rejected`);
-      console.log(req);
+      // console.log(req);
       const response = await axios.post(
         `${process.env.REACT_APP_URL}api/playerpost/POSTREJECT`,
         req,
@@ -166,10 +166,10 @@ const MypostDisplay = ({ playerPost, setPlayerPosts, playerPosts }) => {
       // setpostAccept(json);
       // setacceptflag1();
       setplayerreject(json);
-      console.log(playerreject);
+      // console.log(playerreject);
       setrejectflag1(true);
       console.log(`postAccept`);
-      console.log(postAccept);
+      // console.log(postAccept);
     } catch (error) {
       console.error('Error:', error.message);
     }

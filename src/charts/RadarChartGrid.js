@@ -73,7 +73,7 @@ const RadarChartGrid = () => {
        ) {
         const playerCoachNewData = response.data;
        
-        console.log("coach player data data", playerCoachNewData);
+        // console.log("coach player data data", playerCoachNewData);
 
         
 
