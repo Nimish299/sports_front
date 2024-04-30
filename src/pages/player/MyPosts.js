@@ -79,10 +79,8 @@ const MyPosts = () => {
       const playerInfo = await fetch_info();
 
       if (!playerInfo.location) {
-        setTimeout(() => {
-          alert('Please complete your profile');
-          return navigate('/coach/coach-profile');
-        }, 3000); // Adjust the delay time as needed (3000 milliseconds = 3 seconds)
+        alert('Please complete your profile');
+        return navigate('/player/player-profile');
       }
       // console.log('after fetch info im here', playerInfo);
       // Create new post object with playerInfo

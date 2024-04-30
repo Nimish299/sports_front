@@ -303,7 +303,7 @@ const EditProfile = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Twitter</FormLabel>
+              <FormLabel>Instagram</FormLabel>
               <Input
                 type='text'
                 name='social_interactions.social_media_links.twitter'
@@ -325,7 +325,7 @@ const EditProfile = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Instagram</FormLabel>
+              <FormLabel>Twitter</FormLabel>
               <Input
                 type='text'
                 name='social_interactions.social_media_links.instagram'
